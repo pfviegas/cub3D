@@ -6,7 +6,7 @@
 #    By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 12:00:51 by pviegas           #+#    #+#              #
-#    Updated: 2024/01/23 11:10:49 by pviegas          ###   ########.fr        #
+#    Updated: 2024/01/23 16:33:44 by pviegas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,13 @@ NAME = cub3D
 
 # Compiler options
 CC 			= cc
-FLAGS		= -Wall -Werror -Wextra -g #-fsanitize=address
+FLAGS		= -Wall -Werror -Wextra -g -fsanitize=address
 MLXFLAGS	= -L ./minilibx -lmlx -Ilmlx -lXext -lX11
 
 # Paths
 SRC_DIR			= ./src/
 OBJ_DIR			= ./obj/
-SRC_DIR_BONUS	= ./src_bonus/
+# SRC_DIR_BONUS	= ./src_bonus/
 
 LIBFT = ./libft/libft.a
 LIBFT_DIR = ./libft
@@ -60,7 +60,7 @@ ${NAME}: $(OBJS)
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
 	@echo "\n$(GREEN) [Success] Libft compilated.$(RESET)\n\n"
 	$(CC) $(FLAGS) -lm $(SRCS) $(MLXFLAGS) $(LIBFT) -o $(NAME)
-	@echo "\n$(GREEN) [Success] ./so_long created.$(RESET)\n\n"
+	@echo "\n$(GREEN) [Success] ./cub3D created.$(RESET)\n\n"
 
 # ${NAME_BONUS}: $(OBJS_BONUS)
 # 	@$(MAKE) --no-print-directory -C $(MINILIBX_PATH)
@@ -68,7 +68,7 @@ ${NAME}: $(OBJS)
 # 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
 # 	@echo "\n$(GREEN) [Success] Libft compilated.$(RESET)\n\n"
 # 	$(CC) $(FLAGS) -lm $(SRCS_BONUS) $(MLXFLAGS) $(LIBFT) -o $(NAME_BONUS)
-# 	@echo "\n$(GREEN) [Success] ./so_long_bonus created.$(RESET)\n\n"
+# 	@echo "\n$(GREEN) [Success] ./cub3D_bonus created.$(RESET)\n\n"
 
 clean:
 	@rm -rf $(OBJS)

@@ -6,19 +6,48 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:35:05 by pviegas           #+#    #+#             */
-/*   Updated: 2023/09/01 12:03:24 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/23 17:22:43 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/cub3D.h"
+
+// lê as linhas do mapa e verifica se a informacao das texturas estao correctas
+void	get_map_info(t_cub3d *cub3d, int fd)
+{
+	char	*content_line;
+	int		lines;
+	int		i;
+
+	lines = 0;
+	content_line = ft_get_next_line(fd);
+	while (content_line && ft_is_start_map(content_line) == 0)
+	{
+		lines++;
+		i = 0;
+		while(content_line[i] && ft_is_space(content_line[i]) == 1)
+			i++;
+		check_elements(cub3d, content_line, i);
+		free(content_line);
+		content_line = ft_get_next_line(fd);
+	}
+	if (ft_is_start_map(content_line) == 1)
+		cub3d->total_header_map = lines;
+	printf("cub3d->total_header_map: %d\n", cub3d->total_header_map);
+	free(content_line);
+	if (lines == 0)
+		quit("The file is empty.", cub3d, 3);
+	else if (cub3d->total_header_map == 0)
+		quit("Invalid map start.", cub3d, 4);
+}
 
 // lê as linhas do mapa e retorna o número de linhas
-int	get_lines(t_game *game, int fd)
+int	get_map_lines(t_cub3d *cub3d, int fd)
 {
 	char	*content_line;
 	int		lines;
 
-	lines = 0;
+	lines = cub3d->total_header_map;
 	content_line = ft_get_next_line(fd);
 	while (content_line)
 	{
@@ -26,62 +55,62 @@ int	get_lines(t_game *game, int fd)
 		if (*content_line == '\n')
 		{
 			free(content_line);
-			quit("Invalid map.", game, 16);
+			quit("Invalid map.", cub3d, 16);
 		}
 		free(content_line);
 		content_line = ft_get_next_line(fd);
 	}
-	if (lines == 0)
-		quit("The file is empty or not exist.", game, 3);
+	if (lines == cub3d->total_header_map)
+		quit("The map is empty.", cub3d, 3);
 	free(content_line);
-	return (lines);
+	return (lines - cub3d->total_header_map);
 }
 
 // armazena o mapa e o número de colunas
-void	get_map(t_game *game, int fd)
+void	get_map(t_cub3d *cub3d, int fd)
 {
 	int		i;
 	char	*content_line;
 
 	i = 0;
-	game->map = (char **)malloc(sizeof(char *) * (game->line + 1));
-	game->map_floodfill = (char **)malloc(sizeof(char *) * (game->line + 1));
-	if (!game->map || !game->map_floodfill)
-		quit("Malloc error.", game, 4);
-	while (i < game->line)
+	cub3d->map = (char **)malloc(sizeof(char *) * (cub3d->total_lines_map + 1));
+	cub3d->map_floodfill = (char **)malloc(sizeof(char *) * (cub3d->total_lines_map + 1));
+	if (!cub3d->map || !cub3d->map_floodfill)
+		quit("Malloc error.", cub3d, 4);
+	while (i < cub3d->total_lines_map)
 	{
 		content_line = ft_get_next_line(fd);
-		game->map[i] = ft_strtrim(content_line, "\n");
-		game->map_floodfill[i] = ft_strtrim(content_line, "\n");
+		cub3d->map[i] = ft_strtrim(content_line, "\n");
+		cub3d->map_floodfill[i] = ft_strtrim(content_line, "\n");
 		free(content_line);
 		i++;
 	}
 	ft_get_next_line(fd);
-	game->map[i] = NULL;
-	game->map_floodfill[i] = NULL;
-	game->column = ft_strlen(game->map[i - 1]);
+	cub3d->map[i] = NULL;
+	cub3d->map_floodfill[i] = NULL;
+	cub3d->column = ft_strlen(cub3d->map[i - 1]);
 }
 
 // renderiza o mapa
-int	render_map(t_game *game)
+int	render_map(t_cub3d *cub3d)
 {
 	int	y;
 	int	x;
 	int	s;
 
 	s = 64;
-	if (game->collectibles == 0)
+	if (cub3d->collectibles == 0)
 	{
-		mlx_destroy_image(game->mlx, game->img.exit);
-		game->img.exit = mlx_xpm_file_to_image(game->mlx, PORTAL, &s, &s);
+		mlx_destroy_image(cub3d->mlx, cub3d->img.exit);
+//		cub3d->img.exit = mlx_xpm_file_to_image(cub3d->mlx, PORTAL, &s, &s);
 	}
 	y = 0;
-	while (y < game->line)
+	while (y < cub3d->total_lines_map)
 	{
 		x = 0;
-		while (x < game->column)
+		while (x < cub3d->column)
 		{
-			put_map(x, y, game->map[y][x], game);
+			put_map(x, y, cub3d->map[y][x], cub3d);
 			x++;
 		}
 		y++;

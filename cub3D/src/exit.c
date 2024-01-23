@@ -6,76 +6,76 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:30:09 by pviegas           #+#    #+#             */
-/*   Updated: 2023/09/01 12:03:29 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/23 12:23:45 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/cub3D.h"
 
 // imprime a mensagem de erro, liberta a memória e encerra o programa 
 // de maneira controlada quando ocorrem erros ou situações excepcionais. 
-void	quit(char *s, t_game *game, int exit_code)
+void	quit(char *s, t_cub3d *cub3d, int exit_code)
 {
 	ft_printf("Error\n%s\n(%d)\n", s, exit_code);
-	if (game->map != NULL)
-		free_map(game);
-	if (game->map_floodfill != NULL)
-		free_map_floodfill(game);
+	if (cub3d->map != NULL)
+		free_map(cub3d);
+	if (cub3d->map_floodfill != NULL)
+		free_map_floodfill(cub3d);
 	exit(exit_code);
 }
 
 // liberta a memória alocada para o mapa
-void	free_map(t_game *game)
+void	free_map(t_cub3d *cub3d)
 {
 	int	i;
 
-	if (!game->map)
+	if (!cub3d->map)
 		return ;
 	i = 0;
-	while (game->map[i])
+	while (cub3d->map[i])
 	{
-		free(game->map[i]);
+		free(cub3d->map[i]);
 		i++;
 	}
-	free(game->map);
-	game->map = NULL;
+	free(cub3d->map);
+	cub3d->map = NULL;
 }
 
 // liberta a memória alocada para o mapa do floodfill
-void	free_map_floodfill(t_game *game)
+void	free_map_floodfill(t_cub3d *cub3d)
 {
 	int	i;
 
-	if (!game->map_floodfill)
+	if (!cub3d->map_floodfill)
 		return ;
 	i = 0;
-	while (game->map_floodfill[i])
+	while (cub3d->map_floodfill[i])
 	{
-		free(game->map_floodfill[i]);
+		free(cub3d->map_floodfill[i]);
 		i++;
 	}
-	free(game->map_floodfill);
-	game->map_floodfill = NULL;
+	free(cub3d->map_floodfill);
+	cub3d->map_floodfill = NULL;
 }
 
 // liberta a memória alocada para as imagens e encerra o programa
-int	exit_game(t_game *game)
+int	exit_cub3d(t_cub3d *cub3d)
 {
-	if (game->img.exit)
-		mlx_destroy_image(game->mlx, game->img.exit);
-	if (game->img.collectible)
-		mlx_destroy_image(game->mlx, game->img.collectible);
-	if (game->img.player)
-		mlx_destroy_image(game->mlx, game->img.player);
-	if (game->img.floor)
-		mlx_destroy_image(game->mlx, game->img.floor);
-	if (game->img.wall)
-		mlx_destroy_image(game->mlx, game->img.wall);
-	if (game->img.on_exit)
-		mlx_destroy_image(game->mlx, game->img.on_exit);
-	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	free_map(game);
-	free(game->mlx);
+	if (cub3d->img.exit)
+		mlx_destroy_image(cub3d->mlx, cub3d->img.exit);
+	if (cub3d->img.collectible)
+		mlx_destroy_image(cub3d->mlx, cub3d->img.collectible);
+	if (cub3d->img.player)
+		mlx_destroy_image(cub3d->mlx, cub3d->img.player);
+	if (cub3d->img.floor)
+		mlx_destroy_image(cub3d->mlx, cub3d->img.floor);
+	if (cub3d->img.wall)
+		mlx_destroy_image(cub3d->mlx, cub3d->img.wall);
+	if (cub3d->img.on_exit)
+		mlx_destroy_image(cub3d->mlx, cub3d->img.on_exit);
+	mlx_destroy_window(cub3d->mlx, cub3d->win);
+	mlx_destroy_display(cub3d->mlx);
+	free_map(cub3d);
+	free(cub3d->mlx);
 	exit(0);
 }

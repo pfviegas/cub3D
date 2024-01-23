@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/23 13:38:14 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/23 16:57:13 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@
 
 typedef struct s_textures
 {
-	int	NORTH;
-	int	SOUTH;
-	int	EAST;
-	int	WEST;
-	int	FLOOR;
-	int	CEILING;
+	int	north;
+	int	south;
+	int	west;
+	int	east;
+	int	floor;
+	int	ceiling;
 }	t_textures;
 
 typedef struct s_img
@@ -73,7 +73,12 @@ typedef struct s_cub3d
 
 void		check_args(int argc, char **argv);
 int			get_map_lines(t_cub3d *cub3d, int fd);
-int			get_map_info(t_cub3d *cub3d, int fd);
+void		get_map_info(t_cub3d *cub3d, int fd);
+int			ft_is_space(int c);
+int			ft_is_start_map(char *line);
+void		check_elements(t_cub3d *cub3d, char *cl, int i);
+void		check_number_elem(t_cub3d *cub3d);
+
 void		get_map(t_cub3d *cub3d, int fd);
 void		check_map(t_cub3d *cub3d);
 void		check_char(t_cub3d *cub3d, char c, int line, int col);

@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2023/09/01 10:11:28 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/23 12:23:45 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
 
-// game font colors
+// cub3d font colors
 # define YELLOW 	0xF7FF00
 # define RED 		0xFF0000
 # define GREEN 		0x00FF00
@@ -65,7 +65,7 @@ typedef struct s_img
 	void	*danger;
 }	t_img;
 
-typedef struct s_game
+typedef struct s_cub3d
 {
 	t_img	img;
 	void	*mlx;
@@ -74,7 +74,7 @@ typedef struct s_game
 	char	**map_floodfill;
 	char	temp;
 	int		collectibles;
-	int		player_gamey;
+	int		player_cub3dy;
 	int		player_x;
 	int		player_y;
 	int		player_on_exit ;
@@ -83,31 +83,31 @@ typedef struct s_game
 	int		player;
 	int		line;
 	int		column;
-	int		end_game;
+	int		end_cub3d;
 	int		move;
 	int		anim_speed;
 	int		frame;
-}	t_game;
+}	t_cub3d;
 
-void		check_args(t_game *game, int argc, char **argv);
-int			get_lines(t_game *game, int fd);
-void		get_map(t_game *game, int fd);
-void		check_map(t_game *game);
-void		check_char(t_game *game, char c, int line, int col);
-void		quit(char *s, t_game *game, int exit_code);
-void		check_walls(t_game *game);
-void		check_path(t_game *game);
-int			floodfill(t_game *game);
-bool		fill(t_game *game, char c, int line, int col);
-int			exit_game(t_game *game);
-void		free_map(t_game *game);
-void		free_map_floodfill(t_game *game);
-void		start_game(t_game *game);
-int			key_handling(int keycode, t_game *game);
-void		init_images(t_game *game);
-int			render_map(t_game *game);
-void		put_map(int x, int y, char c, t_game *game);
-void		ft_print_moves(t_game *game);
-int			animation(t_game *game);
+void		check_args(t_cub3d *cub3d, int argc, char **argv);
+int			get_map_lines(t_cub3d *cub3d, int fd);
+void		get_map(t_cub3d *cub3d, int fd);
+void		check_map(t_cub3d *cub3d);
+void		check_char(t_cub3d *cub3d, char c, int line, int col);
+void		quit(char *s, t_cub3d *cub3d, int exit_code);
+void		check_walls(t_cub3d *cub3d);
+void		check_path(t_cub3d *cub3d);
+int			floodfill(t_cub3d *cub3d);
+bool		fill(t_cub3d *cub3d, char c, int line, int col);
+int			exit_cub3d(t_cub3d *cub3d);
+void		free_map(t_cub3d *cub3d);
+void		free_map_floodfill(t_cub3d *cub3d);
+void		start_cub3d(t_cub3d *cub3d);
+int			key_handling(int keycode, t_cub3d *cub3d);
+void		init_images(t_cub3d *cub3d);
+int			render_map(t_cub3d *cub3d);
+void		put_map(int x, int y, char c, t_cub3d *cub3d);
+void		ft_print_moves(t_cub3d *cub3d);
+int			animation(t_cub3d *cub3d);
 
 #endif
