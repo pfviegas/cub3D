@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/24 10:56:50 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:17:26 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ typedef struct s_textures
 	int	east;
 	char *east_path;
 	int	floor;
-	char *floor_path;
+	int floor_color[3];
 	int	ceiling;
-	char *ceiling_path;
+	int ceiling_color[3];
 }	t_textures;
 
 typedef struct s_img

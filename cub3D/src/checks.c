@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/24 10:59:41 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:41:34 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,66 +29,93 @@ void	check_args(int argc, char **argv)
 }
 void	get_textures_path(t_cub3d *cub3d, char *cl, int i, int flag)
 {
-	i = i + 2;
+//	i = i + 2;
 	while(cl[i] && ft_is_space(cl[i]) == 1)
 		i++;
 	if(flag == 1)
 	{
 		cub3d->textures.north++;
 		cub3d->textures.north_path = ft_substr(cl, i, ft_strlen(cl) - i + 1);
-		printf("cub3d->textures.north_path : %s\n", cub3d->textures.north_path);
+		printf("cub3d->textures.north_path : %s", cub3d->textures.north_path);
 	}
 	if(flag == 2)
 	{
 		cub3d->textures.south++;
 		cub3d->textures.south_path = ft_substr(cl, i, ft_strlen(cl) - i + 1);
-		printf("cub3d->textures.south_path : %s\n", cub3d->textures.south_path);
+		printf("cub3d->textures.south_path : %s", cub3d->textures.south_path);
 	}
 	if(flag == 3)
 	{
 		cub3d->textures.west++;
 		cub3d->textures.west_path = ft_substr(cl, i, ft_strlen(cl) - i + 1);
-		printf("cub3d->textures.west_path : %s\n", cub3d->textures.west_path);
+		printf("cub3d->textures.west_path : %s", cub3d->textures.west_path);
 	}
 	if(flag == 4)
 	{
 		cub3d->textures.east++;
 		cub3d->textures.east_path = ft_substr(cl, i, ft_strlen(cl) - i + 1);
-		printf("cub3d->textures.east_path : %s\n", cub3d->textures.east_path);
+		printf("cub3d->textures.east_path : %s", cub3d->textures.east_path);
 	}
 
 }
 
 void	get_colors_path(t_cub3d *cub3d, char *cl, int i, int flag)
 {
+	char	*temp;
+	char	**temp_array;
+	int j;
+
+	j = 0;	
+//	cub3d->textures.floor_path = ft_substr(cl, i, ft_strlen(cl) - i + 1);
+	temp = ft_substr(cl, i, ft_strlen(cl) - i + 1);
+	printf("(temp): %s", temp);
+	temp_array = ft_split(temp,',');
+	while(temp_array[j])
+	{
+		if (!ft_isdigit(temp_array[j]))
+			quit("Error: Invalid color.", cub3d, 11);
+		if(flag == 5)
+		{
+			cub3d->textures.floor_color[j] = ft_atoi(temp_array[j]);
+			printf("cub3d->textures.floor_color[%d]: %d\n", j, cub3d->textures.floor_color[j]);
+		}
+		if(flag == 6)
+		{
+			cub3d->textures.ceiling_color[j] = ft_atoi(temp_array[j]);
+			printf("cub3d->textures.ceiling_color[%d]: %d\n", j, cub3d->textures.ceiling_color[j]);
+		}
+		j++;
+		if (j > 3)
+			quit("Error: Format color invalid.", cub3d, 12);
+
+	}
 	if(flag == 5)
 	{
 		cub3d->textures.floor++;
-		cub3d->textures.floor_path = ft_substr(cl, i, ft_strlen(cl) - i + 1);
-		printf("cub3d->textures.floor_path : %s\n", cub3d->textures.floor_path);
 	}
 	if(flag == 6)
 	{
 		cub3d->textures.ceiling++;
-		cub3d->textures.ceiling_path = ft_substr(cl, i, ft_strlen(cl) - i + 1);
-		printf("cub3d->textures.ceiling_path : %s\n", cub3d->textures.ceiling_path);
 	}
+	while (j >= 0)
+		free(temp_array[j--]);
+	free(temp_array);
 }
 
 void	check_elements(t_cub3d *cub3d, char *cl, int i)
 {
 	if (cl[i] == 'N' && cl[i + 1] == 'O' && ft_is_space(cl[i + 2]) == 1)
-		get_textures_path(cub3d, cl, i, 1);
+		get_textures_path(cub3d, cl, i + 2, 1);
 	else if (cl[i] == 'S' && cl[i + 1] == 'O'  && ft_is_space(cl[i + 2]) == 1)
-		get_textures_path(cub3d, cl, i, 2);
+		get_textures_path(cub3d, cl, i + 2, 2);
 	else if (cl[i] == 'W' && cl[i + 1] == 'E'  && ft_is_space(cl[i + 2]) == 1)
-		get_textures_path(cub3d, cl, i, 3);
+		get_textures_path(cub3d, cl, i + 2, 3);
 	else if (cl[i] == 'E' && cl[i + 1] == 'A'  && ft_is_space(cl[i + 2]) == 1)
-		get_textures_path(cub3d, cl, i, 4);
+		get_textures_path(cub3d, cl, i + 2, 4);
 	else if (cl[i] == 'F' && ft_is_space(cl[i + 1]) == 1)
-		get_colors_path(cub3d, cl, i, 5);
+		get_colors_path(cub3d, cl, i + 2, 5);
 	else if (cl[i] == 'C' && ft_is_space(cl[i + 1]) == 1)
-		get_colors_path(cub3d, cl, i, 6);
+		get_colors_path(cub3d, cl, i + 2, 6);
 }
 
 void	check_number_elem(t_cub3d *cub3d)
