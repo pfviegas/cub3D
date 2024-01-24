@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+         #
+#    By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 12:00:51 by pviegas           #+#    #+#              #
-#    Updated: 2024/01/23 16:33:44 by pviegas          ###   ########.fr        #
+#    Updated: 2024/01/24 15:49:59 by pveiga-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ NAME = cub3D
 
 # Compiler options
 CC 			= cc
-FLAGS		= -Wall -Werror -Wextra -g -fsanitize=address
+FLAGS		= -Wall -Werror -Wextra -g3 #-fsanitize=address
 MLXFLAGS	= -L ./minilibx -lmlx -Ilmlx -lXext -lX11
 
 # Paths
@@ -84,6 +84,9 @@ fclean: clean
 # 	@rm -rf $(NAME_BONUS) $(OBJS_BONUS)
 # 	@echo "$(RED) [Deleting] .a files ... (deleted)$(RESET)"
 # 	@cd $(LIBFT_DIR) && $(MAKE) --no-print-directory fclean
+
+v:
+	make re && valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes ./cub3D maps/map_01.cub
 
 re: fclean all
 

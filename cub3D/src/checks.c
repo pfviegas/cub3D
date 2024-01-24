@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/24 11:41:34 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/24 17:05:13 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,43 +18,38 @@ void	check_args(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		write(2, "Invalid number of argument.\n", 29);
+		write(2, "Error: Invalid number of argument.\n", 36);
 		exit(1);
 	}
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4))
 	{
-		write(2, "File must be of type .cub\n", 27);
+		write(2, "Error: File must be of type .cub\n", 34);
 		exit(2);
 	}
 }
 void	get_textures_path(t_cub3d *cub3d, char *cl, int i, int flag)
 {
-//	i = i + 2;
 	while(cl[i] && ft_is_space(cl[i]) == 1)
 		i++;
 	if(flag == 1)
 	{
 		cub3d->textures.north++;
-		cub3d->textures.north_path = ft_substr(cl, i, ft_strlen(cl) - i + 1);
-		printf("cub3d->textures.north_path : %s", cub3d->textures.north_path);
+		cub3d->textures.north_path = ft_substr(cl, i, ft_strlen(cl) - i - 1);
 	}
 	if(flag == 2)
 	{
 		cub3d->textures.south++;
-		cub3d->textures.south_path = ft_substr(cl, i, ft_strlen(cl) - i + 1);
-		printf("cub3d->textures.south_path : %s", cub3d->textures.south_path);
+		cub3d->textures.south_path = ft_substr(cl, i, ft_strlen(cl) - i - 1);
 	}
 	if(flag == 3)
 	{
 		cub3d->textures.west++;
-		cub3d->textures.west_path = ft_substr(cl, i, ft_strlen(cl) - i + 1);
-		printf("cub3d->textures.west_path : %s", cub3d->textures.west_path);
+		cub3d->textures.west_path = ft_substr(cl, i, ft_strlen(cl) - i - 1);
 	}
 	if(flag == 4)
 	{
 		cub3d->textures.east++;
-		cub3d->textures.east_path = ft_substr(cl, i, ft_strlen(cl) - i + 1);
-		printf("cub3d->textures.east_path : %s", cub3d->textures.east_path);
+		cub3d->textures.east_path = ft_substr(cl, i, ft_strlen(cl) - i - 1);
 	}
 
 }
@@ -66,40 +61,26 @@ void	get_colors_path(t_cub3d *cub3d, char *cl, int i, int flag)
 	int j;
 
 	j = 0;	
-//	cub3d->textures.floor_path = ft_substr(cl, i, ft_strlen(cl) - i + 1);
-	temp = ft_substr(cl, i, ft_strlen(cl) - i + 1);
-	printf("(temp): %s", temp);
+	temp = ft_substr(cl, i, ft_strlen(cl) - i);
 	temp_array = ft_split(temp,',');
 	while(temp_array[j])
 	{
-		if (!ft_isdigit(temp_array[j]))
-			quit("Error: Invalid color.", cub3d, 11);
 		if(flag == 5)
-		{
-			cub3d->textures.floor_color[j] = ft_atoi(temp_array[j]);
-			printf("cub3d->textures.floor_color[%d]: %d\n", j, cub3d->textures.floor_color[j]);
-		}
+			cub3d->textures.floor_color[j] = ft_atoi_cub3d(cub3d, temp_array[j]);
 		if(flag == 6)
-		{
-			cub3d->textures.ceiling_color[j] = ft_atoi(temp_array[j]);
-			printf("cub3d->textures.ceiling_color[%d]: %d\n", j, cub3d->textures.ceiling_color[j]);
-		}
+			cub3d->textures.ceiling_color[j] = ft_atoi_cub3d(cub3d, temp_array[j]);
 		j++;
 		if (j > 3)
 			quit("Error: Format color invalid.", cub3d, 12);
-
 	}
 	if(flag == 5)
-	{
 		cub3d->textures.floor++;
-	}
 	if(flag == 6)
-	{
 		cub3d->textures.ceiling++;
-	}
 	while (j >= 0)
 		free(temp_array[j--]);
 	free(temp_array);
+	free(temp);
 }
 
 void	check_elements(t_cub3d *cub3d, char *cl, int i)
@@ -121,17 +102,17 @@ void	check_elements(t_cub3d *cub3d, char *cl, int i)
 void	check_number_elem(t_cub3d *cub3d)
 {
 	if (cub3d->textures.north != 1)
-		quit("Error: Invalid element line.", cub3d, 5);
-	if (cub3d->textures.south != 1)
 		quit("Error: Invalid element line.", cub3d, 6);
-	if (cub3d->textures.west != 1)
+	if (cub3d->textures.south != 1)
 		quit("Error: Invalid element line.", cub3d, 7);
-	if (cub3d->textures.east != 1)
+	if (cub3d->textures.west != 1)
 		quit("Error: Invalid element line.", cub3d, 8);
-	if (cub3d->textures.floor != 1)
+	if (cub3d->textures.east != 1)
 		quit("Error: Invalid element line.", cub3d, 9);
-	if (cub3d->textures.ceiling != 1)
+	if (cub3d->textures.floor != 1)
 		quit("Error: Invalid element line.", cub3d, 10);
+	if (cub3d->textures.ceiling != 1)
+		quit("Error: Invalid element line.", cub3d, 11);
 }
 
 
@@ -151,38 +132,43 @@ void	check_map(t_cub3d *cub3d)
 			check_char(cub3d, cub3d->map[line][col], line, col);
 		line++;
 	}
-	if (line == col)
-		quit("The map must be rectangular.", cub3d, 6);
-	if (cub3d->collectibles == 0)
-		quit("There's no collectibles.", cub3d, 7);
-	else if (cub3d->exit == 0)
-		quit("There's no exit.", cub3d, 8);
-	else if (cub3d->exit > 1)
-		quit("Just one exit per map.", cub3d, 9);
-	else if (cub3d->player == 0)
-		quit("There's no player.", cub3d, 10);
+	if (cub3d->player == 0)
+		quit("Error: There's no player.", cub3d, 24);
 	else if (cub3d->player > 1)
-		quit("Just one player per map.", cub3d, 11);
+		quit("Error: Just one player per map.", cub3d, 25);
 }
 
-// soma os collectibles e verifica se os caracteres sao validos 
 void	check_char(t_cub3d *cub3d, char c, int line, int col)
 {
-	if (c == 'C')
-		cub3d->collectibles++;
-	else if (c == 'E')
-		cub3d->exit++;
-	else if (c == 'P')
+	if(c == 'N' || c == 'S' || c == 'W' || c == 'E')
 	{
 		cub3d->player++;
-		cub3d->player_x = col;
-		cub3d->player_y = line;
+		cub3d->player_y = col;
+		cub3d->player_x = line;
+		cub3d->player_direction = c;
 	}
 	else if (c == '1' || c == '0')
 		return ;
+	// else if (c == ' ')
+	// 	ft_check_spaces(cub3d, c, line, col);
 	else
-		quit("Invalid characters.", cub3d, 5);
+		quit("Error: Invalid characters.", cub3d, 23);
+	printf("cub3d->player : %d\n", cub3d->player);
+	printf("cub3d->player_x : %d\n", cub3d->player_x);
+	printf("cub3d->player_y : %d\n", cub3d->player_y);
+	printf("cub3d->player_direction : %c\n", cub3d->player_direction);
+	
 }
+
+// void	ft_check_spaces(t_cub3d *cub3d, char c, int line, int col)
+// {
+// 	int i;
+// 	int j;
+
+// 	i = 0;
+// 	j = 0;
+// 	while()
+// }
 
 // verifica se o mapa está cercado por paredes.
 void	check_walls(t_cub3d *cub3d)
@@ -215,5 +201,4 @@ void	check_path(t_cub3d *cub3d)
 	{
 		quit("Invalid path on the map", cub3d, 13);
 	}
-	free_map_floodfill(cub3d);
 }

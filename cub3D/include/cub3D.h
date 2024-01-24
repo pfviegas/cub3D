@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/24 11:17:26 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/24 16:48:40 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_cub3d
 	void		*mlx;
 	void		*win;
 	char		**map;
-	char		**map_floodfill;
+	char		player_direction;
 	char		temp;
 	int			collectibles;
 	int			player_cub3dy;
@@ -70,7 +70,7 @@ typedef struct s_cub3d
 	int			player_on_exit ;
 	int			exit;
 	int			player;
-	int			total_header_map;
+	int			start_map;
 	int			total_lines_map;
 	int			column;
 	int			end_cub3d;
@@ -79,13 +79,17 @@ typedef struct s_cub3d
 
 void		check_args(int argc, char **argv);
 int			get_map_lines(t_cub3d *cub3d, int fd);
-void		get_map_info(t_cub3d *cub3d, int fd);
+void		get_elements_info(t_cub3d *cub3d, int fd);
 int			ft_is_space(int c);
 int			ft_is_start_map(char *line);
 void		check_elements(t_cub3d *cub3d, char *cl, int i);
 void		check_number_elem(t_cub3d *cub3d);
+int			ft_atoi_cub3d(t_cub3d *cub3d, char *str);
+void 		ft_print_map(t_cub3d *cub3d);
+void		get_map(t_cub3d *cub3d, char **argv);
+void		ft_check_spaces(t_cub3d *cub3d, char c, int line, int col);
 
-void		get_map(t_cub3d *cub3d, int fd);
+
 void		check_map(t_cub3d *cub3d);
 void		check_char(t_cub3d *cub3d, char c, int line, int col);
 void		quit(char *s, t_cub3d *cub3d, int exit_code);
@@ -95,7 +99,7 @@ int			floodfill(t_cub3d *cub3d);
 bool		fill(t_cub3d *cub3d, char c, int line, int col);
 int			exit_cub3d(t_cub3d *cub3d);
 void		free_map(t_cub3d *cub3d);
-void		free_map_floodfill(t_cub3d *cub3d);
+void		free_textures_image(t_cub3d *cub3d);
 void		start_cub3d(t_cub3d *cub3d);
 int			key_handling(int keycode, t_cub3d *cub3d);
 void		init_images(t_cub3d *cub3d);

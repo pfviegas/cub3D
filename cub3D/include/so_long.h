@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/23 13:38:14 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/24 14:49:23 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_cub3d
 	int			player_on_exit ;
 	int			exit;
 	int			player;
-	int			total_header_map;
+	int			start_map;
 	int			total_lines_map;
 	int			column;
 	int			end_cub3d;
@@ -73,7 +73,7 @@ typedef struct s_cub3d
 
 void		check_args(int argc, char **argv);
 int			get_map_lines(t_cub3d *cub3d, int fd);
-int			get_map_info(t_cub3d *cub3d, int fd);
+int			get_elements_info(t_cub3d *cub3d, int fd);
 void		get_map(t_cub3d *cub3d, int fd);
 void		check_map(t_cub3d *cub3d);
 void		check_char(t_cub3d *cub3d, char c, int line, int col);

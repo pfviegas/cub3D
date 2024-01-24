@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:30:09 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/23 12:23:45 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/24 14:45:31 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	quit(char *s, t_cub3d *cub3d, int exit_code)
 	ft_printf("Error\n%s\n(%d)\n", s, exit_code);
 	if (cub3d->map != NULL)
 		free_map(cub3d);
-	if (cub3d->map_floodfill != NULL)
-		free_map_floodfill(cub3d);
+	free_textures_image(cub3d);
 	exit(exit_code);
 }
 
@@ -42,20 +41,16 @@ void	free_map(t_cub3d *cub3d)
 }
 
 // liberta a memória alocada para o mapa do floodfill
-void	free_map_floodfill(t_cub3d *cub3d)
+void	free_textures_image(t_cub3d *cub3d)
 {
-	int	i;
-
-	if (!cub3d->map_floodfill)
-		return ;
-	i = 0;
-	while (cub3d->map_floodfill[i])
-	{
-		free(cub3d->map_floodfill[i]);
-		i++;
-	}
-	free(cub3d->map_floodfill);
-	cub3d->map_floodfill = NULL;
+	if(cub3d->textures.north_path != NULL)
+		free(cub3d->textures.north_path);
+	if(cub3d->textures.south_path != NULL)
+		free(cub3d->textures.south_path);
+	if(cub3d->textures.west_path != NULL)
+		free(cub3d->textures.west_path);
+	if(cub3d->textures.east_path != NULL)
+		free(cub3d->textures.east_path);
 }
 
 // liberta a memória alocada para as imagens e encerra o programa
