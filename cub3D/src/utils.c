@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/23 17:35:36 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/24 09:58:57 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	ft_is_start_map(char *line)
 	else
 	{
 		while(line[i] && (line[i] == '1' || line[i] == ' ' || line[i] == '\t'))
-//			printf("%c", line[i++]);
 			i++;
-		printf("PFV---%c\n",line[i]);
+//			printf("%c", line[i++]);
+		// printf("PFV---%c\n",line[i]);
 		if(line[i] != '\n')
 			return (0);
 		else

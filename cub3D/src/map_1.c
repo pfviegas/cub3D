@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:35:05 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/23 17:22:43 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/24 10:06:58 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	get_map_info(t_cub3d *cub3d, int fd)
 	int		lines;
 	int		i;
 
-	lines = 0;
+	lines = 1;
 	content_line = ft_get_next_line(fd);
 	while (content_line && ft_is_start_map(content_line) == 0)
 	{
@@ -33,7 +33,6 @@ void	get_map_info(t_cub3d *cub3d, int fd)
 	}
 	if (ft_is_start_map(content_line) == 1)
 		cub3d->total_header_map = lines;
-	printf("cub3d->total_header_map: %d\n", cub3d->total_header_map);
 	free(content_line);
 	if (lines == 0)
 		quit("The file is empty.", cub3d, 3);
