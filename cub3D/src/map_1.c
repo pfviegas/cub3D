@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:35:05 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/24 16:32:33 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/01/25 12:45:28 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,29 @@ int	get_map_lines(t_cub3d *cub3d, int fd)
 {
 	char	*content_line;
 	int		lines;
+	int	flag;
 
+	flag = 0;
 	lines = cub3d->start_map;
 	content_line = ft_get_next_line(fd);
 	while (content_line)
 	{
 		lines++;
 		if (*content_line == '\n')
-		{
-			free(content_line);
-			quit("Error: Invalid map.", cub3d, 16);
-		}
+			flag = 1;
 		free(content_line);
 		content_line = ft_get_next_line(fd);
 	}
+	free(content_line);
+	if (flag == 1)
+	{
+//			free(content_line);
+//			ft_get_next_line(fd);
+			close(fd);
+			quit("Error: Invalid map.", cub3d, 16);
+	}
 	if (lines == cub3d->start_map)
 		quit("Error: The map is empty.", cub3d, 3);
-	free(content_line);
 	return (lines - cub3d->start_map);
 }
 
@@ -75,27 +81,26 @@ void	get_map(t_cub3d *cub3d, char **argv)
 {
 	int		i;
 	int 	j;
-	int fd_map;
 	char	*content_line;
 
 	i = -1;
 	j = 0;
-	fd_map = open(argv[1], O_RDONLY);
-	if (fd_map == -1)
+	cub3d->fd = open(argv[1], O_RDONLY);
+	if (cub3d->fd == -1)
 		quit("Error: Fail to open map", cub3d, 21);
 	cub3d->map = (char **)malloc(sizeof(char *) * (cub3d->total_lines_map + 2));
 	if (!cub3d->map)
 		quit("Error: Malloc error.", cub3d, 22);
 	while (++i <= cub3d->total_lines_map + cub3d->start_map )
 	{
-		content_line = ft_get_next_line(fd_map);
+		content_line = ft_get_next_line(cub3d->fd);
 		if(i >= cub3d->start_map)
 			cub3d->map[j++] = ft_strtrim(content_line, "\n");
 		free(content_line);
 	}	
-	ft_get_next_line(fd_map);
+	ft_get_next_line(cub3d->fd);
 	cub3d->map[j] = NULL;
-	close(fd_map);
+	close(cub3d->fd);
 }
 
 // renderiza o mapa

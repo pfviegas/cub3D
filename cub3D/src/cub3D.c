@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/24 16:45:22 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/01/25 12:36:46 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,17 @@ static void	init_var(t_cub3d *cub3d)
 	cub3d->textures.ceiling = 0;
 	cub3d->total_lines_map = 0;
 	cub3d->start_map = 0;
-	
 	cub3d->map = NULL;
-	//cub3d->player_direction = 0;
-	cub3d->collectibles = 0;
+	cub3d->fd = 9999;
+	cub3d->textures.north_path = NULL;
+	cub3d->textures.south_path = NULL;
+	cub3d->textures.west_path = NULL;
+	cub3d->textures.east_path = NULL;
 	cub3d->player_x = 0;
 	cub3d->player_y = 0;
-	cub3d->player_on_exit = 0;
-	cub3d->exit = 0;
 	cub3d->player = 0;
+	
+	//cub3d->player_direction = 0;
 	cub3d->column = 0;
 	cub3d->end_cub3d = 0;
 	cub3d->move = 1;
@@ -39,24 +41,27 @@ static void	init_var(t_cub3d *cub3d)
 // verifica se as imagens existem
 static void	check_textures_images(t_cub3d *cub3d)
 {
-	int			fd;
-
-	fd = open(cub3d->textures.north_path, O_RDONLY);
-	close(fd);
-	if (fd == -1)
+	cub3d->fd = open(cub3d->textures.north_path, O_RDONLY);
+	if (cub3d->fd == -1)
 		quit("Error: North image missing.", cub3d, 17);
-	fd = open(cub3d->textures.south_path, O_RDONLY);
-	close(fd);
-	if (fd == -1)
+	else
+		close(cub3d->fd);
+	cub3d->fd = open(cub3d->textures.south_path, O_RDONLY);
+	if (cub3d->fd == -1)
 		quit("Error: South image missing.", cub3d, 18);
-	fd = open(cub3d->textures.west_path, O_RDONLY);
-	close(fd);
-	if (fd == -1)
+	else
+		close(cub3d->fd);
+	cub3d->fd = open(cub3d->textures.west_path, O_RDONLY);
+	if (cub3d->fd == -1)
 		quit("Error: West image missing.", cub3d, 19);
-	fd = open(cub3d->textures.east_path, O_RDONLY);
-	close(fd);
-	if (fd == -1)
+	else
+		close(cub3d->fd);
+	cub3d->fd = open(cub3d->textures.east_path, O_RDONLY);
+	if (cub3d->fd == -1)
 		quit("Error: East image missing.", cub3d, 20);
+	else
+		close(cub3d->fd);
+	cub3d->fd = 9999;
 }
 
 // valida o mapa, as paredes e o caminho
@@ -89,15 +94,13 @@ void	start_cub3d(t_cub3d *cub3d)
 
 void	check_textures(t_cub3d *cub3d, char **argv)
 {
-	int fd_map;
-	
-	fd_map = open(argv[1], O_RDONLY);
-	if (fd_map == -1)
+	cub3d->fd = open(argv[1], O_RDONLY);
+	if (cub3d->fd == -1)
 		quit("Error: Fail to open map", cub3d, 3);
-	get_elements_info(cub3d, fd_map);
+	get_elements_info(cub3d, cub3d->fd);
 	check_number_elem(cub3d);
-	cub3d->total_lines_map = get_map_lines(cub3d, fd_map);
-	close(fd_map);
+	cub3d->total_lines_map = get_map_lines(cub3d, cub3d->fd);
+	close(cub3d->fd);
 }
 
 int	main(int argc, char **argv)

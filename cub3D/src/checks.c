@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/24 17:05:13 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/01/25 12:43:11 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	check_number_elem(t_cub3d *cub3d)
 
 
 
-// verifica se o mapa do jogo cumpre com as condições necessárias.
+// verifica se o mapa tem apenas os caracteres permitidos.
 void	check_map(t_cub3d *cub3d)
 {
 	int	line;
@@ -138,6 +138,52 @@ void	check_map(t_cub3d *cub3d)
 		quit("Error: Just one player per map.", cub3d, 25);
 }
 
+// Função para verificar se uma coordenada está rodeada de 1s
+void	is_surrounded_1(t_cub3d *cub3d, int line, int col)
+{
+	int	i;
+	int j;
+	
+	i = line - 1;
+	while (i <= line + 1)
+	{
+		j = col - 1;
+		while (j <= col + 1)
+		{
+			if (i >= 0 && i <= cub3d->total_lines_map \
+				&& j >= 0 && j < (int)ft_strlen(cub3d->map[i]))
+				if (cub3d->map[i][j] != '1')
+					if (cub3d->map[i][j] != ' ')
+						quit("Error: Invalid map.", cub3d, 26);
+			j++;
+		}
+		i++;
+	}
+}
+
+// Função para verificar se uma coordenada está rodeada de 1s
+void	is_new_line(t_cub3d *cub3d, int line, int col)
+{
+	int	i;
+	int j;
+	
+	i = line - 1;
+	while (i <= line + 1)
+	{
+		j = col - 1;
+		while (j <= col + 1)
+		{
+			if (i >= 0 && i <= cub3d->total_lines_map \
+				&& j >= 0 && j < (int)ft_strlen(cub3d->map[i]))
+				if (cub3d->map[i][j] != '1')
+					if (cub3d->map[i][j] != ' ')
+						quit("Error: Invalid map.", cub3d, 26);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	check_char(t_cub3d *cub3d, char c, int line, int col)
 {
 	if(c == 'N' || c == 'S' || c == 'W' || c == 'E')
@@ -149,26 +195,16 @@ void	check_char(t_cub3d *cub3d, char c, int line, int col)
 	}
 	else if (c == '1' || c == '0')
 		return ;
-	// else if (c == ' ')
-	// 	ft_check_spaces(cub3d, c, line, col);
+	else if (c == ' ')
+		is_surrounded_1(cub3d, line, col);
 	else
 		quit("Error: Invalid characters.", cub3d, 23);
-	printf("cub3d->player : %d\n", cub3d->player);
-	printf("cub3d->player_x : %d\n", cub3d->player_x);
-	printf("cub3d->player_y : %d\n", cub3d->player_y);
-	printf("cub3d->player_direction : %c\n", cub3d->player_direction);
-	
+
+//	printf("cub3d->player : %d\n", cub3d->player);
+//	printf("cub3d->player_x : %d\n", cub3d->player_x);
+//	printf("cub3d->player_y : %d\n", cub3d->player_y);
+//	printf("cub3d->player_direction : %c\n", cub3d->player_direction);
 }
-
-// void	ft_check_spaces(t_cub3d *cub3d, char c, int line, int col)
-// {
-// 	int i;
-// 	int j;
-
-// 	i = 0;
-// 	j = 0;
-// 	while()
-// }
 
 // verifica se o mapa está cercado por paredes.
 void	check_walls(t_cub3d *cub3d)

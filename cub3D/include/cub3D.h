@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/24 16:48:40 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/01/25 12:11:13 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_cub3d
 	t_textures	textures;
 	void		*mlx;
 	void		*win;
+	int 		fd;
 	char		**map;
 	char		player_direction;
 	char		temp;
@@ -87,7 +88,7 @@ void		check_number_elem(t_cub3d *cub3d);
 int			ft_atoi_cub3d(t_cub3d *cub3d, char *str);
 void 		ft_print_map(t_cub3d *cub3d);
 void		get_map(t_cub3d *cub3d, char **argv);
-void		ft_check_spaces(t_cub3d *cub3d, char c, int line, int col);
+void		is_surrounded_1(t_cub3d *cub3d, int line, int col);
 
 
 void		check_map(t_cub3d *cub3d);
