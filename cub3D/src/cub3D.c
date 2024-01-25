@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/25 12:36:46 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/25 17:38:55 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void	init_var(t_cub3d *cub3d)
 	cub3d->textures.ceiling = 0;
 	cub3d->total_lines_map = 0;
 	cub3d->start_map = 0;
+	cub3d->cub = NULL;
 	cub3d->map = NULL;
-	cub3d->fd = 9999;
 	cub3d->textures.north_path = NULL;
 	cub3d->textures.south_path = NULL;
 	cub3d->textures.west_path = NULL;
@@ -38,6 +38,53 @@ static void	init_var(t_cub3d *cub3d)
 	cub3d->move = 1;
 }
 
+void	get_cub_lines(t_cub3d *cub3d, int fd)
+{
+	char	*content_line;
+	int	lines;
+
+	lines = 0;
+	content_line = ft_get_next_line(fd);
+	while (content_line)
+	{
+		free(content_line);
+		lines++;
+		content_line = ft_get_next_line(fd);
+	}
+	cub3d->cub_total_lines = lines;
+	free(content_line);
+}
+
+void	copy_cub(t_cub3d *cub3d, char **argv)
+{
+	char *content_line;
+	int lines;
+	int fd;
+
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		quit("nError: Opening .cub file.", cub3d, 3);
+
+	get_cub_lines(cub3d, fd);
+
+	cub3d->cub = (char **)malloc(sizeof(char *) * (cub3d->cub_total_lines + 1));
+	if (!cub3d->cub)
+		quit("nError: Malloc error.", cub3d, 4);
+
+	lines = 0;
+	content_line = ft_get_next_line(fd);
+	while (content_line)
+	{
+		cub3d->cub[lines] = ft_strtrim(content_line, "\n");
+		free(content_line);
+		lines++;
+		content_line = ft_get_next_line(fd);
+	}
+	cub3d->cub[lines] = NULL;
+	free(content_line);
+	close(fd);
+}
+/*
 // verifica se as imagens existem
 static void	check_textures_images(t_cub3d *cub3d)
 {
@@ -69,13 +116,12 @@ static void	validations(t_cub3d *cub3d)
 {
 	check_map(cub3d);
 	
-	// if (cub3d->column <= 0)
-	// 	quit("Invalid number of columns.", cub3d, 14);
-	// if (cub3d->total_lines_map <= 0)
+	// if (cub3d->col63)al_lines_map <= 0)
 	// 	quit("Invalid number of lines.", cub3d, 15);
 	// check_walls(cub3d);
 	// check_path(cub3d);
 }
+*/
 
 /*
 // inicializa o ambiente gráfico, as imagens e o jogo
@@ -92,12 +138,9 @@ void	start_cub3d(t_cub3d *cub3d)
 }
 */
 
-void	check_textures(t_cub3d *cub3d, char **argv)
+void	check_textures(t_cub3d *cub3d)
 {
-	cub3d->fd = open(argv[1], O_RDONLY);
-	if (cub3d->fd == -1)
-		quit("Error: Fail to open map", cub3d, 3);
-	get_elements_info(cub3d, cub3d->fd);
+	get_elements_info(cub3d);
 	check_number_elem(cub3d);
 	cub3d->total_lines_map = get_map_lines(cub3d, cub3d->fd);
 	close(cub3d->fd);
@@ -110,16 +153,17 @@ int	main(int argc, char **argv)
 
 	init_var(&cub3d);
 	check_args(argc, argv);
-	check_textures(&cub3d, argv);
-	check_textures_images(&cub3d);
-	get_map(&cub3d, argv);
+	copy_cub(&cub3d, argv);
+	check_textures(&cub3d);
+
+//	check_textures_images(&cub3d);
+//	get_map(&cub3d, argv);
 	
 	printf("cub3d.start_map = %d\n", cub3d.start_map);
 	printf("cub3d->total_lines_map = %d\n", cub3d.total_lines_map);
-	ft_print_map(&cub3d);
-	validations(&cub3d);
+//	ft_print_map(&cub3d);
+//	validations(&cub3d);
 	
-
 	
 	free_textures_image(&cub3d);
 	free_map(&cub3d);

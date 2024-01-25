@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:30:09 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/25 12:29:19 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/25 17:28:31 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,24 @@
 // de maneira controlada quando ocorrem erros ou situações excepcionais. 
 void	quit(char *s, t_cub3d *cub3d, int exit_code)
 {
-	if (cub3d->fd > 0 && cub3d->fd < 9999)
-		close(cub3d->fd);	
-	ft_printf("Error\n%s\n(%d)\n", s, exit_code);
+	printf("Error\n%s\n(%d)\n", s, exit_code);
 	if (cub3d->map != NULL)
 		free_map(cub3d);
+	if (cub3d->cub != NULL)
+		free_matrix(cub3d->cub);
+
 	free_textures_image(cub3d);
 	exit(exit_code);
+}
+
+void free_matrix(char **str)
+{
+	int i;
+	
+	i = 0;
+	while (str[i])
+		free(str[i++]);
+	free(str);
 }
 
 // liberta a memória alocada para o mapa

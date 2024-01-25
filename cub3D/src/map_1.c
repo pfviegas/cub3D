@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:35:05 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/25 12:45:28 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/25 17:38:13 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,51 @@ void get_elements_info(t_cub3d *cub3d, int fd)
 		quit("Error: Invalid map start.", cub3d, 5);
 }
 
+
+
+
+
+
+// lê as linhas do mapa e retorna o número de linhas
+int	get_map_lines(t_cub3d *cub3d, int fd)
+{
+	char	*content_line;
+	int		lines;
+	int	flag;
+
+	flag = 0;
+	lines = cub3d->start_map;
+	content_line = ft_get_next_line(fd);
+	while (content_line)
+	{
+		lines++;
+		if (*content_line == '\n')
+			flag = 1;
+		if (flag == 1 && *content_line != '\n')
+			flag = 2
+		free(content_line);
+		content_line = ft_get_next_line(fd);
+	}
+	free(content_line);
+	if (flag == 1)
+	{
+//			free(content_line);
+//			ft_get_next_line(fd);
+			close(fd);
+			quit("Error: Invalid map.", cub3d, 16);
+	}
+	if (lines == cub3d->start_map)
+		quit("Error: The map is empty.", cub3d, 3);
+	return (lines - cub3d->start_map);
+}
+
+
+
+
+
+
+
+
 // lê as linhas do mapa e retorna o número de linhas
 int	get_map_lines(t_cub3d *cub3d, int fd)
 {
@@ -76,7 +121,7 @@ int	get_map_lines(t_cub3d *cub3d, int fd)
 	return (lines - cub3d->start_map);
 }
 
-// armazena o mapa e o número de colunas
+// armazena o mapa
 void	get_map(t_cub3d *cub3d, char **argv)
 {
 	int		i;
