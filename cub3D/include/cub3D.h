@@ -6,7 +6,7 @@
 /*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/26 13:18:02 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/26 19:16:00 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,21 @@ typedef struct s_cub3d
 }	t_cub3d;
 
 void		check_args(int argc, char **argv);
-int			get_map_lines(t_cub3d *cub3d, int fd);
 void		get_cub_lines(t_cub3d *cub3d, char **argv);
 void		copy_cub(t_cub3d *cub3d, char **argv);
+void		check_textures(t_cub3d *cub3d);
 void		get_elements_info(t_cub3d *cub3d);
+void		check_textures_images(t_cub3d *cub3d);
+
+void		get_map(t_cub3d *cub3d);
+void		check_nl_middle_map(t_cub3d *cub3d);
+
 int			ft_is_space(int c);
 int			ft_is_start_map(char *line);
 void		check_elements(t_cub3d *cub3d, char *cl, int i);
 void		check_number_elem(t_cub3d *cub3d);
 int			ft_atoi_cub3d(t_cub3d *cub3d, char *str);
 void 		ft_print_map(t_cub3d *cub3d);
-void		get_map(t_cub3d *cub3d, char **argv);
 void		is_surrounded_1(t_cub3d *cub3d, int line, int col);
 void 		free_matrix(char **str);
 

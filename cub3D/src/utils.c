@@ -6,12 +6,18 @@
 /*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/26 13:18:37 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/26 20:02:22 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+/**
+ * Verifica se o caractere fornecido é um espaço em branco.
+ *
+ * @param c O caractere a ser verificado.
+ * @return 1 se o caractere for um espaço em branco, 0 caso contrário.
+ */
 int	ft_is_space(int c)
 {
 	if((c >= '\t' && c <= '\r') || c == ' ')
@@ -19,9 +25,18 @@ int	ft_is_space(int c)
 	return (0);
 }
 
-int	ft_is_start_map(char *line)
+/**
+ * Verifica se a linha é o início do mapa.
+ * 
+ * Esta função verifica se a linha fornecida é o início do mapa, 
+ * verificando se começa com o caractere '1' seguido de espaços em branco.
+ * 
+ * @param line A linha a ser verificada.
+ * @return 1 se a linha for o início do mapa, 0 caso contrário.
+ */
+int ft_is_start_map(char *line)
 {
-	int	i;
+	int i;
 	
 	if (!line)
 		return (0);
@@ -34,16 +49,24 @@ int	ft_is_start_map(char *line)
 	{
 		while(line[i] && (line[i] == '1' || line[i] == ' ' || line[i] == '\t'))
 			i++;
-		if(line[i] != '\n')
-			return (0);
-		else
+		if(line[i] == '\0')
 			return (1);
+		else
+			return (0);
 	}
 }
+
+/**
+ * Converte uma string em um número inteiro.
+ *
+ * @param cub3d O ponteiro para a estrutura do jogo cub3D.
+ * @param str A string a ser convertida em um número inteiro.
+ * @return O número inteiro convertido.
+ */
 int	ft_atoi_cub3d(t_cub3d *cub3d, char *str)
 {
 	int	res;
-	int i;
+	int	i;
 
 	i = 0;
 	res = 0;
@@ -51,32 +74,45 @@ int	ft_atoi_cub3d(t_cub3d *cub3d, char *str)
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
-		quit("Error: Format color invalid.", cub3d, 13);
+		quit("Error: Formato de cor inválido.", cub3d, 13);
 		str++;
 	}
 	while (str[i])
 	{
-		if(ft_isdigit(str[i]))	
+		if (ft_isdigit(str[i]))
 			res = res * 10 + (str[i] - '0');
-		else if(str[i] != '\n')
-			quit("Error: Format color.", cub3d, 14);
+		else if (str[i] != '\n')
+			quit("Error: Formato de cor inválido.", cub3d, 14);
 		i++;
 	}
-	if(res > 255)
-		quit("Error: Format color invalid.", cub3d, 15);
+	if (res > 255)
+		quit("Error: Formato de cor inválido.", cub3d, 15);
 	return (res);
 }
 
-void ft_print_map(t_cub3d *cub3d)
+/**
+ * Imprime o mapa na saída padrão.
+ *
+ * @param cub3d O ponteiro para a estrutura do jogo cub3D.
+ */
+void	ft_print_map(t_cub3d *cub3d)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	printf("-----Mapa------\n\n");
-	while(i <= cub3d->total_lines_map)
+	while(cub3d->map[i])
 		printf("%s\n", cub3d->map[i++]);
+	printf("\n\n");
 }
 
+/**
+ * Obtém o número total de linhas no arquivo .cub.
+ *
+ * @param cub3d O ponteiro para a estrutura t_cub3d.
+ * @param argv Os argumentos de linha de comando, 
+ * contendo o caminho para o arquivo .cub.
+ */
 void	get_cub_lines(t_cub3d *cub3d, char **argv)
 {
 	char	*content_line;
@@ -100,6 +136,13 @@ void	get_cub_lines(t_cub3d *cub3d, char **argv)
 	close(fd);
 }
 
+/**
+ * Copia o conteúdo do arquivo .cub para a estrutura de dados do cub3D.
+ * 
+ * @param cub3d A estrutura de dados do cub3D.
+ * @param argv Os argumentos de linha de comando, 
+ * onde argv[1] é o caminho para o arquivo .cub.
+ */
 void	copy_cub(t_cub3d *cub3d, char **argv)
 {
 	char	*content_line;

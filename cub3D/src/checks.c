@@ -6,7 +6,7 @@
 /*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/26 13:15:18 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/26 15:55:54 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ void	check_args(int argc, char **argv)
 		exit(2);
 	}
 }
+
+void	check_textures(t_cub3d *cub3d)
+{
+	get_elements_info(cub3d);
+	check_number_elem(cub3d);
+	check_textures_images(cub3d);
+}
+
 void	get_textures_path(t_cub3d *cub3d, char *cl, int i, int flag)
 {
 	while(cl[i] && ft_is_space(cl[i]) == 1)
@@ -34,24 +42,23 @@ void	get_textures_path(t_cub3d *cub3d, char *cl, int i, int flag)
 	if(flag == 1)
 	{
 		cub3d->textures.north++;
-		cub3d->textures.north_path = ft_substr(cl, i, ft_strlen(cl) - i - 1);
+		cub3d->textures.north_path = ft_substr(cl, i, ft_strlen(cl) - i);
 	}
 	if(flag == 2)
 	{
 		cub3d->textures.south++;
-		cub3d->textures.south_path = ft_substr(cl, i, ft_strlen(cl) - i - 1);
+		cub3d->textures.south_path = ft_substr(cl, i, ft_strlen(cl) - i);
 	}
 	if(flag == 3)
 	{
 		cub3d->textures.west++;
-		cub3d->textures.west_path = ft_substr(cl, i, ft_strlen(cl) - i - 1);
+		cub3d->textures.west_path = ft_substr(cl, i, ft_strlen(cl) - i);
 	}
 	if(flag == 4)
 	{
 		cub3d->textures.east++;
-		cub3d->textures.east_path = ft_substr(cl, i, ft_strlen(cl) - i - 1);
+		cub3d->textures.east_path = ft_substr(cl, i, ft_strlen(cl) - i);
 	}
-
 }
 
 void	get_colors_path(t_cub3d *cub3d, char *cl, int i, int flag)
@@ -83,38 +90,60 @@ void	get_colors_path(t_cub3d *cub3d, char *cl, int i, int flag)
 	free(temp);
 }
 
-void	check_elements(t_cub3d *cub3d, char *cl, int i)
+void	check_elements(t_cub3d *cub3d, char *str, int i)
 {
-	if (cl[i] == 'N' && cl[i + 1] == 'O' && ft_is_space(cl[i + 2]) == 1)
-		get_textures_path(cub3d, cl, i + 2, 1);
-	else if (cl[i] == 'S' && cl[i + 1] == 'O'  && ft_is_space(cl[i + 2]) == 1)
-		get_textures_path(cub3d, cl, i + 2, 2);
-	else if (cl[i] == 'W' && cl[i + 1] == 'E'  && ft_is_space(cl[i + 2]) == 1)
-		get_textures_path(cub3d, cl, i + 2, 3);
-	else if (cl[i] == 'E' && cl[i + 1] == 'A'  && ft_is_space(cl[i + 2]) == 1)
-		get_textures_path(cub3d, cl, i + 2, 4);
-	else if (cl[i] == 'F' && ft_is_space(cl[i + 1]) == 1)
-		get_colors_path(cub3d, cl, i + 2, 5);
-	else if (cl[i] == 'C' && ft_is_space(cl[i + 1]) == 1)
-		get_colors_path(cub3d, cl, i + 2, 6);
+	if (str[i] == 'N' && str[i + 1] == 'O' && ft_is_space(str[i + 2]) == 1)
+		get_textures_path(cub3d, str, i + 2, 1);
+	else if (str[i] == 'S' && str[i + 1] == 'O'  && ft_is_space(str[i + 2]) == 1)
+		get_textures_path(cub3d, str, i + 2, 2);
+	else if (str[i] == 'W' && str[i + 1] == 'E'  && ft_is_space(str[i + 2]) == 1)
+		get_textures_path(cub3d, str, i + 2, 3);
+	else if (str[i] == 'E' && str[i + 1] == 'A'  && ft_is_space(str[i + 2]) == 1)
+		get_textures_path(cub3d, str, i + 2, 4);
+	else if (str[i] == 'F' && ft_is_space(str[i + 1]) == 1)
+		get_colors_path(cub3d, str, i + 2, 5);
+	else if (str[i] == 'C' && ft_is_space(str[i + 1]) == 1)
+		get_colors_path(cub3d, str, i + 2, 6);
 }
 
 void	check_number_elem(t_cub3d *cub3d)
 {
 	if (cub3d->textures.north != 1)
-		quit("Error: Invalid element line.", cub3d, 6);
+		quit("nError: Invalid element line.", cub3d, 9);
 	if (cub3d->textures.south != 1)
-		quit("Error: Invalid element line.", cub3d, 7);
+		quit("nError: Invalid element line.", cub3d, 10);
 	if (cub3d->textures.west != 1)
-		quit("Error: Invalid element line.", cub3d, 8);
+		quit("nError: Invalid element line.", cub3d, 11);
 	if (cub3d->textures.east != 1)
-		quit("Error: Invalid element line.", cub3d, 9);
+		quit("nError: Invalid element line.", cub3d, 12);
 	if (cub3d->textures.floor != 1)
-		quit("Error: Invalid element line.", cub3d, 10);
+		quit("nError: Invalid element line.", cub3d, 13);
 	if (cub3d->textures.ceiling != 1)
-		quit("Error: Invalid element line.", cub3d, 11);
+		quit("nError: Invalid element line.", cub3d, 14);
 }
 
+// verifica se as imagens existem
+void	check_textures_images(t_cub3d *cub3d)
+{
+	int fd;
+
+	fd = open(cub3d->textures.north_path, O_RDONLY);
+	if (fd == -1)
+		quit("nError: North image missing.", cub3d, 15);
+	close(fd);
+	fd = open(cub3d->textures.south_path, O_RDONLY);
+	if (fd == -1)
+		quit("nError: South image missing.", cub3d, 16);
+	close(fd);
+	fd = open(cub3d->textures.west_path, O_RDONLY);
+	if (fd == -1)
+		quit("nError: West image missing.", cub3d, 17);
+	close(fd);
+	fd = open(cub3d->textures.east_path, O_RDONLY);
+	if (fd == -1)
+		quit("nError: East image missing.", cub3d, 18);
+	close(fd);
+}
 
 
 

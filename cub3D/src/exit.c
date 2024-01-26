@@ -6,7 +6,7 @@
 /*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:30:09 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/26 13:12:41 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/26 15:49:43 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // de maneira controlada quando ocorrem erros ou situações excepcionais. 
 void	quit(char *s, t_cub3d *cub3d, int exit_code)
 {
-	printf("Error\n%s\n(%d)\n", s, exit_code);
+	printf("%s\n(%d)\n", s, exit_code);
 
 	free_matrix(cub3d->map);
 	free_matrix(cub3d->cub);

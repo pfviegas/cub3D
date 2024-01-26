@@ -6,12 +6,13 @@
 /*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/26 13:18:50 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/26 20:06:18 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
-// inicializa as variáveis do jogo
+
+// inicializa as variáveis do cub3D
 static void	init_var(t_cub3d *cub3d)
 {
 	cub3d->textures.north = 0;
@@ -38,33 +39,8 @@ static void	init_var(t_cub3d *cub3d)
 	cub3d->move = 1;
 }
 
-/*
-// verifica se as imagens existem
-static void	check_textures_images(t_cub3d *cub3d)
-{
-	cub3d->fd = open(cub3d->textures.north_path, O_RDONLY);
-	if (cub3d->fd == -1)
-		quit("Error: North image missing.", cub3d, 17);
-	else
-		close(cub3d->fd);
-	cub3d->fd = open(cub3d->textures.south_path, O_RDONLY);
-	if (cub3d->fd == -1)
-		quit("Error: South image missing.", cub3d, 18);
-	else
-		close(cub3d->fd);
-	cub3d->fd = open(cub3d->textures.west_path, O_RDONLY);
-	if (cub3d->fd == -1)
-		quit("Error: West image missing.", cub3d, 19);
-	else
-		close(cub3d->fd);
-	cub3d->fd = open(cub3d->textures.east_path, O_RDONLY);
-	if (cub3d->fd == -1)
-		quit("Error: East image missing.", cub3d, 20);
-	else
-		close(cub3d->fd);
-	cub3d->fd = 9999;
-}
 
+/*
 // valida o mapa, as paredes e o caminho
 static void	validations(t_cub3d *cub3d)
 {
@@ -90,34 +66,21 @@ void	start_cub3d(t_cub3d *cub3d)
 	mlx_hook(cub3d->win, 17, 1L << 17, exit_cub3d, cub3d);
 	mlx_loop(cub3d->mlx);
 }
-
-void	check_textures(t_cub3d *cub3d)
-{
-//	get_elements_info(cub3d);
-//	check_number_elem(cub3d);
-//	cub3d->total_lines_map = get_map_lines(cub3d, cub3d->fd);
-//	close(cub3d->fd);
-}
 */
 
 int	main(int argc, char **argv)
 {
-	t_cub3d		cub3d;
-//	t_textures	textures;
+	t_cub3d	cub3d;
 
 	init_var(&cub3d);
 	check_args(argc, argv);
 	copy_cub(&cub3d, argv);
-//	check_textures(&cub3d);
-
-//	check_textures_images(&cub3d);
-//	get_map(&cub3d, argv);
+	check_textures(&cub3d);
+	get_map(&cub3d);
 	
-	printf("cub3d.start_map = %d\n", cub3d.start_map);
-	printf("cub3d->total_lines_map = %d\n", cub3d.total_lines_map);
-//	ft_print_map(&cub3d);
+	ft_print_map(&cub3d);
+	
 //	validations(&cub3d);
-	
 	
 	free_matrix(cub3d.cub);
 	free_textures_image(&cub3d);

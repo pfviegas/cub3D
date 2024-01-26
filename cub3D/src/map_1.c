@@ -6,7 +6,7 @@
 /*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:35:05 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/26 13:12:41 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/26 19:43:44 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,146 +20,79 @@
  */
 void get_elements_info(t_cub3d *cub3d)
 {
-//	char *content_line;
-//	int lines;
-	int i;
+	int line;
+	int col;
 
-	i = 0;
-	while(cub3d->cub[i])
+	line = 0;
+	col = 0;
+	while(cub3d->cub[line] && ft_is_start_map(cub3d->cub[line]) == 0)
 	{
-		printf("get_elements_info->cub3d->cub[%d] : %s\n", i, cub3d->cub[i]);
-		i++;
+		col = 0;
+		while (cub3d->cub[line][col] && ft_is_space(cub3d->cub[line][col]) == 1)
+			col++;
+		check_elements(cub3d, cub3d->cub[line], col);
+		line++;
 	}
-/*
-
-	lines = 0;
-	content_line = ft_get_next_line(fd);
-	while (content_line && ft_is_start_map(content_line) == 0)
-	{
-		lines++;
-		i = 0;
-		while (content_line[i] && ft_is_space(content_line[i]) == 1)
-			i++;
-		check_elements(cub3d, content_line, i);
-		free(content_line);
-		content_line = ft_get_next_line(fd);
-	}
-	if (ft_is_start_map(content_line) == 1)
-		cub3d->start_map = lines;
-	free(content_line);
-	if (lines == 0)
-		quit("Error: file empty.", cub3d, 4);
+	if (ft_is_start_map(cub3d->cub[line]) == 1)
+		cub3d->start_map = line;
+	if (line == 0)
+		quit("nError: file empty.", cub3d, 7);
 	else if (cub3d->start_map == 0)
-		quit("Error: Invalid map start.", cub3d, 5);
-*/	
+		quit("nError: Invalid map start.", cub3d, 8);
 }
 
-
-
-
-
-/*
-// lê as linhas do mapa e retorna o número de linhas
-int	get_map_lines(t_cub3d *cub3d, int fd)
+// verifica se existem linhas em branco no meio do mapa
+void	check_nl_middle_map(t_cub3d *cub3d)
 {
-	char	*content_line;
 	int		lines;
-	int	flag;
+	int		flag;
 
 	flag = 0;
 	lines = cub3d->start_map;
-	content_line = ft_get_next_line(fd);
-	while (content_line)
+	while (cub3d->cub[lines])
 	{
-		lines++;
-		if (*content_line == '\n')
+		if (flag == 0 && cub3d->cub[lines][0] == '\0')
 			flag = 1;
-		if (flag == 1 && *content_line != '\n')
+		if (flag == 1 && cub3d->cub[lines][0] != '\0')
 			flag = 2;
-		free(content_line);
-		content_line = ft_get_next_line(fd);
-	}
-	free(content_line);
-	if (flag == 1)
-	{
-//			free(content_line);
-//			ft_get_next_line(fd);
-			close(fd);
-			quit("Error: Invalid map.", cub3d, 16);
-	}
-	if (lines == cub3d->start_map)
-		quit("Error: The map is empty.", cub3d, 3);
-	return (lines - cub3d->start_map);
-}
-*/
-
-
-
-
-
-
-/*
-
-
-// lê as linhas do mapa e retorna o número de linhas
-int	get_map_lines(t_cub3d *cub3d, int fd)
-{
-	char	*content_line;
-	int		lines;
-	int	flag;
-
-	flag = 0;
-	lines = cub3d->start_map;
-	content_line = ft_get_next_line(fd);
-	while (content_line)
-	{
 		lines++;
-		if (*content_line == '\n')
-			flag = 1;
-		free(content_line);
-		content_line = ft_get_next_line(fd);
 	}
-	free(content_line);
-	if (flag == 1)
+	if (flag == 2)
 	{
-//			free(content_line);
-//			ft_get_next_line(fd);
-			close(fd);
-			quit("Error: Invalid map.", cub3d, 16);
+		quit("nError: Invalid map.", cub3d, 19);
 	}
-	if (lines == cub3d->start_map)
-		quit("Error: The map is empty.", cub3d, 3);
-	return (lines - cub3d->start_map);
+	if (lines == cub3d->start_map )
+		quit("nError: The map is empty.", cub3d, 20);
+	else if (lines == cub3d->start_map + 1)
+		quit("nError: Invalid map.", cub3d, 21);
 }
-*/
-/*
+
 // armazena o mapa
-void	get_map(t_cub3d *cub3d, char **argv)
+void	get_map(t_cub3d *cub3d)
 {
 	int		i;
-	int 	j;
-	char	*content_line;
+	int		start_line;
 
-	i = -1;
-	j = 0;
-	cub3d->fd = open(argv[1], O_RDONLY);
-	if (cub3d->fd == -1)
-		quit("Error: Fail to open map", cub3d, 21);
+	check_nl_middle_map(cub3d);
+	i = 0;
+	start_line = cub3d->start_map;
+	while (cub3d->cub[start_line] && cub3d->cub[start_line][0] != '\0')
+	{
+		i++;
+		start_line++;
+	}
+	cub3d->total_lines_map = i;
 	cub3d->map = (char **)malloc(sizeof(char *) * (cub3d->total_lines_map + 2));
 	if (!cub3d->map)
-		quit("Error: Malloc error.", cub3d, 22);
-	while (++i <= cub3d->total_lines_map + cub3d->start_map )
+		quit("nError: Malloc error.", cub3d, 22);
+	i = 0;
+	start_line = cub3d->start_map;
+	while (i < cub3d->total_lines_map)
 	{
-		content_line = ft_get_next_line(cub3d->fd);
-		if(i >= cub3d->start_map)
-			cub3d->map[j++] = ft_strtrim(content_line, "\n");
-		free(content_line);
-	}	
-	ft_get_next_line(cub3d->fd);
-	cub3d->map[j] = NULL;
-	close(cub3d->fd);
+		cub3d->map[i++] = ft_strdup(cub3d->cub[start_line++]);
+	}
+	cub3d->map[i] = NULL;
 }
-*/
 
 /*
 // renderiza o mapa
