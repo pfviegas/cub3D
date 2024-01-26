@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/25 17:31:05 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/26 13:18:02 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ typedef struct s_cub3d
 
 void		check_args(int argc, char **argv);
 int			get_map_lines(t_cub3d *cub3d, int fd);
+void		get_cub_lines(t_cub3d *cub3d, char **argv);
+void		copy_cub(t_cub3d *cub3d, char **argv);
 void		get_elements_info(t_cub3d *cub3d);
 int			ft_is_space(int c);
 int			ft_is_start_map(char *line);
@@ -101,7 +103,6 @@ void		check_path(t_cub3d *cub3d);
 int			floodfill(t_cub3d *cub3d);
 bool		fill(t_cub3d *cub3d, char c, int line, int col);
 int			exit_cub3d(t_cub3d *cub3d);
-void		free_map(t_cub3d *cub3d);
 void		free_textures_image(t_cub3d *cub3d);
 void		start_cub3d(t_cub3d *cub3d);
 int			key_handling(int keycode, t_cub3d *cub3d);

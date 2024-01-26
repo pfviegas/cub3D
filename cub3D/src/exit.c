@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:30:09 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/25 17:28:31 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/26 13:12:41 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,40 +17,25 @@
 void	quit(char *s, t_cub3d *cub3d, int exit_code)
 {
 	printf("Error\n%s\n(%d)\n", s, exit_code);
-	if (cub3d->map != NULL)
-		free_map(cub3d);
-	if (cub3d->cub != NULL)
-		free_matrix(cub3d->cub);
+
+	free_matrix(cub3d->map);
+	free_matrix(cub3d->cub);
 
 	free_textures_image(cub3d);
 	exit(exit_code);
 }
 
+// liberta a memória alocada para uma matriz
 void free_matrix(char **str)
 {
 	int i;
-	
+	if (!str)
+		return ;
 	i = 0;
 	while (str[i])
 		free(str[i++]);
 	free(str);
-}
-
-// liberta a memória alocada para o mapa
-void	free_map(t_cub3d *cub3d)
-{
-	int	i;
-
-	if (!cub3d->map)
-		return ;
-	i = 0;
-	while (cub3d->map[i])
-	{
-		free(cub3d->map[i]);
-		i++;
-	}
-	free(cub3d->map);
-	cub3d->map = NULL;
+	str = NULL;
 }
 
 // liberta a memória alocada para o mapa do floodfill
@@ -83,7 +68,7 @@ int	exit_cub3d(t_cub3d *cub3d)
 		mlx_destroy_image(cub3d->mlx, cub3d->img.on_exit);
 	mlx_destroy_window(cub3d->mlx, cub3d->win);
 	mlx_destroy_display(cub3d->mlx);
-	free_map(cub3d);
+//	free_matrix(cub3d);
 	free(cub3d->mlx);
 	exit(0);
 }

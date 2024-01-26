@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:28:48 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/23 14:23:28 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/26 13:13:29 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/cub3D.h"
 
 // coloca as imagens do jogo na janela de acordo com mapa
 void	put_map(int x, int y, char c, t_cub3d *cub3d)

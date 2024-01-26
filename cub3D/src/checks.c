@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/25 12:43:11 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/26 13:15:18 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ void	check_walls(t_cub3d *cub3d)
 		line++;
 	}
 }
-
+/*
 // verifica se o caminho do jogador é válido.
 void	check_path(t_cub3d *cub3d)
 {
@@ -238,3 +238,4 @@ void	check_path(t_cub3d *cub3d)
 		quit("Invalid path on the map", cub3d, 13);
 	}
 }
+*/

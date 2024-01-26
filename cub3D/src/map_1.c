@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:35:05 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/25 17:38:13 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/26 13:12:41 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,19 @@
  * @param cub3d O ponteiro para a estrutura t_cub3d.
  * @param fd O descritor de arquivo do mapa.
  */
-void get_elements_info(t_cub3d *cub3d, int fd)
+void get_elements_info(t_cub3d *cub3d)
 {
-	char *content_line;
-	int lines;
+//	char *content_line;
+//	int lines;
 	int i;
+
+	i = 0;
+	while(cub3d->cub[i])
+	{
+		printf("get_elements_info->cub3d->cub[%d] : %s\n", i, cub3d->cub[i]);
+		i++;
+	}
+/*
 
 	lines = 0;
 	content_line = ft_get_next_line(fd);
@@ -43,13 +51,14 @@ void get_elements_info(t_cub3d *cub3d, int fd)
 		quit("Error: file empty.", cub3d, 4);
 	else if (cub3d->start_map == 0)
 		quit("Error: Invalid map start.", cub3d, 5);
+*/	
 }
 
 
 
 
 
-
+/*
 // lê as linhas do mapa e retorna o número de linhas
 int	get_map_lines(t_cub3d *cub3d, int fd)
 {
@@ -66,7 +75,7 @@ int	get_map_lines(t_cub3d *cub3d, int fd)
 		if (*content_line == '\n')
 			flag = 1;
 		if (flag == 1 && *content_line != '\n')
-			flag = 2
+			flag = 2;
 		free(content_line);
 		content_line = ft_get_next_line(fd);
 	}
@@ -82,12 +91,14 @@ int	get_map_lines(t_cub3d *cub3d, int fd)
 		quit("Error: The map is empty.", cub3d, 3);
 	return (lines - cub3d->start_map);
 }
+*/
 
 
 
 
 
 
+/*
 
 
 // lê as linhas do mapa e retorna o número de linhas
@@ -120,7 +131,8 @@ int	get_map_lines(t_cub3d *cub3d, int fd)
 		quit("Error: The map is empty.", cub3d, 3);
 	return (lines - cub3d->start_map);
 }
-
+*/
+/*
 // armazena o mapa
 void	get_map(t_cub3d *cub3d, char **argv)
 {
@@ -147,7 +159,9 @@ void	get_map(t_cub3d *cub3d, char **argv)
 	cub3d->map[j] = NULL;
 	close(cub3d->fd);
 }
+*/
 
+/*
 // renderiza o mapa
 int	render_map(t_cub3d *cub3d)
 {
@@ -174,3 +188,4 @@ int	render_map(t_cub3d *cub3d)
 	}
 	return (0);
 }
+*/

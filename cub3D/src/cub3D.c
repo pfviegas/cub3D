@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/25 17:38:55 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/26 13:18:50 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,52 +38,6 @@ static void	init_var(t_cub3d *cub3d)
 	cub3d->move = 1;
 }
 
-void	get_cub_lines(t_cub3d *cub3d, int fd)
-{
-	char	*content_line;
-	int	lines;
-
-	lines = 0;
-	content_line = ft_get_next_line(fd);
-	while (content_line)
-	{
-		free(content_line);
-		lines++;
-		content_line = ft_get_next_line(fd);
-	}
-	cub3d->cub_total_lines = lines;
-	free(content_line);
-}
-
-void	copy_cub(t_cub3d *cub3d, char **argv)
-{
-	char *content_line;
-	int lines;
-	int fd;
-
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		quit("nError: Opening .cub file.", cub3d, 3);
-
-	get_cub_lines(cub3d, fd);
-
-	cub3d->cub = (char **)malloc(sizeof(char *) * (cub3d->cub_total_lines + 1));
-	if (!cub3d->cub)
-		quit("nError: Malloc error.", cub3d, 4);
-
-	lines = 0;
-	content_line = ft_get_next_line(fd);
-	while (content_line)
-	{
-		cub3d->cub[lines] = ft_strtrim(content_line, "\n");
-		free(content_line);
-		lines++;
-		content_line = ft_get_next_line(fd);
-	}
-	cub3d->cub[lines] = NULL;
-	free(content_line);
-	close(fd);
-}
 /*
 // verifica se as imagens existem
 static void	check_textures_images(t_cub3d *cub3d)
@@ -136,15 +90,15 @@ void	start_cub3d(t_cub3d *cub3d)
 	mlx_hook(cub3d->win, 17, 1L << 17, exit_cub3d, cub3d);
 	mlx_loop(cub3d->mlx);
 }
-*/
 
 void	check_textures(t_cub3d *cub3d)
 {
-	get_elements_info(cub3d);
-	check_number_elem(cub3d);
-	cub3d->total_lines_map = get_map_lines(cub3d, cub3d->fd);
-	close(cub3d->fd);
+//	get_elements_info(cub3d);
+//	check_number_elem(cub3d);
+//	cub3d->total_lines_map = get_map_lines(cub3d, cub3d->fd);
+//	close(cub3d->fd);
 }
+*/
 
 int	main(int argc, char **argv)
 {
@@ -154,7 +108,7 @@ int	main(int argc, char **argv)
 	init_var(&cub3d);
 	check_args(argc, argv);
 	copy_cub(&cub3d, argv);
-	check_textures(&cub3d);
+//	check_textures(&cub3d);
 
 //	check_textures_images(&cub3d);
 //	get_map(&cub3d, argv);
@@ -165,8 +119,9 @@ int	main(int argc, char **argv)
 //	validations(&cub3d);
 	
 	
+	free_matrix(cub3d.cub);
 	free_textures_image(&cub3d);
-	free_map(&cub3d);
+	free_matrix(cub3d.map);
 	//close(fd_map);
 /*
 	start_cub3d(&cub3d);

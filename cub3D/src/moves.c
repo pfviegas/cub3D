@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:03:15 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/23 12:23:45 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/26 13:13:29 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/cub3D.h"
 
 // verifica se o jogador pode se mover para a nova posição, 
 // considerando as regras do jogo (paredes, coletáveis, saídas, ...)
@@ -68,7 +68,7 @@ static void	move_player(t_cub3d *cub3d, int col, int line, int pressed_key)
 		else
 			cub3d->map[temp_line][temp_col] = 'E';
 		ft_printf("Moves: %d\n", cub3d->move++);
-		render_map(cub3d);
+		//render_map(cub3d);
 	}
 }
 
