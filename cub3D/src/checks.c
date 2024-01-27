@@ -6,11 +6,23 @@
 /*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/26 15:55:54 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/27 12:09:09 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
+
+// valida o mapa, as paredes e o caminho
+void	map_validations(t_cub3d *cub3d)
+{
+	check_map(cub3d);
+	
+	printf("total lines: %d\n", cub3d->total_lines_map);
+	if (cub3d->total_lines_map <= 2)
+		quit("nError: Invalid number of lines.", cub3d, 27);
+	// check_walls(cub3d);
+	// check_path(cub3d);
+}
 
 // verifica se o programa foi chamado com o número correto de argumentos 
 // e se o argumento fornecido tem a extensão .ber. 
@@ -37,7 +49,7 @@ void	check_textures(t_cub3d *cub3d)
 
 void	get_textures_path(t_cub3d *cub3d, char *cl, int i, int flag)
 {
-	while(cl[i] && ft_is_space(cl[i]) == 1)
+	while(cl[i] && is_space(cl[i]) == 1)
 		i++;
 	if(flag == 1)
 	{
@@ -92,17 +104,17 @@ void	get_colors_path(t_cub3d *cub3d, char *cl, int i, int flag)
 
 void	check_elements(t_cub3d *cub3d, char *str, int i)
 {
-	if (str[i] == 'N' && str[i + 1] == 'O' && ft_is_space(str[i + 2]) == 1)
+	if (str[i] == 'N' && str[i + 1] == 'O' && is_space(str[i + 2]) == 1)
 		get_textures_path(cub3d, str, i + 2, 1);
-	else if (str[i] == 'S' && str[i + 1] == 'O'  && ft_is_space(str[i + 2]) == 1)
+	else if (str[i] == 'S' && str[i + 1] == 'O'  && is_space(str[i + 2]) == 1)
 		get_textures_path(cub3d, str, i + 2, 2);
-	else if (str[i] == 'W' && str[i + 1] == 'E'  && ft_is_space(str[i + 2]) == 1)
+	else if (str[i] == 'W' && str[i + 1] == 'E'  && is_space(str[i + 2]) == 1)
 		get_textures_path(cub3d, str, i + 2, 3);
-	else if (str[i] == 'E' && str[i + 1] == 'A'  && ft_is_space(str[i + 2]) == 1)
+	else if (str[i] == 'E' && str[i + 1] == 'A'  && is_space(str[i + 2]) == 1)
 		get_textures_path(cub3d, str, i + 2, 4);
-	else if (str[i] == 'F' && ft_is_space(str[i + 1]) == 1)
+	else if (str[i] == 'F' && is_space(str[i + 1]) == 1)
 		get_colors_path(cub3d, str, i + 2, 5);
-	else if (str[i] == 'C' && ft_is_space(str[i + 1]) == 1)
+	else if (str[i] == 'C' && is_space(str[i + 1]) == 1)
 		get_colors_path(cub3d, str, i + 2, 6);
 }
 
@@ -162,56 +174,12 @@ void	check_map(t_cub3d *cub3d)
 		line++;
 	}
 	if (cub3d->player == 0)
-		quit("Error: There's no player.", cub3d, 24);
+		quit("nError: There's no player.", cub3d, 25);
 	else if (cub3d->player > 1)
-		quit("Error: Just one player per map.", cub3d, 25);
+		quit("nError: Just one player per map.", cub3d, 26);
 }
 
-// Função para verificar se uma coordenada está rodeada de 1s
-void	is_surrounded_1(t_cub3d *cub3d, int line, int col)
-{
-	int	i;
-	int j;
-	
-	i = line - 1;
-	while (i <= line + 1)
-	{
-		j = col - 1;
-		while (j <= col + 1)
-		{
-			if (i >= 0 && i <= cub3d->total_lines_map \
-				&& j >= 0 && j < (int)ft_strlen(cub3d->map[i]))
-				if (cub3d->map[i][j] != '1')
-					if (cub3d->map[i][j] != ' ')
-						quit("Error: Invalid map.", cub3d, 26);
-			j++;
-		}
-		i++;
-	}
-}
 
-// Função para verificar se uma coordenada está rodeada de 1s
-void	is_new_line(t_cub3d *cub3d, int line, int col)
-{
-	int	i;
-	int j;
-	
-	i = line - 1;
-	while (i <= line + 1)
-	{
-		j = col - 1;
-		while (j <= col + 1)
-		{
-			if (i >= 0 && i <= cub3d->total_lines_map \
-				&& j >= 0 && j < (int)ft_strlen(cub3d->map[i]))
-				if (cub3d->map[i][j] != '1')
-					if (cub3d->map[i][j] != ' ')
-						quit("Error: Invalid map.", cub3d, 26);
-			j++;
-		}
-		i++;
-	}
-}
 
 void	check_char(t_cub3d *cub3d, char c, int line, int col)
 {
@@ -222,17 +190,12 @@ void	check_char(t_cub3d *cub3d, char c, int line, int col)
 		cub3d->player_x = line;
 		cub3d->player_direction = c;
 	}
-	else if (c == '1' || c == '0')
+	else if (c == '0' || c == '1')
 		return ;
 	else if (c == ' ')
 		is_surrounded_1(cub3d, line, col);
 	else
-		quit("Error: Invalid characters.", cub3d, 23);
-
-//	printf("cub3d->player : %d\n", cub3d->player);
-//	printf("cub3d->player_x : %d\n", cub3d->player_x);
-//	printf("cub3d->player_y : %d\n", cub3d->player_y);
-//	printf("cub3d->player_direction : %c\n", cub3d->player_direction);
+		quit("nError: Invalid characters.", cub3d, 23);
 }
 
 // verifica se o mapa está cercado por paredes.

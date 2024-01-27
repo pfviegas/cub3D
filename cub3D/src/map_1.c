@@ -6,7 +6,7 @@
 /*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:35:05 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/26 19:43:44 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/27 11:31:41 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ void get_elements_info(t_cub3d *cub3d)
 
 	line = 0;
 	col = 0;
-	while(cub3d->cub[line] && ft_is_start_map(cub3d->cub[line]) == 0)
+	while(cub3d->cub[line] && is_start_map(cub3d->cub[line]) == 0)
 	{
 		col = 0;
-		while (cub3d->cub[line][col] && ft_is_space(cub3d->cub[line][col]) == 1)
+		while (cub3d->cub[line][col] && is_space(cub3d->cub[line][col]) == 1)
 			col++;
 		check_elements(cub3d, cub3d->cub[line], col);
 		line++;
 	}
-	if (ft_is_start_map(cub3d->cub[line]) == 1)
+	if (is_start_map(cub3d->cub[line]) == 1)
 		cub3d->start_map = line;
 	if (line == 0)
 		quit("nError: file empty.", cub3d, 7);

@@ -6,7 +6,7 @@
 /*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/26 20:02:22 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/27 12:01:06 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param c O caractere a ser verificado.
  * @return 1 se o caractere for um espaço em branco, 0 caso contrário.
  */
-int	ft_is_space(int c)
+int	is_space(int c)
 {
 	if((c >= '\t' && c <= '\r') || c == ' ')
 		return (1);
@@ -34,14 +34,14 @@ int	ft_is_space(int c)
  * @param line A linha a ser verificada.
  * @return 1 se a linha for o início do mapa, 0 caso contrário.
  */
-int ft_is_start_map(char *line)
+int is_start_map(char *line)
 {
 	int i;
 	
 	if (!line)
 		return (0);
 	i = 0;
-	while(line[i] && ft_is_space(line[i]) == 1)
+	while(line[i] && is_space(line[i]) == 1)
 		i++;
 	if(line[i] != '1')
 		return (0);
@@ -169,4 +169,56 @@ void	copy_cub(t_cub3d *cub3d, char **argv)
 	free(content_line);
 	ft_get_next_line(fd);
 	close(fd);
+}
+
+// Função para verificar se uma coordenada está rodeada de 1s
+void	is_surrounded_1(t_cub3d *cub3d, int line, int col)
+{
+	int	i;
+	int j;
+	
+	if (line == 0)
+		i = line;
+	else
+		i = line - 1;
+	while (cub3d->map[i] && i <= line + 1)
+	{
+		if (col == 0)
+			j = col;
+		else
+		j = col - 1;
+		while (j <= col + 1)
+		{
+			if (i <= cub3d->total_lines_map \
+				&& j < (int)ft_strlen(cub3d->map[i]))
+				if (cub3d->map[i][j] != '1')
+					if (cub3d->map[i][j] != ' ')
+						quit("nError: Invalid map.", cub3d, 24);
+			j++;
+		}
+		i++;
+	}
+}
+
+// Função para verificar se uma coordenada está rodeada de 1s
+void	is_new_line(t_cub3d *cub3d, int line, int col)
+{
+	int	i;
+	int j;
+	
+	i = line - 1;
+	while (i <= line + 1)
+	{
+		j = col - 1;
+		while (j <= col + 1)
+		{
+			if (i >= 0 && i <= cub3d->total_lines_map \
+				&& j >= 0 && j < (int)ft_strlen(cub3d->map[i]))
+				if (cub3d->map[i][j] != '1')
+					if (cub3d->map[i][j] != ' ')
+						quit("Error: Invalid map.", cub3d, 26);
+			j++;
+		}
+		i++;
+	}
 }

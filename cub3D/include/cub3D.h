@@ -6,7 +6,7 @@
 /*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/26 19:16:00 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/27 11:31:41 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,12 @@ void		check_textures_images(t_cub3d *cub3d);
 
 void		get_map(t_cub3d *cub3d);
 void		check_nl_middle_map(t_cub3d *cub3d);
+void		map_validations(t_cub3d *cub3d);
+void		is_surrounded_1(t_cub3d *cub3d, int line, int col);
+void		is_new_line(t_cub3d *cub3d, int line, int col);
 
-int			ft_is_space(int c);
-int			ft_is_start_map(char *line);
+int			is_space(int c);
+int			is_start_map(char *line);
 void		check_elements(t_cub3d *cub3d, char *cl, int i);
 void		check_number_elem(t_cub3d *cub3d);
 int			ft_atoi_cub3d(t_cub3d *cub3d, char *str);

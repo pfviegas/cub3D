@@ -6,7 +6,7 @@
 /*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/26 20:06:18 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/27 12:06:56 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,12 @@ static void	init_var(t_cub3d *cub3d)
 	cub3d->player_x = 0;
 	cub3d->player_y = 0;
 	cub3d->player = 0;
+	cub3d->player_direction = '9';
 	
-	//cub3d->player_direction = 0;
 	cub3d->column = 0;
 	cub3d->end_cub3d = 0;
 	cub3d->move = 1;
 }
-
-
-/*
-// valida o mapa, as paredes e o caminho
-static void	validations(t_cub3d *cub3d)
-{
-	check_map(cub3d);
-	
-	// if (cub3d->col63)al_lines_map <= 0)
-	// 	quit("Invalid number of lines.", cub3d, 15);
-	// check_walls(cub3d);
-	// check_path(cub3d);
-}
-*/
 
 /*
 // inicializa o ambiente gráfico, as imagens e o jogo
@@ -77,15 +63,21 @@ int	main(int argc, char **argv)
 	copy_cub(&cub3d, argv);
 	check_textures(&cub3d);
 	get_map(&cub3d);
+	map_validations(&cub3d);
 	
-	ft_print_map(&cub3d);
-	
-//	validations(&cub3d);
-	
+	ft_print_map(&cub3d);	
+
+
+	printf("cub3d->player : %d\n", cub3d.player);
+	printf("cub3d->player_x : %d\n", cub3d.player_x);
+	printf("cub3d->player_y : %d\n", cub3d.player_y);
+	printf("cub3d->player_direction : %c\n\n", cub3d.player_direction);
+
+
+
 	free_matrix(cub3d.cub);
 	free_textures_image(&cub3d);
 	free_matrix(cub3d.map);
-	//close(fd_map);
 /*
 	start_cub3d(&cub3d);
 */
