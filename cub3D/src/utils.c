@@ -6,7 +6,7 @@
 /*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/27 12:01:06 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/28 13:44:08 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,14 +186,17 @@ void	is_surrounded_1(t_cub3d *cub3d, int line, int col)
 		if (col == 0)
 			j = col;
 		else
-		j = col - 1;
+			j = col - 1;
 		while (j <= col + 1)
 		{
 			if (i <= cub3d->total_lines_map \
 				&& j < (int)ft_strlen(cub3d->map[i]))
 				if (cub3d->map[i][j] != '1')
 					if (cub3d->map[i][j] != ' ')
+					{
+						printf("map[%d][%d] = %c\n", i, j, cub3d->map[i][j]);
 						quit("nError: Invalid map.", cub3d, 24);
+					}
 			j++;
 		}
 		i++;

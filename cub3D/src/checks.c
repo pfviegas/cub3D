@@ -6,7 +6,7 @@
 /*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/27 12:09:09 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/28 13:38:38 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,9 +168,14 @@ void	check_map(t_cub3d *cub3d)
 	line = 0;
 	while (cub3d->map[line] != NULL)
 	{
-		col = -1;
-		while (cub3d->map[line][++col])
+		col = 0;
+		while (cub3d->map[line][col] == ' ' || cub3d->map[line][col] == '\t')
+			col++;
+		while (cub3d->map[line][col])
+		{
 			check_char(cub3d, cub3d->map[line][col], line, col);
+			col++;
+		}
 		line++;
 	}
 	if (cub3d->player == 0)
@@ -194,6 +199,8 @@ void	check_char(t_cub3d *cub3d, char c, int line, int col)
 		return ;
 	else if (c == ' ')
 		is_surrounded_1(cub3d, line, col);
+	else if (c == '\t')
+		printf("o que fazer quando for um tab ?\n");
 	else
 		quit("nError: Invalid characters.", cub3d, 23);
 }
