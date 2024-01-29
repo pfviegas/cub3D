@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/29 14:29:47 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/29 15:03:12 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_cub3d
 	int			cub_total_lines;
 	char		**map;
 	int			map_total_lines;
+	int			map_max_column;
 	char		**map_floodfill;
 	char		player_direction;
 	char		temp;

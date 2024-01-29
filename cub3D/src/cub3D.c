@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/29 14:30:05 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/29 15:03:57 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	init_var(t_cub3d *cub3d)
 	cub3d->start_map = 0;
 	cub3d->cub = NULL;
 	cub3d->map = NULL;
+	cub3d->map_max_column = 0;
 	cub3d->map_floodfill = NULL;
 	cub3d->textures.north_path = NULL;
 	cub3d->textures.south_path = NULL;

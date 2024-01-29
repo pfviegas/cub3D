@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/29 14:29:53 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/29 15:02:53 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,8 @@ void	check_map(t_cub3d *cub3d)
 			check_char(cub3d, cub3d->map[line][col], line, col);
 			col++;
 		}
+		if (cub3d->map_max_column < col)
+			cub3d->map_max_column = col;
 		line++;
 	}
 	if (cub3d->player == 0)
@@ -173,7 +175,6 @@ void	check_map(t_cub3d *cub3d)
 	else if (cub3d->player > 1)
 		quit("nError: Just one player per map.", cub3d, 26);
 }
-
 
 // verifica se o caractere é válido e se for espaco valida os caracteres adjacentes.
 void	check_char(t_cub3d *cub3d, char c, int line, int col)
