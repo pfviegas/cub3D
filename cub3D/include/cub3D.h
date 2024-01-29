@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/29 15:03:12 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/29 16:33:51 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,17 @@
 # define ARROW_UP 65362
 # define ARROW_RIGHT 65363
 # define ARROW_DOWN 65364
+
+// images
+# define WALL "./images/wall.xpm"
+# define PLAYER "./images/player.xpm"
+# define FLOOR "./images/floor.xpm"
+# define EXIT "./images/portal.xpm"
+# define BAG "./images/gold-bag.xpm"
+# define ON_EXIT "./images/portal1.xpm"
+# define PORTAL "./images/portal2.xpm"
+
+#define IMAGE_WIDTH 16
 
 typedef struct s_textures
 {
@@ -54,12 +65,21 @@ typedef struct s_img
 	void	*on_exit;
 }	t_img;
 
+typedef struct	s_image_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_image_data;
+
 typedef struct s_cub3d
 {
 	t_img		img;
 	t_textures	textures;
 	void		*mlx;
 	void		*win;
+	t_image_data	*pixel_img;
 	char		**cub;
 	int			cub_total_lines;
 	char		**map;

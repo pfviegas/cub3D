@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:35:05 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/29 11:49:19 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/29 15:13:14 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,25 +97,18 @@ void	get_map(t_cub3d *cub3d)
 	cub3d->map_floodfill[i] = NULL;
 }
 
-/*
+
 // renderiza o mapa
 int	render_map(t_cub3d *cub3d)
 {
 	int	y;
 	int	x;
-	int	s;
 
-	s = 64;
-	if (cub3d->collectibles == 0)
-	{
-		mlx_destroy_image(cub3d->mlx, cub3d->img.exit);
-//		cub3d->img.exit = mlx_xpm_file_to_image(cub3d->mlx, PORTAL, &s, &s);
-	}
 	y = 0;
 	while (y < cub3d->map_total_lines)
 	{
 		x = 0;
-		while (x < cub3d->column)
+		while (x < cub3d->map_max_column)
 		{
 			put_map(x, y, cub3d->map[y][x], cub3d);
 			x++;
@@ -124,4 +117,3 @@ int	render_map(t_cub3d *cub3d)
 	}
 	return (0);
 }
-*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 12:03:15 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/26 13:13:29 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/29 15:40:01 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,6 @@ static int	valid_move(t_cub3d *cub3d, int col, int line, int pressed_key)
 	cub3d->temp = '0';
 	if (cub3d->map[line][col] == '1')
 		return (-1);
-	if (cub3d->map[line][col] == 'C')
-		cub3d->collectibles--;
-	if (cub3d->map[line][col] == 'E' && cub3d->collectibles > 0)
-	{
-		cub3d->player_on_exit = 1;
-		cub3d->temp = 'O';
-		return (1);
-	}
-	if (cub3d->map[line][col] == 'E' && cub3d->collectibles == 0)
-	{
-		cub3d->end_cub3d = 1;
-		ft_printf("Moves: %d\n", cub3d->move++);
-		ft_printf("\n\n\t\tCongrats!!!\tYOU WIN (*_*)\n\n");
-		exit_cub3d(cub3d);
-	}
 	if (pressed_key != W && pressed_key != ARROW_UP 
 		&& pressed_key != S && pressed_key != ARROW_DOWN
 		&& pressed_key != A && pressed_key != ARROW_LEFT
@@ -55,20 +40,14 @@ static void	move_player(t_cub3d *cub3d, int col, int line, int pressed_key)
 	temp_col = cub3d->player_x;
 	temp_line = cub3d->player_y;
 	valid = valid_move(cub3d, col, line, pressed_key);
-	if (valid != -1)
+	if (valid == 1)
 	{
 		cub3d->player_y = line;
 		cub3d->player_x = col;
-		if (cub3d->temp != 'O')
-			cub3d->map[line][col] = 'P';
-		else
-			cub3d->map[line][col] = 'O';
-		if (cub3d->map[temp_line][temp_col] != 'O')
-			cub3d->map[temp_line][temp_col] = '0';
-		else
-			cub3d->map[temp_line][temp_col] = 'E';
+		cub3d->map[line][col] = 'N';
+		cub3d->map[temp_line][temp_col] = '0';
 		ft_printf("Moves: %d\n", cub3d->move++);
-		//render_map(cub3d);
+		render_map(cub3d);
 	}
 }
 
@@ -90,7 +69,6 @@ int	key_handling(int keycode, t_cub3d *cub3d)
 		col++;
 	else if (keycode == ESC)
 		exit_cub3d(cub3d);
-	if (cub3d->end_cub3d != 1)
-		move_player(cub3d, col, line, keycode);
+	move_player(cub3d, col, line, keycode);
 	return (0);
 }

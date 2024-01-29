@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/29 15:03:57 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/29 16:41:03 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,23 @@ static void	init_var(t_cub3d *cub3d)
 	cub3d->move = 1;
 }
 
-/*
+
 // inicializa o ambiente gráfico, as imagens e o jogo
 void	start_cub3d(t_cub3d *cub3d)
 {
+	t_image_data	img;
+	
 	cub3d->mlx = mlx_init();
-	cub3d->win = mlx_new_window(cub3d->mlx, cub3d->column * 64,
-			cub3d->map_total_lines * 64, "So_long");
+	cub3d->win = mlx_new_window(cub3d->mlx, cub3d->map_max_column * IMAGE_WIDTH,
+			cub3d->map_total_lines * IMAGE_WIDTH, "cub3D");
 	init_images(cub3d);
 	render_map(cub3d);
+// colocar o player no mapa (pixels)
+	img.img = mlx_new_image(cub3d->mlx, 160, 160);
 	mlx_hook(cub3d->win, 02, 1L << 0, key_handling, cub3d);
 	mlx_hook(cub3d->win, 17, 1L << 17, exit_cub3d, cub3d);
 	mlx_loop(cub3d->mlx);
 }
-*/
 
 int	main(int argc, char **argv)
 {
@@ -75,9 +78,8 @@ int	main(int argc, char **argv)
 	printf("cub3d->player_x (col): %d\n", cub3d.player_x);
 	printf("cub3d->player_direction : %c\n\n", cub3d.player_direction);
 
-	quit("", &cub3d, 0);
-/*
 	start_cub3d(&cub3d);
-*/
+
+	quit("", &cub3d, 0);
 	return (0);
 }
