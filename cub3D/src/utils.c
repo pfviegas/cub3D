@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/28 13:44:08 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/29 14:08:54 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int is_start_map(char *line)
 	if(line[i] != '1')
 		return (0);
 	else
-	{
-		while(line[i] && (line[i] == '1' || line[i] == ' ' || line[i] == '\t'))
+	{	
+		while(line[i] && (line[i] == '1' || line[i] == '0' || line[i] == ' ' || line[i] == '\t'))
 			i++;
 		if(line[i] == '\0')
 			return (1);
@@ -103,6 +103,22 @@ void	ft_print_map(t_cub3d *cub3d)
 	printf("-----Mapa------\n\n");
 	while(cub3d->map[i])
 		printf("%s\n", cub3d->map[i++]);
+	printf("\n\n");
+}
+
+/**
+ * Imprime o mapa floodfill na saída padrão.
+ *
+ * @param cub3d O ponteiro para a estrutura do jogo cub3D.
+ */
+void	ft_print_map_flood(t_cub3d *cub3d)
+{
+	int	i;
+
+	i = 0;
+	printf("-----Mapa FLOOD------\n\n");
+	while(cub3d->map_floodfill[i])
+		printf("%s\n", cub3d->map_floodfill[i++]);
 	printf("\n\n");
 }
 
@@ -189,14 +205,11 @@ void	is_surrounded_1(t_cub3d *cub3d, int line, int col)
 			j = col - 1;
 		while (j <= col + 1)
 		{
-			if (i <= cub3d->total_lines_map \
+			if (i <= cub3d->map_total_lines \
 				&& j < (int)ft_strlen(cub3d->map[i]))
 				if (cub3d->map[i][j] != '1')
 					if (cub3d->map[i][j] != ' ')
-					{
-						printf("map[%d][%d] = %c\n", i, j, cub3d->map[i][j]);
 						quit("nError: Invalid map.", cub3d, 24);
-					}
 			j++;
 		}
 		i++;
@@ -215,7 +228,7 @@ void	is_new_line(t_cub3d *cub3d, int line, int col)
 		j = col - 1;
 		while (j <= col + 1)
 		{
-			if (i >= 0 && i <= cub3d->total_lines_map \
+			if (i >= 0 && i <= cub3d->map_total_lines \
 				&& j >= 0 && j < (int)ft_strlen(cub3d->map[i]))
 				if (cub3d->map[i][j] != '1')
 					if (cub3d->map[i][j] != ' ')

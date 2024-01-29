@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:30:09 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/26 15:49:43 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/29 13:42:54 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	quit(char *s, t_cub3d *cub3d, int exit_code)
 
 	free_matrix(cub3d->map);
 	free_matrix(cub3d->cub);
+	free_matrix(cub3d->map_floodfill);
 
 	free_textures_image(cub3d);
 	exit(exit_code);

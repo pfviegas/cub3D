@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/27 11:31:41 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/29 14:29:47 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct s_cub3d
 	char		**cub;
 	int			cub_total_lines;
 	char		**map;
+	int			map_total_lines;
+	char		**map_floodfill;
 	char		player_direction;
 	char		temp;
 	int			collectibles;
@@ -73,13 +75,11 @@ typedef struct s_cub3d
 	int			exit;
 	int			player;
 	int			start_map;
-	int			total_lines_map;
-	int			column;
 	int			end_cub3d;
 	int			move;
 }	t_cub3d;
 
-void		check_args(int argc, char **argv);
+void		check_args(t_cub3d *cub3d, int argc, char **argv);
 void		get_cub_lines(t_cub3d *cub3d, char **argv);
 void		copy_cub(t_cub3d *cub3d, char **argv);
 void		check_textures(t_cub3d *cub3d);
@@ -91,13 +91,17 @@ void		check_nl_middle_map(t_cub3d *cub3d);
 void		map_validations(t_cub3d *cub3d);
 void		is_surrounded_1(t_cub3d *cub3d, int line, int col);
 void		is_new_line(t_cub3d *cub3d, int line, int col);
+int			floodfill(t_cub3d *cub3d);
+bool		fill(t_cub3d *cub3d, char c, int line, int col);
+void		ft_print_map_flood(t_cub3d *cub3d);
+
 
 int			is_space(int c);
 int			is_start_map(char *line);
 void		check_elements(t_cub3d *cub3d, char *cl, int i);
 void		check_number_elem(t_cub3d *cub3d);
 int			ft_atoi_cub3d(t_cub3d *cub3d, char *str);
-void 		ft_print_map(t_cub3d *cub3d);
+void		ft_print_map(t_cub3d *cub3d);
 void		is_surrounded_1(t_cub3d *cub3d, int line, int col);
 void 		free_matrix(char **str);
 
@@ -105,10 +109,7 @@ void 		free_matrix(char **str);
 void		check_map(t_cub3d *cub3d);
 void		check_char(t_cub3d *cub3d, char c, int line, int col);
 void		quit(char *s, t_cub3d *cub3d, int exit_code);
-void		check_walls(t_cub3d *cub3d);
-void		check_path(t_cub3d *cub3d);
-int			floodfill(t_cub3d *cub3d);
-bool		fill(t_cub3d *cub3d, char c, int line, int col);
+void		check_map_closed(t_cub3d *cub3d);
 int			exit_cub3d(t_cub3d *cub3d);
 void		free_textures_image(t_cub3d *cub3d);
 void		start_cub3d(t_cub3d *cub3d);

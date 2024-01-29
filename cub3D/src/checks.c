@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/28 13:38:38 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/29 14:29:53 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,19 @@ void	map_validations(t_cub3d *cub3d)
 {
 	check_map(cub3d);
 	
-	printf("total lines: %d\n", cub3d->total_lines_map);
-	if (cub3d->total_lines_map <= 2)
+	if (cub3d->map_total_lines <= 2)
 		quit("nError: Invalid number of lines.", cub3d, 27);
-	// check_walls(cub3d);
-	// check_path(cub3d);
+	 check_map_closed(cub3d);
 }
 
 // verifica se o programa foi chamado com o número correto de argumentos 
 // e se o argumento fornecido tem a extensão .ber. 
-void	check_args(int argc, char **argv)
+void	check_args(t_cub3d *cub3d, int argc, char **argv)
 {
 	if (argc != 2)
-	{
-		write(2, "Error: Invalid number of argument.\n", 36);
-		exit(1);
-	}
+		quit("nError: Invalid number of argument.\n", cub3d, 1);
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4))
-	{
-		write(2, "Error: File must be of type .cub\n", 34);
-		exit(2);
-	}
+		quit("nError: File must be of type .cub\n", cub3d, 2);
 }
 
 void	check_textures(t_cub3d *cub3d)
@@ -157,8 +149,6 @@ void	check_textures_images(t_cub3d *cub3d)
 	close(fd);
 }
 
-
-
 // verifica se o mapa tem apenas os caracteres permitidos.
 void	check_map(t_cub3d *cub3d)
 {
@@ -169,7 +159,7 @@ void	check_map(t_cub3d *cub3d)
 	while (cub3d->map[line] != NULL)
 	{
 		col = 0;
-		while (cub3d->map[line][col] == ' ' || cub3d->map[line][col] == '\t')
+		while (cub3d->map[line][col] == ' ')
 			col++;
 		while (cub3d->map[line][col])
 		{
@@ -185,56 +175,29 @@ void	check_map(t_cub3d *cub3d)
 }
 
 
-
+// verifica se o caractere é válido e se for espaco valida os caracteres adjacentes.
 void	check_char(t_cub3d *cub3d, char c, int line, int col)
 {
 	if(c == 'N' || c == 'S' || c == 'W' || c == 'E')
 	{
 		cub3d->player++;
-		cub3d->player_y = col;
-		cub3d->player_x = line;
+		cub3d->player_y = line;
+		cub3d->player_x = col;
 		cub3d->player_direction = c;
 	}
 	else if (c == '0' || c == '1')
 		return ;
 	else if (c == ' ')
 		is_surrounded_1(cub3d, line, col);
-	else if (c == '\t')
-		printf("o que fazer quando for um tab ?\n");
 	else
 		quit("nError: Invalid characters.", cub3d, 23);
 }
 
-// verifica se o mapa está cercado por paredes.
-void	check_walls(t_cub3d *cub3d)
+// verifica se o mapa esta fechado por paredes
+void	check_map_closed(t_cub3d *cub3d)
 {
-	int	line;
-	int	col;
-
-	line = 0;
-	while (cub3d->map[line])
-	{
-		col = 0;
-		while (cub3d->map[line][col])
-		{
-			if (cub3d->map[0][col] != '1' ||
-				cub3d->map[cub3d->total_lines_map - 1][col] != '1')
-				quit("The map is not surrounded by walls", cub3d, 12);
-			if (cub3d->map[line][0] != '1' ||
-				cub3d->map[line][cub3d->column - 1] != '1')
-				quit("The map is not surrounded by walls", cub3d, 12);
-			col++;
-		}
-		line++;
-	}
-}
-/*
-// verifica se o caminho do jogador é válido.
-void	check_path(t_cub3d *cub3d)
-{
-	if (!floodfill(cub3d))
+	if (floodfill(cub3d) == 0)
 	{
 		quit("Invalid path on the map", cub3d, 13);
 	}
 }
-*/

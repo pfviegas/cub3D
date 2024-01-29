@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:35:05 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/28 13:28:32 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/29 11:49:19 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,20 @@ void	get_map(t_cub3d *cub3d)
 		i++;
 		start_line++;
 	}
-	cub3d->total_lines_map = i;
-	cub3d->map = (char **)malloc(sizeof(char *) * (cub3d->total_lines_map + 2));
-	if (!cub3d->map)
+	cub3d->map_total_lines = i;
+	cub3d->map = (char **)malloc(sizeof(char *) * (cub3d->map_total_lines + 2));
+	cub3d->map_floodfill = (char **)malloc(sizeof(char *) * (cub3d->map_total_lines + 2));
+	if (!cub3d->map || !cub3d->map_floodfill)
 		quit("nError: Malloc error.", cub3d, 22);
 	i = 0;
 	start_line = cub3d->start_map;
-	while (i < cub3d->total_lines_map)
+	while (i < cub3d->map_total_lines)
 	{
+		cub3d->map_floodfill[i] = ft_strdup(cub3d->cub[start_line]);
 		cub3d->map[i++] = ft_strdup(cub3d->cub[start_line++]);
 	}
 	cub3d->map[i] = NULL;
+	cub3d->map_floodfill[i] = NULL;
 }
 
 /*
@@ -109,7 +112,7 @@ int	render_map(t_cub3d *cub3d)
 //		cub3d->img.exit = mlx_xpm_file_to_image(cub3d->mlx, PORTAL, &s, &s);
 	}
 	y = 0;
-	while (y < cub3d->total_lines_map)
+	while (y < cub3d->map_total_lines)
 	{
 		x = 0;
 		while (x < cub3d->column)

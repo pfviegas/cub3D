@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/27 12:06:56 by paulo            ###   ########.fr       */
+/*   Updated: 2024/01/29 14:30:05 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ static void	init_var(t_cub3d *cub3d)
 	cub3d->textures.west = 0;
 	cub3d->textures.floor = 0;
 	cub3d->textures.ceiling = 0;
-	cub3d->total_lines_map = 0;
+	cub3d->map_total_lines = 0;
 	cub3d->start_map = 0;
 	cub3d->cub = NULL;
 	cub3d->map = NULL;
+	cub3d->map_floodfill = NULL;
 	cub3d->textures.north_path = NULL;
 	cub3d->textures.south_path = NULL;
 	cub3d->textures.west_path = NULL;
@@ -34,7 +35,6 @@ static void	init_var(t_cub3d *cub3d)
 	cub3d->player = 0;
 	cub3d->player_direction = '9';
 	
-	cub3d->column = 0;
 	cub3d->end_cub3d = 0;
 	cub3d->move = 1;
 }
@@ -45,7 +45,7 @@ void	start_cub3d(t_cub3d *cub3d)
 {
 	cub3d->mlx = mlx_init();
 	cub3d->win = mlx_new_window(cub3d->mlx, cub3d->column * 64,
-			cub3d->total_lines_map * 64, "So_long");
+			cub3d->map_total_lines * 64, "So_long");
 	init_images(cub3d);
 	render_map(cub3d);
 	mlx_hook(cub3d->win, 02, 1L << 0, key_handling, cub3d);
@@ -59,25 +59,22 @@ int	main(int argc, char **argv)
 	t_cub3d	cub3d;
 
 	init_var(&cub3d);
-	check_args(argc, argv);
+	check_args(&cub3d, argc, argv);
 	copy_cub(&cub3d, argv);
 	check_textures(&cub3d);
 	get_map(&cub3d);
 	map_validations(&cub3d);
 	
-	ft_print_map(&cub3d);	
+//	ft_print_map(&cub3d);	
+//	ft_print_map_flood(&cub3d);	
 
-
+	printf("total lines: %d\n", cub3d.map_total_lines);
 	printf("cub3d->player : %d\n", cub3d.player);
-	printf("cub3d->player_x : %d\n", cub3d.player_x);
-	printf("cub3d->player_y : %d\n", cub3d.player_y);
+	printf("cub3d->player_y (line): %d\n", cub3d.player_y);
+	printf("cub3d->player_x (col): %d\n", cub3d.player_x);
 	printf("cub3d->player_direction : %c\n\n", cub3d.player_direction);
 
-
-
-	free_matrix(cub3d.cub);
-	free_textures_image(&cub3d);
-	free_matrix(cub3d.map);
+	quit("", &cub3d, 0);
 /*
 	start_cub3d(&cub3d);
 */
