@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/30 11:40:08 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/30 12:06:54 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,12 @@ void	get_colors_path(t_cub3d *cub3d, char *cl, int i, int flag)
 
 	j = -1;
 	temp = ft_substr(cl, i, ft_strlen(cl) - i);
+	printf("temp =%s\n", temp);
 	temp_array = ft_split(temp,',');
+
 	while(temp_array[++j])
 	{
+		printf("temp_array [%d]= [%s]\n",j , temp_array[j]);
 		if((flag == 5 || flag == 6) && ft_atoi_cub3d(cub3d, temp_array[j]) < 0)
 			return (free_matrix(temp_array), free(temp), \
 					quit("nError: Format color invalid.", cub3d, 30));

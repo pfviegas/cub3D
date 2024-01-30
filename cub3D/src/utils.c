@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/30 11:38:04 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/30 12:15:04 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_atoi_cub3d(t_cub3d *cub3d, char *str)
 	int	i;
 
 	i = 0;
-	res = 0;
+	res = -1;
 	(void) cub3d;
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
@@ -77,6 +77,8 @@ int	ft_atoi_cub3d(t_cub3d *cub3d, char *str)
 		return (-1);
 	while (str[i])
 	{
+		if(res == -1)
+			res = 0;
 		if (ft_isdigit(str[i]))
 			res = res * 10 + (str[i] - '0');
 		else if (str[i] != '\0' && is_space(str[i]) != 1)
@@ -85,6 +87,7 @@ int	ft_atoi_cub3d(t_cub3d *cub3d, char *str)
 	}
 	if (res > 255)
 		return (-1);
+	printf("res : %d\n", res);
 	return (res);
 }
 
