@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/29 16:41:03 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/30 11:43:09 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	init_var(t_cub3d *cub3d)
 void	start_cub3d(t_cub3d *cub3d)
 {
 	t_image_data	img;
+//	int				offset;
 	
 	cub3d->mlx = mlx_init();
 	cub3d->win = mlx_new_window(cub3d->mlx, cub3d->map_max_column * IMAGE_WIDTH,
@@ -52,7 +53,10 @@ void	start_cub3d(t_cub3d *cub3d)
 	init_images(cub3d);
 	render_map(cub3d);
 // colocar o player no mapa (pixels)
-	img.img = mlx_new_image(cub3d->mlx, 160, 160);
+	img.img = mlx_new_image(cub3d->mlx, 16, 16);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+								&img.endian);
+//	offset = (y * line_length + x * (bits_per_pixel / 8));
 	mlx_hook(cub3d->win, 02, 1L << 0, key_handling, cub3d);
 	mlx_hook(cub3d->win, 17, 1L << 17, exit_cub3d, cub3d);
 	mlx_loop(cub3d->mlx);
@@ -69,7 +73,7 @@ int	main(int argc, char **argv)
 	get_map(&cub3d);
 	map_validations(&cub3d);
 	
-//	ft_print_map(&cub3d);	
+	ft_print_map(&cub3d);	
 //	ft_print_map_flood(&cub3d);	
 
 	printf("total lines: %d\n", cub3d.map_total_lines);

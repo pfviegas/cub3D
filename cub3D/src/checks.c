@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/29 15:02:53 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/30 11:40:08 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,43 +71,45 @@ void	get_colors_path(t_cub3d *cub3d, char *cl, int i, int flag)
 	char	**temp_array;
 	int j;
 
-	j = 0;	
+	j = -1;
 	temp = ft_substr(cl, i, ft_strlen(cl) - i);
 	temp_array = ft_split(temp,',');
-	while(temp_array[j])
+	while(temp_array[++j])
 	{
-		if(flag == 5)
-			cub3d->textures.floor_color[j] = ft_atoi_cub3d(cub3d, temp_array[j]);
-		if(flag == 6)
+		if((flag == 5 || flag == 6) && ft_atoi_cub3d(cub3d, temp_array[j]) < 0)
+			return (free_matrix(temp_array), free(temp), \
+					quit("nError: Format color invalid.", cub3d, 30));
+		else if (flag == 6)
 			cub3d->textures.ceiling_color[j] = ft_atoi_cub3d(cub3d, temp_array[j]);
-		j++;
-		if (j > 3)
-			quit("Error: Format color invalid.", cub3d, 12);
+		else if (flag == 5)
+			cub3d->textures.floor_color[j] = ft_atoi_cub3d(cub3d, temp_array[j]);
 	}
+	free_matrix(temp_array);
+	free(temp);
+	if (j != 3)
+		quit("nError: Format color invalid (RGB).", cub3d, 31);
 	if(flag == 5)
 		cub3d->textures.floor++;
 	if(flag == 6)
 		cub3d->textures.ceiling++;
-	while (j >= 0)
-		free(temp_array[j--]);
-	free(temp_array);
-	free(temp);
 }
 
 void	check_elements(t_cub3d *cub3d, char *str, int i)
 {
-	if (str[i] == 'N' && str[i + 1] == 'O' && is_space(str[i + 2]) == 1)
+	if (str[i] == 'N' && str[i + 1] == 'O')
 		get_textures_path(cub3d, str, i + 2, 1);
-	else if (str[i] == 'S' && str[i + 1] == 'O'  && is_space(str[i + 2]) == 1)
+	else if (str[i] == 'S' && str[i + 1] == 'O')
 		get_textures_path(cub3d, str, i + 2, 2);
-	else if (str[i] == 'W' && str[i + 1] == 'E'  && is_space(str[i + 2]) == 1)
+	else if (str[i] == 'W' && str[i + 1] == 'E')
 		get_textures_path(cub3d, str, i + 2, 3);
-	else if (str[i] == 'E' && str[i + 1] == 'A'  && is_space(str[i + 2]) == 1)
+	else if (str[i] == 'E' && str[i + 1] == 'A')
 		get_textures_path(cub3d, str, i + 2, 4);
-	else if (str[i] == 'F' && is_space(str[i + 1]) == 1)
-		get_colors_path(cub3d, str, i + 2, 5);
-	else if (str[i] == 'C' && is_space(str[i + 1]) == 1)
-		get_colors_path(cub3d, str, i + 2, 6);
+	else if (str[i] == 'F')
+		get_colors_path(cub3d, str, i + 1, 5);
+	else if (str[i] == 'C')
+		get_colors_path(cub3d, str, i + 1, 6);
+	else if(str[i] != '\0' )
+		quit("nError: Invalid element line.", cub3d, 29);
 }
 
 void	check_number_elem(t_cub3d *cub3d)

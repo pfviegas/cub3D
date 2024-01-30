@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:51:26 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/29 14:00:33 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/30 11:41:51 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,9 @@ int	floodfill(t_cub3d *cub3d)
 	int		col;
 	bool	valid;
 
-	printf("floodfill player_[line][col]: %d,%d\n", cub3d->player_y, cub3d->player_x);
 	seed = cub3d->map_floodfill[cub3d->player_y][cub3d->player_x];
-	printf("floodfill seed: %c\n", seed);
 	line = cub3d->player_y;
 	col = cub3d->player_x;
 	valid = fill(cub3d, seed, line, col);
-	printf("\nfloodfill valid: %d\n\n", valid);
 	return (valid);
 }

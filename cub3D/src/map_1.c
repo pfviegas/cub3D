@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:35:05 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/29 15:13:14 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/30 11:49:49 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,10 @@ int	render_map(t_cub3d *cub3d)
 	int	x;
 
 	y = 0;
-	while (y < cub3d->map_total_lines)
+	while (cub3d->map[y])
 	{
 		x = 0;
-		while (x < cub3d->map_max_column)
+		while (cub3d->map[y][x])
 		{
 			put_map(x, y, cub3d->map[y][x], cub3d);
 			x++;

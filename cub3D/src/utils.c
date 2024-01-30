@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/29 14:08:54 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/30 11:38:04 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,21 @@ int	ft_atoi_cub3d(t_cub3d *cub3d, char *str)
 
 	i = 0;
 	res = 0;
+	(void) cub3d;
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
-	{
-		quit("Error: Formato de cor inválido.", cub3d, 13);
-		str++;
-	}
+		return (-1);
 	while (str[i])
 	{
 		if (ft_isdigit(str[i]))
 			res = res * 10 + (str[i] - '0');
-		else if (str[i] != '\n')
-			quit("Error: Formato de cor inválido.", cub3d, 14);
+		else if (str[i] != '\0' && is_space(str[i]) != 1)
+			return (-1);
 		i++;
 	}
 	if (res > 255)
-		quit("Error: Formato de cor inválido.", cub3d, 15);
+		return (-1);
 	return (res);
 }
 
