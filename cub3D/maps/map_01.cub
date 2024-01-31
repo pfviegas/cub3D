@@ -4,8 +4,8 @@ WE ./images/fire_60.xpm
 EA ./images/fire_80.xpm
 
 
-F 10, 100	,20
-C 250 ,	20,0
+F10,100,20
+C 250 , 20,  0
 
 
                 111 11 

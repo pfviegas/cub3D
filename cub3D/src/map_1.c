@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/16 13:35:05 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/30 11:49:49 by pviegas          ###   ########.fr       */
+/*   Created: 2024/01/31 09:34:06 by pveiga-c          #+#    #+#             */
+/*   Updated: 2024/01/31 09:34:50 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,6 @@ int	render_map(t_cub3d *cub3d)
 		}
 		y++;
 	}
+	draw_player(cub3d->mlx, cub3d->win, cub3d->player_xx * 16, cub3d->player_yy * 16);
 	return (0);
 }

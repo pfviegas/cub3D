@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/30 12:15:04 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/01/31 09:37:08 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	ft_atoi_cub3d(t_cub3d *cub3d, char *str)
 	}
 	if (res > 255)
 		return (-1);
-	printf("res : %d\n", res);
 	return (res);
 }
 

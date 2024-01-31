@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/30 12:06:54 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/01/31 09:32:21 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,9 @@ void	get_colors_path(t_cub3d *cub3d, char *cl, int i, int flag)
 
 	j = -1;
 	temp = ft_substr(cl, i, ft_strlen(cl) - i);
-	printf("temp =%s\n", temp);
 	temp_array = ft_split(temp,',');
-
 	while(temp_array[++j])
 	{
-		printf("temp_array [%d]= [%s]\n",j , temp_array[j]);
 		if((flag == 5 || flag == 6) && ft_atoi_cub3d(cub3d, temp_array[j]) < 0)
 			return (free_matrix(temp_array), free(temp), \
 					quit("nError: Format color invalid.", cub3d, 30));
@@ -189,6 +186,8 @@ void	check_char(t_cub3d *cub3d, char c, int line, int col)
 		cub3d->player++;
 		cub3d->player_y = line;
 		cub3d->player_x = col;
+		cub3d->player_yy = line;
+		cub3d->player_xx = col + 0.15;
 		cub3d->player_direction = c;
 	}
 	else if (c == '0' || c == '1')

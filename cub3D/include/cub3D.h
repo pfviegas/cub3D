@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/29 16:33:51 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/31 09:38:12 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include <stdbool.h>
+# include <math.h>
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
 
@@ -38,6 +39,7 @@
 # define PORTAL "./images/portal2.xpm"
 
 #define IMAGE_WIDTH 16
+#define DISTANCE_MOVE 0.1 
 
 typedef struct s_textures
 {
@@ -92,6 +94,8 @@ typedef struct s_cub3d
 	int			player_cub3dy;
 	int			player_x;
 	int			player_y;
+	float		player_xx;
+	float		player_yy;
 	int			player_on_exit ;
 	int			exit;
 	int			player;
@@ -138,5 +142,8 @@ int			key_handling(int keycode, t_cub3d *cub3d);
 void		init_images(t_cub3d *cub3d);
 int			render_map(t_cub3d *cub3d);
 void		put_map(int x, int y, char c, t_cub3d *cub3d);
+
+
+void draw_player(void *mlx, void *win, int x, int y);
 
 #endif

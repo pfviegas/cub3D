@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 12:03:15 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/29 15:40:01 by pviegas          ###   ########.fr       */
+/*   Created: 2024/01/31 09:35:46 by pveiga-c          #+#    #+#             */
+/*   Updated: 2024/01/31 09:35:48 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 // considerando as regras do jogo (paredes, coletáveis, saídas, ...)
 static int	valid_move(t_cub3d *cub3d, int col, int line, int pressed_key)
 {
+	printf("Moves line: %d\n", line);
+	printf("Moves col: %d\n", col);
 	cub3d->temp = '0';
 	if (cub3d->map[line][col] == '1')
 		return (-1);
@@ -31,22 +33,32 @@ static int	valid_move(t_cub3d *cub3d, int col, int line, int pressed_key)
 // valida o movimento do jogador, atualiza as posições no mapa, 
 // gere a recolha dos coletáveis e a saída, e atualiza a 
 // renderização do mapa após cada movimento.
-static void	move_player(t_cub3d *cub3d, int col, int line, int pressed_key)
+static void	move_player(t_cub3d *cub3d, float col, float line, int pressed_key)
 {
 	int	valid;
 	int	temp_col;
 	int	temp_line;
 
-	temp_col = cub3d->player_x;
-	temp_line = cub3d->player_y;
-	valid = valid_move(cub3d, col, line, pressed_key);
+	if(col - round(col) > 0)
+		temp_col = col - 0.15;
+	else
+		temp_col = col + 0.15;
+//PFV corrigir o line
+	if(line - round(line) > 0)
+		temp_line = line + 0.09;
+	else
+		temp_line = line - 0.15;
+	valid = valid_move(cub3d, temp_col, temp_line, pressed_key);
 	if (valid == 1)
 	{
-		cub3d->player_y = line;
-		cub3d->player_x = col;
-		cub3d->map[line][col] = 'N';
-		cub3d->map[temp_line][temp_col] = '0';
-		ft_printf("Moves: %d\n", cub3d->move++);
+		cub3d->player_yy = line;
+		cub3d->player_xx = col;
+		//cub3d->map[int(line)][int(col)] = 'N';
+		//cub3d->map[temp_line][temp_col] = '0';
+		printf("Moves: %d\n", cub3d->move++);
+		printf("Moves XX: %f\n", cub3d->player_xx);
+		printf("Moves YY: %f\n", cub3d->player_yy);
+	
 		render_map(cub3d);
 	}
 }
@@ -54,19 +66,19 @@ static void	move_player(t_cub3d *cub3d, int col, int line, int pressed_key)
 // trata os movimentos do jogador
 int	key_handling(int keycode, t_cub3d *cub3d)
 {
-	int	col;
-	int	line;
+	float	col;
+	float	line;
 
-	col = cub3d->player_x;
-	line = cub3d->player_y;
-	if (keycode == A || keycode == ARROW_LEFT)
-		col--;
+	col = cub3d->player_xx;
+	line = cub3d->player_yy;
+	if ((keycode == A || keycode == ARROW_LEFT) && cub3d->player_xx != cub3d->player_x)
+		col = col - DISTANCE_MOVE;
 	else if (keycode == W || keycode == ARROW_UP)
-		line--;
+		line = line - DISTANCE_MOVE;
 	else if (keycode == S || keycode == ARROW_DOWN)
-		line++;
+		line = line + DISTANCE_MOVE;
 	else if (keycode == D || keycode == ARROW_RIGHT)
-		col++;
+		col = col + DISTANCE_MOVE;
 	else if (keycode == ESC)
 		exit_cub3d(cub3d);
 	move_player(cub3d, col, line, keycode);
