@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/31 13:16:35 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/31 15:48:47 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 #define IMAGE_WIDTH 16
 #define DISTANCE_MOVE 0.1 
 #define ROTATION_MOVE 1
-#define BAR_LENGTH 5
+#define BAR_LENGTH 7
 
 
 
@@ -94,7 +94,6 @@ typedef struct s_cub3d
 	char		**map_floodfill;
 	char		player_direction;
 	double		angle_direction;
-	char		temp;
 	int			collectibles;
 	int			player_cub3dy;
 	int			player_x;
@@ -151,8 +150,7 @@ void		put_map(int x, int y, char c, t_cub3d *cub3d);
 
 void draw_player(void *mlx, void *win, int x, int y);
 void rotate_360();
-void rot_player(t_cub3d *cub3d, int x, int y);
 void draw_circle_with_bar(void *mlx, void *win, int x, int y, double angle);
-void draw_bar(void *mlx, void *win, int x, int y, double angle);
+void draw_bar(t_cub3d *cub3d, int x, int y);
 
 #endif
