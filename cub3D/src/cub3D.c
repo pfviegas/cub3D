@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/31 09:33:00 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:13:23 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	init_var(t_cub3d *cub3d)
 	cub3d->player_y = 0;
 	cub3d->player = 0;
 	cub3d->player_direction = '9';
+	cub3d->angle_direction = 0;	
 	
 	cub3d->end_cub3d = 0;
 	cub3d->move = 1;
@@ -57,10 +58,12 @@ void	start_cub3d(t_cub3d *cub3d)
 }
 
 
+
 int	main(int argc, char **argv)
 {
 	(void) argc;
 	(void) argv;
+
 	t_cub3d	cub3d;
 	init_var(&cub3d);
 	check_args(&cub3d, argc, argv);
@@ -82,4 +85,7 @@ int	main(int argc, char **argv)
 
 	quit("", &cub3d, 0);
 	return (0);
+
+	
+	rotate_360();
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/31 09:32:21 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:11:43 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,14 @@ void	check_char(t_cub3d *cub3d, char c, int line, int col)
 		cub3d->player_yy = line;
 		cub3d->player_xx = col + 0.15;
 		cub3d->player_direction = c;
+		if(c == 'N')
+			cub3d->angle_direction = 90;
+		if(c == 'S')
+			cub3d->angle_direction = 270;
+		if(c == 'W')
+			cub3d->angle_direction = 180;
+		if(c == 'E')
+			cub3d->angle_direction = 0;
 	}
 	else if (c == '0' || c == '1')
 		return ;

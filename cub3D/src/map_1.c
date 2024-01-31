@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:34:06 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/01/31 09:34:50 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:24:31 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,53 @@ int	render_map(t_cub3d *cub3d)
 		y++;
 	}
 	draw_player(cub3d->mlx, cub3d->win, cub3d->player_xx * 16, cub3d->player_yy * 16);
+	rot_player(cub3d, cub3d->player_xx * IMAGE_WIDTH, cub3d->player_yy * IMAGE_WIDTH + 3);
+
 	return (0);
+}
+
+void rot_player(t_cub3d *cub3d, int x, int y) 
+{
+	double angle ;
+
+	angle = cub3d->angle_direction;
+//    mlx_clear_window(cub3d->mlx, cub3d->win);
+
+	// Desenhar o círculo preenchido com a barra
+	draw_bar(cub3d->mlx, cub3d->win, x, y, angle);
+
+}
+
+void draw_bar(void *mlx, void *win, int x, int y, double angle) {
+
+    // Calcular as extremidades da barra com base no ângulo
+    int bar_x1 = x;
+    int bar_y1 = y;
+    int bar_x2 = x + BAR_LENGTH * cos(angle * 3.14 / 180);
+    int bar_y2 = y - BAR_LENGTH * sin(angle * 3.14 / 180);
+
+    // Desenhar a linha que representa a barra
+    int dx = abs(bar_x2 - bar_x1);
+    int dy = abs(bar_y2 - bar_y1);
+    int sx = (bar_x1 < bar_x2) ? 1 : -1;
+    int sy = (bar_y1 < bar_y2) ? 1 : -1;
+    int err = dx - dy;
+
+    while (1) 
+	{
+        mlx_pixel_put(mlx, win, bar_x1, bar_y1, 0xFF0000);
+
+        if (bar_x1 == bar_x2 && bar_y1 == bar_y2)
+            break;
+
+        int e2 = 2 * err;
+        if (e2 > -dy) {
+            err -= dy;
+            bar_x1 += sx;
+        }
+        if (e2 < dx) {
+            err += dx;
+            bar_y1 += sy;
+        }
+    }
 }

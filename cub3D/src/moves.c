@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:35:46 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/01/31 09:35:48 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:32:02 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,24 @@ int	key_handling(int keycode, t_cub3d *cub3d)
 
 	col = cub3d->player_xx;
 	line = cub3d->player_yy;
-	if ((keycode == A || keycode == ARROW_LEFT) && cub3d->player_xx != cub3d->player_x)
+	if ((keycode == A) && cub3d->player_xx != cub3d->player_x)
 		col = col - DISTANCE_MOVE;
 	else if (keycode == W || keycode == ARROW_UP)
 		line = line - DISTANCE_MOVE;
 	else if (keycode == S || keycode == ARROW_DOWN)
 		line = line + DISTANCE_MOVE;
-	else if (keycode == D || keycode == ARROW_RIGHT)
+	else if (keycode == D)
 		col = col + DISTANCE_MOVE;
 	else if (keycode == ESC)
 		exit_cub3d(cub3d);
+	else if (keycode == ARROW_LEFT)
+		cub3d->angle_direction += ROTATION_MOVE;
+	else if (keycode == ARROW_RIGHT)
+		cub3d->angle_direction -= ROTATION_MOVE;
+	if(cub3d->angle_direction > 360)
+		cub3d->angle_direction = 0;
+	else if(cub3d->angle_direction < 0)
+		cub3d->angle_direction = 360;
 	move_player(cub3d, col, line, keycode);
 	return (0);
 }
