@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:51:26 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/30 11:41:51 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/01/31 17:01:26 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,12 @@ bool	fill(t_cub3d *cub3d, char c, int line, int col)
 	cub3d->map_floodfill[line][col] = 'X';
 	fill(cub3d, c, line + 1, col);
 	fill(cub3d, c, line, col + 1);
+	fill(cub3d, c, line + 1, col + 1);
+	fill(cub3d, c, line - 1, col + 1);
 	fill(cub3d, c, line - 1, col);
 	fill(cub3d, c, line, col - 1);
+	fill(cub3d, c, line - 1, col - 1);
+	fill(cub3d, c, line + 1, col - 1);
 	return (true);
 }
 
