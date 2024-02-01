@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/31 09:37:08 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:08:35 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,17 @@ void	ft_print_map(t_cub3d *cub3d)
 	printf("-----Mapa------\n\n");
 	while(cub3d->map[i])
 		printf("%s\n", cub3d->map[i++]);
+	printf("\n\n");
+}
+
+void	ft_print_map_char(char **str)
+{
+	int	i;
+
+	i = 0;
+	printf("-----Mapa------\n\n");
+	while(str[i])
+		printf("%s\n", str[i++]);
 	printf("\n\n");
 }
 

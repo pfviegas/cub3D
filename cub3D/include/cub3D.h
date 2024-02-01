@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/31 15:48:47 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:57:04 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,4 +153,7 @@ void rotate_360();
 void draw_circle_with_bar(void *mlx, void *win, int x, int y, double angle);
 void draw_bar(t_cub3d *cub3d, int x, int y);
 
+void	check_map_surrounded_end(t_cub3d *cub3d);
+void	check_map_surrounded_start(t_cub3d *cub3d);
+void	ft_print_map_char(char **str);
 #endif

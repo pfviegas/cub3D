@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/31 13:11:43 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/01 14:15:43 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	map_validations(t_cub3d *cub3d)
 	
 	if (cub3d->map_total_lines <= 2)
 		quit("nError: Invalid number of lines.", cub3d, 27);
-	 check_map_closed(cub3d);
+	check_map_closed(cub3d);
+	check_map_surrounded_start(cub3d);
+	check_map_surrounded_end(cub3d);
 }
 
 // verifica se o programa foi chamado com o número correto de argumentos 
@@ -207,10 +209,86 @@ void	check_char(t_cub3d *cub3d, char c, int line, int col)
 }
 
 // verifica se o mapa esta fechado por paredes
+void	check_map_surrounded_end(t_cub3d *cub3d)
+{
+	int i;
+	int j_0;
+	int j_1;
+
+	i = 0;
+	while(cub3d->map[++i])
+	{
+		j_0 = (size_t)(ft_strlen(cub3d->map[i - 1]) - 1);
+		j_1 = (size_t)(ft_strlen(cub3d->map[i]) - 1);
+		while (j_0 > 0 && cub3d->map[i -1][j_0] == ' ')
+			j_0--;
+		while (j_1 > 0 && cub3d->map[i][j_1] == ' ')
+			j_1--;
+		if(j_0 < j_1)
+		{	
+			while(cub3d->map[i][j_0])
+				if(cub3d->map[i][j_0++] == '0')
+					quit("nError: Invalid Map.", cub3d, 34);
+		}
+		else if (j_0 > j_1)
+			while(cub3d->map[i - 1][j_1])
+				if(cub3d->map[i - 1][j_1++] == '0')
+					quit("nError: Invalid Map.", cub3d, 35);
+	}
+}
+
+void	check_map_surrounded_start(t_cub3d *cub3d)
+{
+	int i;
+	int j_0;
+	int j_1;
+
+	i = 0;
+	while(cub3d->map[++i])
+	{
+		j_0 = 0;
+		j_1 = 0;
+		while (cub3d->map[i -1][j_0] == ' ')
+			j_0++;
+		while (cub3d->map[i][j_1] == ' ')
+			j_1++;
+		if(j_0 > j_1)
+		{		
+			while(j_1 <= j_0)
+				if(cub3d->map[i][j_1++] == '0')	
+					quit("nError: Invalid Map.", cub3d, 36);
+		}
+		else if (j_0 < j_1)
+			while(j_0 <= j_1)
+				if(cub3d->map[i - 1][j_0++] == '0')
+					quit("nError: Invalid Map.", cub3d, 37);
+	}
+}
+
+// verifica se o mapa esta fechado por paredes
 void	check_map_closed(t_cub3d *cub3d)
 {
-	if (floodfill(cub3d) == 0)
+	int		i;
+	int		j;
+
+	i = 0;
+	while (cub3d->map[i])
 	{
-		quit("Invalid path on the map", cub3d, 13);
+		j = 0;
+		while (cub3d->map[i][j] && cub3d->map[i][j] == ' ')
+			j++;
+		if (cub3d->map[i][j] != '1')
+			quit("nError: Invalid map line start.", cub3d, 32);
+		i++;
+	}
+	i = 0;
+	while (cub3d->map[i])
+	{
+		j = ft_strlen(cub3d->map[i]) - 1;
+		while (j > 0 && cub3d->map[i][j] == ' ')
+			j--;
+		if (cub3d->map[i][j] != '1')
+			quit("nError: Invalid map line end.", cub3d, 33);
+		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/01/31 12:13:23 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/01 12:06:33 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,16 @@ int	main(int argc, char **argv)
 	get_map(&cub3d);
 	map_validations(&cub3d);
 	
-	ft_print_map(&cub3d);	
+	//ft_print_map(&cub3d);	
 //	ft_print_map_flood(&cub3d);	
 
-	printf("total lines: %d\n", cub3d.map_total_lines);
-	printf("cub3d->player : %d\n", cub3d.player);
-	printf("cub3d->player_y (line): %d\n", cub3d.player_y);
-	printf("cub3d->player_x (col): %d\n", cub3d.player_x);
-	printf("cub3d->player_direction : %c\n\n", cub3d.player_direction);
+	// printf("total lines: %d\n", cub3d.map_total_lines);
+	// printf("cub3d->player : %d\n", cub3d.player);
+	// printf("cub3d->player_y (line): %d\n", cub3d.player_y);
+	// printf("cub3d->player_x (col): %d\n", cub3d.player_x);
+	// printf("cub3d->player_direction : %c\n\n", cub3d.player_direction);
 
-	start_cub3d(&cub3d);
+	//start_cub3d(&cub3d);
 
 	quit("", &cub3d, 0);
 	return (0);
