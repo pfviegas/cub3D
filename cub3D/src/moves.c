@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:35:46 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/01/31 16:56:55 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/01 15:34:39 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	move_player(t_cub3d *cub3d, float col, float line, int pressed_key)
 		printf("Moves XX: %f\n", cub3d->player_xx);
 		printf("Moves YY: %f\n", cub3d->player_yy);
 	
-		render_map(cub3d);
+		render_mini_map(cub3d);
 	}
 }
 
@@ -99,6 +99,7 @@ int	key_handling(int keycode, t_cub3d *cub3d)
 	float	col = 0;
 	float	line = 0;
 	
+	printf("keycode = %d\n", keycode);
 	col = cub3d->player_xx;
 	line = cub3d->player_yy;
 	if (keycode == A)
@@ -115,6 +116,14 @@ int	key_handling(int keycode, t_cub3d *cub3d)
 		cub3d->angle_direction += ROTATION_MOVE;
 	else if (keycode == ARROW_RIGHT)
 		cub3d->angle_direction -= ROTATION_MOVE;
+	else if (keycode == M)
+	{
+		cub3d->mini_map_visible = !cub3d->mini_map_visible;
+		if (cub3d->mini_map_visible == true)
+			render_mini_map(cub3d);
+		else
+			mlx_clear_window(cub3d->mlx, cub3d->win);
+	}
 	if(cub3d->angle_direction > 360)
 		cub3d->angle_direction = 0;
 	else if(cub3d->angle_direction < 0)

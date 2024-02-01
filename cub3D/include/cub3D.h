@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/01 13:57:04 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:45:59 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,16 @@
 # define ARROW_UP 65362
 # define ARROW_RIGHT 65363
 # define ARROW_DOWN 65364
+# define M 109
+
+// Window info
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
+# define SCREEN_NAME "cub3D"
+# define REFRESH_RATE 120
 
 // images
+# define IMAGE_WIDTH 16
 # define WALL "./images/wall.xpm"
 # define PLAYER "./images/player.xpm"
 # define FLOOR "./images/floor.xpm"
@@ -38,12 +46,11 @@
 # define ON_EXIT "./images/portal1.xpm"
 # define PORTAL "./images/portal2.xpm"
 
-#define IMAGE_WIDTH 16
-#define DISTANCE_MOVE 0.1 
-#define ROTATION_MOVE 1
-#define BAR_LENGTH 7
-
-
+// player info
+# define DISTANCE_MOVE 0.1 
+# define ROTATION_MOVE 1
+# define BAR_LENGTH 7
+# define FOV 0.66
 
 typedef struct s_textures
 {
@@ -79,6 +86,11 @@ typedef struct	s_image_data {
 	int		endian;
 }				t_image_data;
 
+typedef struct s_position {
+	float	x;
+	float	y;
+}	t_position;
+
 typedef struct s_cub3d
 {
 	t_img		img;
@@ -106,6 +118,7 @@ typedef struct s_cub3d
 	int			start_map;
 	int			end_cub3d;
 	int			move;
+	bool		mini_map_visible;
 }	t_cub3d;
 
 void		check_args(t_cub3d *cub3d, int argc, char **argv);
@@ -144,7 +157,7 @@ void		free_textures_image(t_cub3d *cub3d);
 void		start_cub3d(t_cub3d *cub3d);
 int			key_handling(int keycode, t_cub3d *cub3d);
 void		init_images(t_cub3d *cub3d);
-int			render_map(t_cub3d *cub3d);
+int			render_mini_map(t_cub3d *cub3d);
 void		put_map(int x, int y, char c, t_cub3d *cub3d);
 
 
@@ -156,4 +169,6 @@ void draw_bar(t_cub3d *cub3d, int x, int y);
 void	check_map_surrounded_end(t_cub3d *cub3d);
 void	check_map_surrounded_start(t_cub3d *cub3d);
 void	ft_print_map_char(char **str);
+
+int	loop_hook(t_cub3d *cub3d);
 #endif

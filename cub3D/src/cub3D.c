@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/01 12:06:33 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:27:49 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static void	init_var(t_cub3d *cub3d)
 	cub3d->player_y = 0;
 	cub3d->player = 0;
 	cub3d->player_direction = '9';
-	cub3d->angle_direction = 0;	
+	cub3d->angle_direction = 0;
+	cub3d->mini_map_visible = false;
 	
 	cub3d->end_cub3d = 0;
 	cub3d->move = 1;
@@ -44,16 +45,18 @@ static void	init_var(t_cub3d *cub3d)
 // inicializa o ambiente gráfico, as imagens e o jogo
 void	start_cub3d(t_cub3d *cub3d)
 {
-	//t_image_data	img;
-	
 	cub3d->mlx = mlx_init();
-	cub3d->win = mlx_new_window(cub3d->mlx, cub3d->map_max_column * IMAGE_WIDTH,
-			cub3d->map_total_lines * IMAGE_WIDTH, "cub3D");
+	cub3d->win = mlx_new_window(cub3d->mlx, SCREEN_WIDTH, 
+					SCREEN_HEIGHT, SCREEN_NAME);
 	init_images(cub3d);
-	render_map(cub3d);
+	if (cub3d->mini_map_visible == true)
+		render_mini_map(cub3d);
+	
+//	detect_wall(cub3d);
 	
 	mlx_hook(cub3d->win, 02, 1L << 0, key_handling, cub3d);
 	mlx_hook(cub3d->win, 17, 1L << 17, exit_cub3d, cub3d);
+	mlx_loop_hook(cub3d->mlx, &loop_hook, cub3d);	
 	mlx_loop(cub3d->mlx);
 }
 
@@ -61,10 +64,8 @@ void	start_cub3d(t_cub3d *cub3d)
 
 int	main(int argc, char **argv)
 {
-	(void) argc;
-	(void) argv;
-
 	t_cub3d	cub3d;
+	
 	init_var(&cub3d);
 	check_args(&cub3d, argc, argv);
 	copy_cub(&cub3d, argv);
@@ -72,7 +73,7 @@ int	main(int argc, char **argv)
 	get_map(&cub3d);
 	map_validations(&cub3d);
 	
-	//ft_print_map(&cub3d);	
+//	ft_print_map(&cub3d);	
 //	ft_print_map_flood(&cub3d);	
 
 	// printf("total lines: %d\n", cub3d.map_total_lines);
@@ -81,11 +82,8 @@ int	main(int argc, char **argv)
 	// printf("cub3d->player_x (col): %d\n", cub3d.player_x);
 	// printf("cub3d->player_direction : %c\n\n", cub3d.player_direction);
 
-	//start_cub3d(&cub3d);
+	start_cub3d(&cub3d);
 
 	quit("", &cub3d, 0);
 	return (0);
-
-	
-	rotate_360();
 }

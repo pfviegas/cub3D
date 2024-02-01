@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:34:06 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/01/31 15:29:55 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:25:51 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	get_map(t_cub3d *cub3d)
 
 
 // renderiza o mapa
-int	render_map(t_cub3d *cub3d)
+int	render_mini_map(t_cub3d *cub3d)
 {
 	int	y;
 	int	x;
