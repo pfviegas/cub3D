@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/01 12:08:35 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:20:05 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,22 +114,6 @@ void	ft_print_map_char(char **str)
 	printf("-----Mapa------\n\n");
 	while(str[i])
 		printf("%s\n", str[i++]);
-	printf("\n\n");
-}
-
-/**
- * Imprime o mapa floodfill na saída padrão.
- *
- * @param cub3d O ponteiro para a estrutura do jogo cub3D.
- */
-void	ft_print_map_flood(t_cub3d *cub3d)
-{
-	int	i;
-
-	i = 0;
-	printf("-----Mapa FLOOD------\n\n");
-	while(cub3d->map_floodfill[i])
-		printf("%s\n", cub3d->map_floodfill[i++]);
 	printf("\n\n");
 }
 

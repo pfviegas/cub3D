@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:34:06 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/01 15:25:51 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/02 17:25:46 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,13 @@ void	get_map(t_cub3d *cub3d)
 	}
 	cub3d->map_total_lines = i;
 	cub3d->map = (char **)malloc(sizeof(char *) * (cub3d->map_total_lines + 2));
-	cub3d->map_floodfill = (char **)malloc(sizeof(char *) * (cub3d->map_total_lines + 2));
-	if (!cub3d->map || !cub3d->map_floodfill)
+	if (!cub3d->map)
 		quit("nError: Malloc error.", cub3d, 22);
 	i = 0;
 	start_line = cub3d->start_map;
 	while (i < cub3d->map_total_lines)
-	{
-		cub3d->map_floodfill[i] = ft_strdup(cub3d->cub[start_line]);
 		cub3d->map[i++] = ft_strdup(cub3d->cub[start_line++]);
-	}
 	cub3d->map[i] = NULL;
-	cub3d->map_floodfill[i] = NULL;
 }
 
 
@@ -115,8 +110,8 @@ int	render_mini_map(t_cub3d *cub3d)
 		}
 		y++;
 	}
-	draw_player(cub3d->mlx, cub3d->win, cub3d->player_xx * 16, cub3d->player_yy * 16);
-	draw_bar(cub3d, cub3d->player_xx * IMAGE_WIDTH, cub3d->player_yy * IMAGE_WIDTH + 3);
+	draw_player(cub3d->mlx,cub3d->win, cub3d->player.position.x * IMAGE_WIDTH, cub3d->player.position.y * IMAGE_WIDTH);
+	draw_bar(cub3d, cub3d->player.position.x * IMAGE_WIDTH, cub3d->player.position.y * IMAGE_WIDTH + 3);
 
 	return (0);
 }

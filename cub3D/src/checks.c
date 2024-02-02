@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/01 14:15:43 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:15:06 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,9 +174,9 @@ void	check_map(t_cub3d *cub3d)
 			cub3d->map_max_column = col;
 		line++;
 	}
-	if (cub3d->player == 0)
+	if (cub3d->player_number == 0)
 		quit("nError: There's no player.", cub3d, 25);
-	else if (cub3d->player > 1)
+	else if (cub3d->player_number > 1)
 		quit("nError: Just one player per map.", cub3d, 26);
 }
 
@@ -185,20 +185,18 @@ void	check_char(t_cub3d *cub3d, char c, int line, int col)
 {
 	if(c == 'N' || c == 'S' || c == 'W' || c == 'E')
 	{
-		cub3d->player++;
-		cub3d->player_y = line;
-		cub3d->player_x = col;
-		cub3d->player_yy = line;
-		cub3d->player_xx = col + 0.15;
+		cub3d->player_number++;
+		cub3d->player.position.y = line + 0.32;
+		cub3d->player.position.x = col + 0.48;
 		cub3d->player_direction = c;
 		if(c == 'N')
-			cub3d->angle_direction = 90;
+			cub3d->player.dirx = 3 * M_PI_2;
 		if(c == 'S')
-			cub3d->angle_direction = 270;
+			cub3d->player.dirx = M_PI_2;
 		if(c == 'W')
-			cub3d->angle_direction = 180;
+			cub3d->player.dirx = M_PI;
 		if(c == 'E')
-			cub3d->angle_direction = 0;
+			cub3d->player.dirx = 0;
 	}
 	else if (c == '0' || c == '1')
 		return ;

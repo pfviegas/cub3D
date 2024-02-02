@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/01 16:45:59 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/02 17:30:49 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 
 // player info
 # define DISTANCE_MOVE 0.1 
-# define ROTATION_MOVE 1
+# define ROTATION_MOVE 5
 # define BAR_LENGTH 7
 # define FOV 0.66
 
@@ -68,16 +68,6 @@ typedef struct s_textures
 	int ceiling_color[3];
 }	t_textures;
 
-typedef struct s_img
-{
-	void	*wall;
-	void	*player;
-	void	*floor;
-	void	*exit;
-	void	*collectible;
-	void	*on_exit;
-}	t_img;
-
 typedef struct	s_image_data {
 	void	*img;
 	char	*addr;
@@ -86,10 +76,54 @@ typedef struct	s_image_data {
 	int		endian;
 }				t_image_data;
 
+typedef struct s_img
+{
+	void		*wall;
+	void		*floor;
+}	t_img;
+
+
 typedef struct s_position {
 	float	x;
 	float	y;
 }	t_position;
+
+typedef struct s_step {
+	int	x;
+	int	y;
+}	t_step;
+
+typedef struct s_draw{
+	int	start;
+	int	end;
+}	t_draw;
+
+typedef struct s_hitbox {
+	t_position	top_left_corner;
+	t_position	top_right_corner;
+	t_position	bottom_left_corner;
+	t_position	bottom_right_corner;
+}	t_hitbox;
+
+typedef struct s_ray {
+	t_position	ray_dir;
+	t_step		step;
+	t_position	delta;
+	t_position	side_dist;
+	int			wall_side;
+	float		prep_wall_dist;
+}	t_ray;
+
+typedef struct s_player_info {
+	t_position	position;
+	t_hitbox	hitbox;
+	void		*img;
+	float		dirx;
+	t_position	view_dir;
+	t_position	plane;
+	// int			map_posx; // PCC
+	// int			map_posy; // PCC
+}	t_player_info;
 
 typedef struct s_cub3d
 {
@@ -97,24 +131,28 @@ typedef struct s_cub3d
 	t_textures	textures;
 	void		*mlx;
 	void		*win;
-	t_image_data	*pixel_img;
+	t_image_data		north_view;
+	t_image_data		south_view;
+	t_image_data		west_view;
+	t_image_data		east_view;
+	t_player_info	player;
+	t_image_data	map_view;
+	t_ray			ray;
+	t_draw			draw;
 	char		**cub;
 	int			cub_total_lines;
 	char		**map;
 	int			map_total_lines;
 	int			map_max_column;
-	char		**map_floodfill;
 	char		player_direction;
 	double		angle_direction;
 	int			collectibles;
 	int			player_cub3dy;
-	int			player_x;
-	int			player_y;
-	float		player_xx;
-	float		player_yy;
+	// float		player_xx;
+	// float		player_yy;
 	int			player_on_exit ;
 	int			exit;
-	int			player;
+	int			player_number;
 	int			start_map;
 	int			end_cub3d;
 	int			move;
@@ -133,9 +171,6 @@ void		check_nl_middle_map(t_cub3d *cub3d);
 void		map_validations(t_cub3d *cub3d);
 void		is_surrounded_1(t_cub3d *cub3d, int line, int col);
 void		is_new_line(t_cub3d *cub3d, int line, int col);
-int			floodfill(t_cub3d *cub3d);
-bool		fill(t_cub3d *cub3d, char c, int line, int col);
-void		ft_print_map_flood(t_cub3d *cub3d);
 
 
 int			is_space(int c);
@@ -169,6 +204,10 @@ void draw_bar(t_cub3d *cub3d, int x, int y);
 void	check_map_surrounded_end(t_cub3d *cub3d);
 void	check_map_surrounded_start(t_cub3d *cub3d);
 void	ft_print_map_char(char **str);
+void	load_textures(t_cub3d *cub3d, t_image_data *wall, char *path);
+void	render_3d_view(t_cub3d *cub3d);
+void	calc_step_and_side(t_cub3d *cub3d);
+t_player_info   create_player(t_cub3d *cub3d);
 
 int	loop_hook(t_cub3d *cub3d);
 #endif
