@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/02 17:15:06 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/05 14:42:34 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,13 +190,25 @@ void	check_char(t_cub3d *cub3d, char c, int line, int col)
 		cub3d->player.position.x = col + 0.48;
 		cub3d->player_direction = c;
 		if(c == 'N')
-			cub3d->player.dirx = 3 * M_PI_2;
+		{
+			cub3d->angle_direction = 90;	
+			cub3d->player.dirx = 3 * MY_PI_2;
+		}
 		if(c == 'S')
-			cub3d->player.dirx = M_PI_2;
+		{
+			cub3d->angle_direction = 270;
+			cub3d->player.dirx = MY_PI_2;
+		}
 		if(c == 'W')
-			cub3d->player.dirx = M_PI;
+		{
+			cub3d->angle_direction = 180;
+			cub3d->player.dirx = MY_PI;
+		}
 		if(c == 'E')
+		{
+			cub3d->angle_direction = 0;
 			cub3d->player.dirx = 0;
+		}
 	}
 	else if (c == '0' || c == '1')
 		return ;

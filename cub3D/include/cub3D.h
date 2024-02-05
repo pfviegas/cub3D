@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 11:57:16 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/05 15:22:58 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@
 # define ROTATION_MOVE 5
 # define BAR_LENGTH 7
 # define FOV 0.66
+
+#define MY_PI 3.14159265358979323846
+#define MY_PI_2 (3.14159265358979323846) / 2
+
 
 typedef struct s_tex {
 	float	wall_line_h;
@@ -125,7 +129,7 @@ typedef struct s_ray {
 	t_position	delta;
 	t_position	side_dist;
 	int			wall_side;
-	float		prep_wall_dist;
+	float		perp_wall_dist;
 }	t_ray;
 
 typedef struct s_player_info {

@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/02 17:08:25 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/05 15:22:58 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	init_ray(t_cub3d *cub3d)
 	cub3d->ray.step.x = 0;
 	cub3d->ray.step.y = 0;
 	cub3d->ray.wall_side = 0;
-	cub3d->ray.prep_wall_dist = 0;
+	cub3d->ray.perp_wall_dist = 0;
 	cub3d->draw.start = 0;
 	cub3d->draw.end = 0;
 	

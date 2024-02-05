@@ -3,30 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:37:40 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/05 12:00:30 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/05 17:11:15 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-void	render_3d_view(t_cub3d *cub3d)
+/**
+ * Renderiza a visão 3D do jogo.
+ *
+ * @param cub3d O ponteiro para a estrutura do jogo cub3D.
+ * 
+ * camera_x = calcular a posição x da câmera na tela.
+ * -1 lado esquerdo da tela
+ * 0 centro da tela
+ * 1 lado direito da tela
+ * 
+ * ray_dir.x = direção x do raio
+ * ray.delta.x = distância entre os raios
+ * player.view_dir.x = direção x da visão do jogador
+ * player.plane.x = direção x do plano da câmera
+ * player.map_x = coordenada x do mapa
+ */
+void render_3d_view(t_cub3d *cub3d)
 {
-	float	camera_x;
-	int		pixel_w;
+	float camera_x;
+	int pixel_w;
 
-	camera_x = 0;
 	pixel_w = -1;
-
 	while (++pixel_w < SCREEN_WIDTH)
 	{
 		camera_x = 2 * pixel_w / (float)(SCREEN_WIDTH) - 1;
-		cub3d->ray.ray_dir.x = cub3d->player.view_dir.x + cub3d->player.plane.x
-			* camera_x;
-		cub3d->ray.ray_dir.y = cub3d->player.view_dir.y + cub3d->player.plane.y
-			* camera_x;
+		cub3d->ray.ray_dir.x = cub3d->player.view_dir.x + cub3d->player.plane.x * camera_x;
+		cub3d->ray.ray_dir.y = cub3d->player.view_dir.y + cub3d->player.plane.y * camera_x;
 		cub3d->player.map_x = (int)cub3d->player.position.x;
 		cub3d->player.map_y = (int)cub3d->player.position.y;
 		cub3d->ray.delta.x = sqrt(1 + pow(cub3d->ray.ray_dir.y, 2) / pow(cub3d->ray.ray_dir.x, 2));
@@ -38,37 +50,48 @@ void	render_3d_view(t_cub3d *cub3d)
 	}
 }
 
-void	calc_step_and_side(t_cub3d *cub3d)
+/**
+ * Função responsável por calcular os passos e as distâncias laterais do raio.
+ *
+ * @param cub3d O ponteiro para a estrutura do jogo cub3D.
+ * 
+ * ray.side_dist.x = distância lateral x
+ */
+void calc_step_and_side(t_cub3d *cub3d)
 {
 	if (cub3d->ray.ray_dir.x < 0)
 	{
 		cub3d->ray.step.x = -1;
-		cub3d->ray.side_dist.x = (cub3d->player.position.x
-				- (int)cub3d->player.position.x) * cub3d->ray.delta.x;
+		cub3d->ray.side_dist.x = (cub3d->player.position.x - (int)cub3d->player.position.x) * cub3d->ray.delta.x;
 	}
 	else
 	{
 		cub3d->ray.step.x = 1;
-		cub3d->ray.side_dist.x = ((int)cub3d->player.position.x + 1
-				- cub3d->player.position.x) * cub3d->ray.delta.x;
+		cub3d->ray.side_dist.x = ((int)cub3d->player.position.x + 1 - cub3d->player.position.x) * cub3d->ray.delta.x;
 	}
 	if (cub3d->ray.ray_dir.y < 0)
 	{
 		cub3d->ray.step.y = -1;
-		cub3d->ray.side_dist.y = (cub3d->player.position.y
-				- (int)cub3d->player.position.y) * cub3d->ray.delta.y;
+		cub3d->ray.side_dist.y = (cub3d->player.position.y - (int)cub3d->player.position.y) * cub3d->ray.delta.y;
 	}
 	else
 	{
 		cub3d->ray.step.y = 1;
-		cub3d->ray.side_dist.y = ((int)cub3d->player.position.y + 1
-				- cub3d->player.position.y) * cub3d->ray.delta.y;
+		cub3d->ray.side_dist.y = ((int)cub3d->player.position.y + 1 - cub3d->player.position.y) * cub3d->ray.delta.y;
 	}
 }
 
-void	find_wall(t_cub3d *cub3d)
+/**
+ * Função responsável por encontrar a parede em que o raio colide.
+ * DDA Algorithm
+ * 
+ * @param cub3d O ponteiro para a estrutura do jogo cub3D.
+ * wall_side = 0 -> horizontal (x)
+ * wall_side = 1 -> vertical (y)
+ */
+void find_wall(t_cub3d *cub3d)
 {
-	int	hit;
+	int hit;
 
 	hit = 0;
 	while (hit == 0)
@@ -90,18 +113,26 @@ void	find_wall(t_cub3d *cub3d)
 	}
 }
 
-void	calc_wall_height(t_cub3d *cub3d)
+/**
+ * Calcula a altura da parede.
+ * 
+ * Esta função calcula a altura da parede com base na distância preparada
+ * e define os valores de início e fim para desenhar a parede na tela.
+ * 
+ * @param cub3d O ponteiro para a estrutura do jogo cub3D.
+ */
+void calc_wall_height(t_cub3d *cub3d)
 {
 	cub3d->tex.wall_line_h = 0;
 	if (cub3d->ray.wall_side == 0)
-		cub3d->ray.prep_wall_dist = fabs((cub3d->player.map_x
+		cub3d->ray.perp_wall_dist = fabs((cub3d->player.map_x
 					- cub3d->player.position.x + (1 - cub3d->ray.step.x) / 2)
 				/ cub3d->ray.ray_dir.x);
 	else
-		cub3d->ray.prep_wall_dist = fabs((cub3d->player.map_y
+		cub3d->ray.perp_wall_dist = fabs((cub3d->player.map_y
 					- cub3d->player.position.y + (1 - cub3d->ray.step.y) / 2)
 				/ cub3d->ray.ray_dir.y);
-	cub3d->tex.wall_line_h = (int)(SCREEN_WIDTH / cub3d->ray.prep_wall_dist);
+	cub3d->tex.wall_line_h = (int)(SCREEN_WIDTH / cub3d->ray.perp_wall_dist);
 	cub3d->draw.start = -cub3d->tex.wall_line_h / 2 + SCREEN_HEIGHT / 2;
 	if (cub3d->draw.start < 0)
 		cub3d->draw.start = 0;
@@ -113,24 +144,26 @@ void	calc_wall_height(t_cub3d *cub3d)
 void	draw_scene(t_cub3d *cub3d, int pixel_w)
 {
 	int	pixel_h;
+	int color;
 
 	pixel_h = -1;
 	get_tex_data(cub3d);
 	while (++pixel_h < SCREEN_HEIGHT)
 	{
-		printf("cub3d->draw.start: %d\n", cub3d->draw.start);
 		if (pixel_h < cub3d->draw.start)
-			// my_pixel_put(&cub3d->scene, pixel_w, pixel_h,
-			// 	cub3d->map.ceiling_color);
-			my_pixel_put(&cub3d->map_view, pixel_w, pixel_h,
-			 	create_trgb(0, cub3d->textures.ceiling_color[0], cub3d->textures.ceiling_color[1], cub3d->textures.ceiling_color[2]));
+		{
+			color = create_trgb(0, cub3d->textures.ceiling_color[0], 
+			cub3d->textures.ceiling_color[1], cub3d->textures.ceiling_color[2]);
+			my_pixel_put(&cub3d->map_view, pixel_w, pixel_h, color);
+		}
 		else if (pixel_h > cub3d->draw.end)
-			// my_pixel_put(&cub3d->scene, pixel_w, pixel_h,
-			// 	cub3d->map.floor_color);
-			 my_pixel_put(&cub3d->map_view, pixel_w, pixel_h,
-			 	create_trgb(0, cub3d->textures.floor_color[0], cub3d->textures.floor_color[1], cub3d->textures.floor_color[2]));
-		else
-			draw_wall(cub3d, pixel_w, pixel_h);
+		{
+			color = create_trgb(0, cub3d->textures.floor_color[0], 
+			cub3d->textures.floor_color[1], cub3d->textures.floor_color[2]);
+			 my_pixel_put(&cub3d->map_view, pixel_w, pixel_h, color);
+		}
+		 else
+		 	draw_wall(cub3d, pixel_w, pixel_h);
 	}
 }
 
@@ -141,13 +174,13 @@ void	get_tex_data(t_cub3d *cub3d)
 	cub3d->tex.tex_x = 0;
 	cub3d->tex.tex_y = 0;
 	if (cub3d->ray.wall_side == 0)
-		wall_x = cub3d->player.position.y + cub3d->ray.prep_wall_dist
+		wall_x = cub3d->player.position.y + cub3d->ray.perp_wall_dist
 			* cub3d->ray.ray_dir.y;
 	else
-		wall_x = cub3d->player.position.x + cub3d->ray.prep_wall_dist
+		wall_x = cub3d->player.position.x + cub3d->ray.perp_wall_dist
 			* cub3d->ray.ray_dir.x;
 	wall_x -= floor(wall_x);
-	cub3d->tex.tex_x = (int)(wall_x * (float)TEXTURE_WIDTH);
+	cub3d->tex.tex_x = wall_x * TEXTURE_WIDTH;
 	cub3d->tex.step = (float)TEXTURE_HEIGHT / cub3d->tex.wall_line_h;
 }
 
@@ -161,26 +194,15 @@ void	my_pixel_put(t_image_data *img, int x, int y, int color)
 
 void	draw_wall(t_cub3d *cub3d, int pixel_w, int pixel_h)
 {
-	cub3d->tex.tex_y = (int)(((float)pixel_h - (float)SCREEN_HEIGHT / 2.0
-				+ (float)cub3d->tex.wall_line_h / 2.0) * cub3d->tex.step);
+	cub3d->tex.tex_y = (int)(((float)pixel_h - (float)SCREEN_HEIGHT / 2.0 + (float)cub3d->tex.wall_line_h / 2.0) * cub3d->tex.step);
 	if (cub3d->ray.wall_side == 0 && cub3d->ray.ray_dir.x > 0)
-		cub3d->tex.color = get_color(&cub3d->north_view, cub3d->tex.tex_x,
-				cub3d->tex.tex_y);
+		cub3d->tex.color = get_color(&cub3d->east_view, cub3d->tex.tex_x, cub3d->tex.tex_y);
 	else if (cub3d->ray.wall_side == 0 && cub3d->ray.ray_dir.x < 0)
-		cub3d->tex.color = get_color(&cub3d->south_view, cub3d->tex.tex_x,
-				cub3d->tex.tex_y);
+		cub3d->tex.color = get_color(&cub3d->west_view, cub3d->tex.tex_x, cub3d->tex.tex_y);
 	else if (cub3d->ray.wall_side == 1 && cub3d->ray.ray_dir.y > 0)
-		cub3d->tex.color = get_color(&cub3d->west_view, cub3d->tex.tex_x,
-				cub3d->tex.tex_y);
+		cub3d->tex.color = get_color(&cub3d->south_view, cub3d->tex.tex_x, cub3d->tex.tex_y);
 	else
-		cub3d->tex.color = get_color(&cub3d->east_view, cub3d->tex.tex_x,
-				cub3d->tex.tex_y);
-				
-	// printf("color: %d\n", cub3d->tex.color);
-	// printf("pixel_w: %d\n", pixel_w);
-	// printf("pixel_h: %d\n", pixel_h);
-	// printf("cub3d->scene: %p\n", &cub3d->map_view);
-
+		cub3d->tex.color = get_color(&cub3d->north_view, cub3d->tex.tex_x, cub3d->tex.tex_y);
 	my_pixel_put(&cub3d->map_view, pixel_w, pixel_h, cub3d->tex.color);
 }
 
