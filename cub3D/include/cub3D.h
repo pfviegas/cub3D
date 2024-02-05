@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/02 17:30:49 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/05 11:57:16 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,32 @@
 // images
 # define IMAGE_WIDTH 16
 # define WALL "./images/wall.xpm"
-# define PLAYER "./images/player.xpm"
 # define FLOOR "./images/floor.xpm"
-# define EXIT "./images/portal.xpm"
-# define BAG "./images/gold-bag.xpm"
-# define ON_EXIT "./images/portal1.xpm"
-# define PORTAL "./images/portal2.xpm"
+// # define PLAYER "./images/player.xpm"
+// # define EXIT "./images/portal.xpm"
+// # define BAG "./images/gold-bag.xpm"
+// # define ON_EXIT "./images/portal1.xpm"
+// # define PORTAL "./images/portal2.xpm"
+
+// textures
+# define TEXTURE_WIDTH 64
+# define TEXTURE_HEIGHT 64
+
+
 
 // player info
 # define DISTANCE_MOVE 0.1 
 # define ROTATION_MOVE 5
 # define BAR_LENGTH 7
 # define FOV 0.66
+
+typedef struct s_tex {
+	float	wall_line_h;
+	float	step;
+	int		tex_x;
+	int		tex_y;
+	int		color;
+}	t_tex;
 
 typedef struct s_textures
 {
@@ -121,26 +135,27 @@ typedef struct s_player_info {
 	float		dirx;
 	t_position	view_dir;
 	t_position	plane;
-	// int			map_posx; // PCC
-	// int			map_posy; // PCC
+	int			map_x;
+	int			map_y;
 }	t_player_info;
 
 typedef struct s_cub3d
 {
-	t_img		img;
-	t_textures	textures;
-	void		*mlx;
-	void		*win;
-	t_image_data		north_view;
-	t_image_data		south_view;
-	t_image_data		west_view;
-	t_image_data		east_view;
+	void			*mlx;
+	void			*win;
 	t_player_info	player;
-	t_image_data	map_view;
 	t_ray			ray;
+	t_img			img;
+	t_textures		textures;
+	t_image_data	north_view;
+	t_image_data	south_view;
+	t_image_data	west_view;
+	t_image_data	east_view;
+	t_image_data	map_view;
 	t_draw			draw;
-	char		**cub;
-	int			cub_total_lines;
+//	t_image_data	scene;
+	char			**cub;
+	int				cub_total_lines;
 	char		**map;
 	int			map_total_lines;
 	int			map_max_column;
@@ -148,8 +163,8 @@ typedef struct s_cub3d
 	double		angle_direction;
 	int			collectibles;
 	int			player_cub3dy;
-	// float		player_xx;
-	// float		player_yy;
+	// float	player_xx;
+	// float	player_yy;
 	int			player_on_exit ;
 	int			exit;
 	int			player_number;
@@ -157,6 +172,7 @@ typedef struct s_cub3d
 	int			end_cub3d;
 	int			move;
 	bool		mini_map_visible;
+	t_tex		tex;
 }	t_cub3d;
 
 void		check_args(t_cub3d *cub3d, int argc, char **argv);
@@ -208,6 +224,14 @@ void	load_textures(t_cub3d *cub3d, t_image_data *wall, char *path);
 void	render_3d_view(t_cub3d *cub3d);
 void	calc_step_and_side(t_cub3d *cub3d);
 t_player_info   create_player(t_cub3d *cub3d);
+void	find_wall(t_cub3d *cub3d);
+void	calc_wall_height(t_cub3d *cub3d);
+void	get_tex_data(t_cub3d *cub3d);
+void	draw_scene(t_cub3d *cub3d, int pixel_w);
+void	my_pixel_put(t_image_data *img, int x, int y, int color);
+void	draw_wall(t_cub3d *cub3d, int pixel_w, int pixel_h);
+unsigned int	get_color(t_image_data *img, int x, int y);
+int	create_trgb(int t, int r, int g, int b);
 
 int	loop_hook(t_cub3d *cub3d);
 #endif
