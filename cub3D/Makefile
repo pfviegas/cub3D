@@ -6,7 +6,7 @@
 #    By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 12:00:51 by pviegas           #+#    #+#              #
-#    Updated: 2024/02/05 11:49:03 by pviegas          ###   ########.fr        #
+#    Updated: 2024/02/06 15:49:21 by pviegas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,9 @@ fclean: clean
 
 v:
 	clear && make re && valgrind --track-fds=yes --show-reachable=yes --leak-check=full --show-leak-kinds=all --track-origins=yes ./cub3D maps/map_01.cub
+
+p:
+	clear && make re && ./cub3D maps/map_01.cub
 
 re: fclean all
 

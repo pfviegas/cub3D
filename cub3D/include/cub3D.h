@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/05 15:22:58 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:28:14 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 
 
 // player info
-# define DISTANCE_MOVE 0.1 
+# define DISTANCE_MOVE 1
 # define ROTATION_MOVE 5
 # define BAR_LENGTH 7
 # define FOV 0.66
@@ -157,18 +157,14 @@ typedef struct s_cub3d
 	t_image_data	east_view;
 	t_image_data	map_view;
 	t_draw			draw;
-//	t_image_data	scene;
 	char			**cub;
 	int				cub_total_lines;
 	char		**map;
 	int			map_total_lines;
 	int			map_max_column;
 	char		player_direction;
-	double		angle_direction;
 	int			collectibles;
 	int			player_cub3dy;
-	// float	player_xx;
-	// float	player_yy;
 	int			player_on_exit ;
 	int			exit;
 	int			player_number;
@@ -179,12 +175,19 @@ typedef struct s_cub3d
 	t_tex		tex;
 }	t_cub3d;
 
+void		init_var(t_cub3d *cub3d);
+void		init_ray(t_cub3d *cub3d);
 void		check_args(t_cub3d *cub3d, int argc, char **argv);
-void		get_cub_lines(t_cub3d *cub3d, char **argv);
 void		copy_cub(t_cub3d *cub3d, char **argv);
+void		get_cub_lines(t_cub3d *cub3d, char **argv);
 void		check_textures(t_cub3d *cub3d);
 void		get_elements_info(t_cub3d *cub3d);
+void		check_elements(t_cub3d *cub3d, char *cl, int i);
+void		check_number_elem(t_cub3d *cub3d);
 void		check_textures_images(t_cub3d *cub3d);
+
+
+void		init_images(t_cub3d *cub3d);
 
 void		get_map(t_cub3d *cub3d);
 void		check_nl_middle_map(t_cub3d *cub3d);
@@ -195,47 +198,46 @@ void		is_new_line(t_cub3d *cub3d, int line, int col);
 
 int			is_space(int c);
 int			is_start_map(char *line);
-void		check_elements(t_cub3d *cub3d, char *cl, int i);
-void		check_number_elem(t_cub3d *cub3d);
 int			ft_atoi_cub3d(t_cub3d *cub3d, char *str);
 void		ft_print_map(t_cub3d *cub3d);
 void		is_surrounded_1(t_cub3d *cub3d, int line, int col);
 void 		free_matrix(char **str);
 
+t_hitbox 	define_hitbox(t_position player_position);
 
-void		check_map(t_cub3d *cub3d);
-void		check_char(t_cub3d *cub3d, char c, int line, int col);
-void		quit(char *s, t_cub3d *cub3d, int exit_code);
-void		check_map_closed(t_cub3d *cub3d);
-int			exit_cub3d(t_cub3d *cub3d);
-void		free_textures_image(t_cub3d *cub3d);
-void		start_cub3d(t_cub3d *cub3d);
-int			key_handling(int keycode, t_cub3d *cub3d);
-void		init_images(t_cub3d *cub3d);
-int			render_mini_map(t_cub3d *cub3d);
-void		put_map(int x, int y, char c, t_cub3d *cub3d);
+void			check_map(t_cub3d *cub3d);
+void			check_char(t_cub3d *cub3d, char c, int line, int col);
+void			quit(char *s, t_cub3d *cub3d, int exit_code);
+void			check_map_closed(t_cub3d *cub3d);
+int				exit_cub3d(t_cub3d *cub3d);
+void			free_textures_image(t_cub3d *cub3d);
+void			start_cub3d(t_cub3d *cub3d);
+int				key_handling(int keycode, t_cub3d *cub3d);
+void			init_images(t_cub3d *cub3d);
+void			render_mini_map(t_cub3d *cub3d);
+void			put_map(int x, int y, char c, t_cub3d *cub3d);
 
 
-void draw_player(void *mlx, void *win, int x, int y);
-void rotate_360();
-void draw_circle_with_bar(void *mlx, void *win, int x, int y, double angle);
-void draw_bar(t_cub3d *cub3d, int x, int y);
+void 			draw_player(void *mlx, void *win, int x, int y);
+void 			rotate_360();
+void 			draw_circle_with_bar(void *mlx, void *win, int x, int y, double angle);
+void 			draw_bar(t_cub3d *cub3d, int x, int y);
 
-void	check_map_surrounded_end(t_cub3d *cub3d);
-void	check_map_surrounded_start(t_cub3d *cub3d);
-void	ft_print_map_char(char **str);
-void	load_textures(t_cub3d *cub3d, t_image_data *wall, char *path);
-void	render_3d_view(t_cub3d *cub3d);
-void	calc_step_and_side(t_cub3d *cub3d);
-t_player_info   create_player(t_cub3d *cub3d);
-void	find_wall(t_cub3d *cub3d);
-void	calc_wall_height(t_cub3d *cub3d);
-void	get_tex_data(t_cub3d *cub3d);
-void	draw_scene(t_cub3d *cub3d, int pixel_w);
-void	my_pixel_put(t_image_data *img, int x, int y, int color);
-void	draw_wall(t_cub3d *cub3d, int pixel_w, int pixel_h);
+void			check_map_surrounded_end(t_cub3d *cub3d);
+void			check_map_surrounded_start(t_cub3d *cub3d);
+void			ft_print_map_char(char **str);
+void			load_textures(t_cub3d *cub3d, t_image_data *wall, char *path);
+void			render_3d_view(t_cub3d *cub3d);
+void			calc_step_and_side(t_cub3d *cub3d);
+t_player_info	create_player(t_cub3d *cub3d);
+void			find_wall(t_cub3d *cub3d);
+void			calc_wall_height(t_cub3d *cub3d);
+void			get_tex_data(t_cub3d *cub3d);
+void			draw_scene(t_cub3d *cub3d, int pixel_w);
+void			my_pixel_put(t_image_data *img, int x, int y, int color);
+void			draw_wall(t_cub3d *cub3d, int pixel_w, int pixel_h);
 unsigned int	get_color(t_image_data *img, int x, int y);
-int	create_trgb(int t, int r, int g, int b);
+int				get_argb(int t, int r, int g, int b);
 
-int	loop_hook(t_cub3d *cub3d);
+int				loop_hook(t_cub3d *cub3d);
 #endif

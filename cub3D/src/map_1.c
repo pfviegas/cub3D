@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:34:06 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/05 14:05:19 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:13:48 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,16 @@ void	get_map(t_cub3d *cub3d)
 
 
 // renderiza o mapa
-int	render_mini_map(t_cub3d *cub3d)
+/**
+ * Renderiza o mini mapa.
+ * 
+ * @param cub3d Ponteiro para a estrutura que contém os dados.
+ * @return Retorna 0 após a renderização do mini mapa.
+ */
+void	render_mini_map(t_cub3d *cub3d)
 {
-	int	y;
-	int	x;
+	int y;
+	int x;
 
 	y = 0;
 	while (cub3d->map[y])
@@ -110,10 +116,8 @@ int	render_mini_map(t_cub3d *cub3d)
 		}
 		y++;
 	}
-	draw_player(cub3d->mlx,cub3d->win, cub3d->player.position.x * IMAGE_WIDTH, cub3d->player.position.y * IMAGE_WIDTH);
+	draw_player(cub3d->mlx, cub3d->win, cub3d->player.position.x * IMAGE_WIDTH, cub3d->player.position.y * IMAGE_WIDTH);
 	draw_bar(cub3d, cub3d->player.position.x * IMAGE_WIDTH, cub3d->player.position.y * IMAGE_WIDTH + 3);
-
-	return (0);
 }
 
 void draw_bar(t_cub3d *cub3d, int x, int y) 
@@ -121,8 +125,8 @@ void draw_bar(t_cub3d *cub3d, int x, int y)
     // Calcular as extremidades da barra com base no ângulo
     int bar_x1 = x;
     int bar_y1 = y;
-    int bar_x2 = x + BAR_LENGTH * cos(cub3d->angle_direction * 3.14 / 180);
-    int bar_y2 = y - BAR_LENGTH * sin(cub3d->angle_direction * 3.14 / 180);
+    int bar_x2 = x + BAR_LENGTH * cos(cub3d->player.dirx);
+    int bar_y2 = y - BAR_LENGTH * -sin(cub3d->player.dirx);
 
     // Desenhar a linha que representa a barra
     int dx = abs(bar_x2 - bar_x1);

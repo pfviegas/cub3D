@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:35:11 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/01/31 09:38:51 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:58:27 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,3 @@ void	put_map(int x, int y, char c, t_cub3d *cub3d)
 }
 
 
-// Inicializa as imagens do jogo
-void	init_images(t_cub3d *cub3d)
-{
-	int	len;
-
-	len = IMAGE_WIDTH;
-	cub3d->img.wall = mlx_xpm_file_to_image(cub3d->mlx, WALL, &len, &len);
-	//cub3d->img.player = mlx_xpm_file_to_image(cub3d->mlx, PLAYER, &len, &len);
-	cub3d->img.floor = mlx_xpm_file_to_image(cub3d->mlx, FLOOR, &len, &len);
-}

@@ -3,42 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:35:46 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/02 14:32:53 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:15:55 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+void	update_look(t_cub3d *cub3d)
+{
+	cub3d->player.view_dir.x = cos(cub3d->player.dirx);
+	cub3d->player.view_dir.y = sin(cub3d->player.dirx);
+	cub3d->ray.ray_dir.x = cos(cub3d->player.dirx);
+	cub3d->ray.ray_dir.y = sin(cub3d->player.dirx);
+	cub3d->player.plane.x = -sin(cub3d->player.dirx);
+	cub3d->player.plane.y = cos(cub3d->player.dirx);	
+}
 // calcula a proxima coordenada quando a tecla para cima foi pressionada
-// void	move_up(t_cub3d *cub3d, float *col, float *line)
-// {
-// 	*col = cub3d->player_xx + DISTANCE_MOVE * cos(cub3d->angle_direction * 3.14 / 180);
-// 	*line = cub3d->player_yy - DISTANCE_MOVE * sin(cub3d->angle_direction * 3.14 / 180);
-// }
+void	move_front(t_cub3d *cub3d)
+{
+	cub3d->player.position.x += DISTANCE_MOVE * 0.01 * cos(cub3d->player.dirx);
+	cub3d->player.position.y += DISTANCE_MOVE * 0.01 * sin(cub3d->player.dirx);
+}
 
 // // calcula a proxima coordenada quando a tecla para baixo foi pressionada
-// void	move_down(t_cub3d *cub3d, float *col, float *line)
-// {
-// 	*col = cub3d->player_xx - DISTANCE_MOVE * cos(cub3d->angle_direction * 3.14 / 180);
-// 	*line = cub3d->player_yy + DISTANCE_MOVE * sin(cub3d->angle_direction * 3.14 / 180);
-// }
+void	move_back(t_cub3d *cub3d)
+{
+	cub3d->player.position.x -= DISTANCE_MOVE * 0.01 * cos(cub3d->player.dirx);
+	cub3d->player.position.y -= DISTANCE_MOVE * 0.01 * sin(cub3d->player.dirx);
+}
 
 // // calcula a proxima coordenada quando a tecla para a direita foi pressionada
-// void	move_right(t_cub3d *cub3d, float *col, float *line)
-// {
-// 	*col = cub3d->player_xx + DISTANCE_MOVE * cos((cub3d->angle_direction + 90) * 3.14 / 180);
-// 	*line = cub3d->player_yy - DISTANCE_MOVE * sin((cub3d->angle_direction + 90) * 3.14 / 180);	
-// }
+void	move_right(t_cub3d *cub3d)
+{
+	cub3d->player.position.x -= DISTANCE_MOVE * 0.01 * sin(cub3d->player.dirx);
+	cub3d->player.position.y += DISTANCE_MOVE * 0.01 * cos(cub3d->player.dirx);
+}
 
 // // calcula a proxima coordenada quando a tecla para a esquerda foi pressionada
-// void	move_left(t_cub3d *cub3d, float *col, float *line)
-// {
-// 	*col = cub3d->player_xx - DISTANCE_MOVE * cos((cub3d->angle_direction + 90) * 3.14 / 180);
-// 	*line = cub3d->player_yy + DISTANCE_MOVE * sin((cub3d->angle_direction + 90) * 3.14 / 180);
-// }
+void	move_left(t_cub3d *cub3d)
+{
+	cub3d->player.position.x += DISTANCE_MOVE * 0.01 * sin(cub3d->player.dirx);
+	cub3d->player.position.y -= DISTANCE_MOVE * 0.01 * cos(cub3d->player.dirx);
+}
+
+void look_left(t_cub3d *cub3d)
+{
+	cub3d->player.dirx -= ROTATION_MOVE * 0.01;
+	if (cub3d->player.dirx >= 2 * MY_PI)
+		cub3d->player.dirx -= 2 * MY_PI;
+	else if (cub3d->player.dirx <= 0)
+		cub3d->player.dirx += 2 * MY_PI;
+	update_look(cub3d);
+}
+
+void look_right(t_cub3d *cub3d)
+{
+	cub3d->player.dirx += ROTATION_MOVE * 0.01;
+	if (cub3d->player.dirx >= 2 * MY_PI)
+		cub3d->player.dirx -= 2 * MY_PI;
+	else if (cub3d->player.dirx <= 0)
+		cub3d->player.dirx += 2 * MY_PI;
+	update_look(cub3d);
+}
 
 // verifica se o jogador pode se mover para a nova posição, 
 // considerando as regras do jogo (paredes, coletáveis, saídas, ...)
@@ -96,42 +125,22 @@
 // trata os movimentos do jogador
 int	key_handling(int keycode, t_cub3d *cub3d)
 {
-	float	col = 0;
-	float	line = 0;
-	
-	printf("keycode = %d\n", keycode);
-	col = cub3d->player.position.x;
-	line = cub3d->player.position.y;
 	if (keycode == A)
-		printf("A\n");
-	//	move_right(cub3d, &col, &line);
+		move_left(cub3d);
 	else if (keycode == W)
-		printf("w\n");
-		//move_up(cub3d, &col, &line);	
+		move_front(cub3d);	
 	else if (keycode == S)
-		printf("s\n");
-		//move_down(cub3d, &col, &line);
+		move_back(cub3d);
 	else if (keycode == D)
-		printf("d\n");
-		//move_left(cub3d, &col, &line);
+		move_right(cub3d);
 	else if (keycode == ESC)
 		exit_cub3d(cub3d);
 	else if (keycode == ARROW_LEFT)
-		cub3d->angle_direction += ROTATION_MOVE;
+		look_left(cub3d);
 	else if (keycode == ARROW_RIGHT)
-		cub3d->angle_direction -= ROTATION_MOVE;
+		look_right(cub3d);
 	else if (keycode == M)
-	{
 		cub3d->mini_map_visible = !cub3d->mini_map_visible;
-		if (cub3d->mini_map_visible == true)
-			render_mini_map(cub3d);
-		else
-			mlx_clear_window(cub3d->mlx, cub3d->win);
-	}
-	if(cub3d->angle_direction > 360)
-		cub3d->angle_direction = 0;
-	else if(cub3d->angle_direction < 0)
-		cub3d->angle_direction = 360;
-	//move_player(cub3d, col, line, keycode);
+	cub3d->player.hitbox = define_hitbox(cub3d->player.position);
 	return (0);
 }
