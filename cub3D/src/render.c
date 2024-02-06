@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:37:40 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/06 16:35:59 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/06 16:38:44 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,8 +181,8 @@ void draw_scene(t_cub3d *cub3d, int pixel_w)
 		else
 			draw_wall(cub3d, pixel_w, pixel_h);
 	}
-	if (cub3d->mini_map_visible == true)
-		render_mini_map(cub3d);
+	// if (cub3d->mini_map_visible == true)
+	// 	render_mini_map(cub3d);
 }
 
 /**

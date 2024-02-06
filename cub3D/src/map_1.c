@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:34:06 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/06 16:13:48 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/06 16:48:43 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,13 @@ void	get_map(t_cub3d *cub3d)
 }
 
 
-// renderiza o mapa
 /**
  * Renderiza o mini mapa.
  * 
  * @param cub3d Ponteiro para a estrutura que contém os dados.
  * @return Retorna 0 após a renderização do mini mapa.
  */
+/* 
 void	render_mini_map(t_cub3d *cub3d)
 {
 	int y;
@@ -154,3 +154,4 @@ void draw_bar(t_cub3d *cub3d, int x, int y)
     }
 }
 
+ */

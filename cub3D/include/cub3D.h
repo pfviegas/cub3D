@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/06 16:28:14 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/06 17:15:06 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define SCREEN_HEIGHT 720
 # define SCREEN_NAME "cub3D"
 # define REFRESH_RATE 120
+
+# define MINIMAP_SCALE 8
 
 // images
 # define IMAGE_WIDTH 16
@@ -217,8 +219,13 @@ void			init_images(t_cub3d *cub3d);
 void			render_mini_map(t_cub3d *cub3d);
 void			put_map(int x, int y, char c, t_cub3d *cub3d);
 
+void			render_mini_map1(t_cub3d *cub3d);
 
-void 			draw_player(void *mlx, void *win, int x, int y);
+
+void 			draw_player(t_cub3d *cub3d, int x, int y);
+//void	draw_player(t_cub3d *cub3d, float x, float y, int color);
+
+
 void 			rotate_360();
 void 			draw_circle_with_bar(void *mlx, void *win, int x, int y, double angle);
 void 			draw_bar(t_cub3d *cub3d, int x, int y);
