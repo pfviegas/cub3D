@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_hook.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:40:40 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/06 16:39:36 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/07 11:17:43 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,68 @@ int	loop_hook(t_cub3d *cub3d)
 			mlx_put_image_to_window(cub3d->mlx, cub3d->win, 
 				cub3d->map_view.img, 0, 0);
 			old_position = cub3d->player.position;
-/*
-			if (check_colision(cub3d->player.hitbox, cub3d->map))
+			
+			//check_colision(cub3d, cub3d->player.hitbox, old_position);
+			
+			if (check_colision(cub3d, cub3d->player.hitbox))
 			{
-				cub3d->player.position = find_new_position(cub3d->player.position,
-						old_position, cub3d->map);
-				cub3d->player.hitbox = define_player_hitbox(
-						cub3d->player.position);
+				//printf("colisao");
+				// cub3d->player.position = find_new_position(cub3d->player.position,
+				// 		old_position, cub3d->map);
+				// cub3d->player.hitbox = define_player_hitbox(
+				// 		cub3d->player.position);
 			}
-*/
+
 	}
 	return (0);
 }
+
+bool	check_colision(t_cub3d *cub3d, t_hitbox hitbox)
+ {
+		if (cub3d->map[(int)hitbox.bottom_left_corner.y][(int)hitbox.bottom_left_corner.x] == '1')
+		return (true);
+	if (cub3d->map[(int)hitbox.bottom_right_corner.y][(int)hitbox.bottom_right_corner.x] == '1')
+		return (true);
+	if (cub3d->map[(int)hitbox.top_left_corner.y][(int)hitbox.top_left_corner.x] == '1')
+		return (true);
+	if (cub3d->map[(int)hitbox.top_right_corner.y][(int)hitbox.top_right_corner.x] == '1')
+		return (true);
+	return (false);
+	
+// 	int flag;
+	
+// 	flag = 0;
+// 	if (cub3d->map[(int)hitbox.bottom_left_corner.y][(int)hitbox.bottom_left_corner.x] == '1')
+// 		flag = 1;
+// 	if (cub3d->map[(int)hitbox.bottom_right_corner.y][(int)hitbox.bottom_right_corner.x] == '1')
+// 		flag = 1;
+// 	if (cub3d->map[(int)hitbox.top_left_corner.y][(int)hitbox.top_left_corner.x] == '1')
+// 		flag = 1;
+// 	if (cub3d->map[(int)hitbox.top_right_corner.y][(int)hitbox.top_right_corner.x] == '1')
+// 		flag = 1;
+// 	if(flag == 1)
+// 	{
+// 		cub3d->player.position = find_new_position(cub3d->player.position, old_position, cub3d->map);
+// 		cub3d->player.hitbox = define_player_hitbox(cub3d->player.position);
+// 	}
+	
+// 	return (false);
+}
+
+// t_position	find_new_position(t_position wanted_position,
+// 		t_position old_position, t_map_info map)
+// {
+// 	t_position	new_position;
+
+// 	new_position.x = wanted_position.x;
+// 	new_position.y = old_position.y;
+// 	if (!check_colision(define_player_hitbox(new_position), map))
+// 		return (new_position);
+// 	new_position.x = old_position.x;
+// 	new_position.y = wanted_position.y;
+// 	if (!check_colision(define_player_hitbox(new_position), map))
+// 		return (new_position);
+// 	new_position.x = old_position.x;
+// 	new_position.y = old_position.y;
+// 	return (new_position);
+// }

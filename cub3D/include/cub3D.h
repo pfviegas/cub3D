@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/06 17:15:06 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/07 12:48:15 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 
 
 // player info
-# define DISTANCE_MOVE 1
+# define DISTANCE_MOVE 25
 # define ROTATION_MOVE 5
 # define BAR_LENGTH 7
 # define FOV 0.66
@@ -228,7 +228,7 @@ void 			draw_player(t_cub3d *cub3d, int x, int y);
 
 void 			rotate_360();
 void 			draw_circle_with_bar(void *mlx, void *win, int x, int y, double angle);
-void 			draw_bar(t_cub3d *cub3d, int x, int y);
+void 			draw_bar(t_cub3d *cub3d, int x, int y, float angle);
 
 void			check_map_surrounded_end(t_cub3d *cub3d);
 void			check_map_surrounded_start(t_cub3d *cub3d);
@@ -247,4 +247,7 @@ unsigned int	get_color(t_image_data *img, int x, int y);
 int				get_argb(int t, int r, int g, int b);
 
 int				loop_hook(t_cub3d *cub3d);
+
+bool	check_colision(t_cub3d *cub3d, t_hitbox hitbox);
+
 #endif

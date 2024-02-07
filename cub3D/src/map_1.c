@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:34:06 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/06 16:48:43 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/07 12:50:12 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-/**
+/*
  * Função responsável por obter as informações dos elementos do mapa.
  * 
  * @param cub3d O ponteiro para a estrutura t_cub3d.
@@ -41,7 +41,6 @@ void get_elements_info(t_cub3d *cub3d)
 		quit("nError: Invalid map start.", cub3d, 8);
 }
 
-// verifica se existem linhas em branco no meio do mapa
 void	check_nl_middle_map(t_cub3d *cub3d)
 {
 	int		lines;
@@ -67,7 +66,6 @@ void	check_nl_middle_map(t_cub3d *cub3d)
 		quit("nError: Invalid map.", cub3d, 21);
 }
 
-// armazena o mapa
 void	get_map(t_cub3d *cub3d)
 {
 	int		i;
@@ -92,66 +90,45 @@ void	get_map(t_cub3d *cub3d)
 	cub3d->map[i] = NULL;
 }
 
-
-/**
- * Renderiza o mini mapa.
- * 
- * @param cub3d Ponteiro para a estrutura que contém os dados.
- * @return Retorna 0 após a renderização do mini mapa.
- */
-/* 
-void	render_mini_map(t_cub3d *cub3d)
+void draw_bar(t_cub3d *cub3d, int x, int y, float angle) 
 {
-	int y;
-	int x;
-
-	y = 0;
-	while (cub3d->map[y])
+    int bar_x2;
+    int bar_y2;
+    int dx;
+    int dy;
+	int sx;
+    int sy;
+    int err;
+	int e2;
+	
+	bar_x2 = x + BAR_LENGTH * cos(cub3d->player.dirx + angle);
+	bar_y2 = y - BAR_LENGTH * -sin(cub3d->player.dirx + angle);
+	dx = abs(bar_x2 - x);
+	dy = abs(bar_y2 - y);
+    err = dx - dy;
+	if (x < bar_x2)
+		sx = 1;
+	else
+		sx = -1;
+	if (y < bar_y2)
+		sy = 1;
+	else
+		sy = -1;
+	while (1) 
 	{
-		x = 0;
-		while (cub3d->map[y][x])
+		my_pixel_put(&cub3d->map_view, x, y, get_argb(0,255, 0, 0));
+		if (x == bar_x2 && y == bar_y2)
+			break;
+		e2 = 2 * err;
+		if (e2 > -dy)
 		{
-			put_map(x, y, cub3d->map[y][x], cub3d);
-			x++;
+			err -= dy;
+			x += sx;
 		}
-		y++;
-	}
-	draw_player(cub3d->mlx, cub3d->win, cub3d->player.position.x * IMAGE_WIDTH, cub3d->player.position.y * IMAGE_WIDTH);
-	draw_bar(cub3d, cub3d->player.position.x * IMAGE_WIDTH, cub3d->player.position.y * IMAGE_WIDTH + 3);
-}
-
-void draw_bar(t_cub3d *cub3d, int x, int y) 
-{
-    // Calcular as extremidades da barra com base no ângulo
-    int bar_x1 = x;
-    int bar_y1 = y;
-    int bar_x2 = x + BAR_LENGTH * cos(cub3d->player.dirx);
-    int bar_y2 = y - BAR_LENGTH * -sin(cub3d->player.dirx);
-
-    // Desenhar a linha que representa a barra
-    int dx = abs(bar_x2 - bar_x1);
-    int dy = abs(bar_y2 - bar_y1);
-    int sx = (bar_x1 < bar_x2) ? 1 : -1;
-    int sy = (bar_y1 < bar_y2) ? 1 : -1;
-    int err = dx - dy;
-
-    while (1) 
-	{
-        mlx_pixel_put(cub3d->mlx, cub3d->win, bar_x1, bar_y1, 0xFF0000);
-
-        if (bar_x1 == bar_x2 && bar_y1 == bar_y2)
-            break;
-
-        int e2 = 2 * err;
-        if (e2 > -dy) {
-            err -= dy;
-            bar_x1 += sx;
-        }
-        if (e2 < dx) {
-            err += dx;
-            bar_y1 += sy;
-        }
+		if (e2 < dx)
+		{
+			err += dx;
+			y += sy;
+		}
     }
 }
-
- */
