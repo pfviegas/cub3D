@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/07 12:48:15 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:44:55 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 
 
 // player info
-# define DISTANCE_MOVE 25
+# define DISTANCE_MOVE 1
 # define ROTATION_MOVE 5
 # define BAR_LENGTH 7
 # define FOV 0.66
@@ -249,5 +249,7 @@ int				get_argb(int t, int r, int g, int b);
 int				loop_hook(t_cub3d *cub3d);
 
 bool	check_colision(t_cub3d *cub3d, t_hitbox hitbox);
+t_position	find_new_position(t_position wanted_position, t_position old_position, t_cub3d *cub3d);
+
 
 #endif

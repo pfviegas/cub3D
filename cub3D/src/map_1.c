@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:34:06 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/07 12:50:12 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:54:36 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	get_map(t_cub3d *cub3d)
 	cub3d->map[i] = NULL;
 }
 
-void draw_bar(t_cub3d *cub3d, int x, int y, float angle) 
+void	draw_bar(t_cub3d *cub3d, int x, int y, float angle)
 {
     int bar_x2;
     int bar_y2;
@@ -132,3 +132,4 @@ void draw_bar(t_cub3d *cub3d, int x, int y, float angle)
 		}
     }
 }
+
