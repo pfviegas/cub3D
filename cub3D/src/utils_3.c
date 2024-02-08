@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 15:51:17 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/08 16:48:05 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@
  * @param y A coordenada y do pixel.
  * @return A cor do pixel.
  */
-unsigned int	get_color(t_image_data *img, int x, int y)
+unsigned int get_pixel_color(t_image_data *img, int x, int y)
 {
 	char *dst;
 	unsigned int color;
+
+
 
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	color = *(unsigned int *)dst;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:37:40 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/08 15:53:52 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/08 16:41:22 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void render_3d_view(t_cub3d *cub3d)
  * cub3d->ray.step.x = passo a dar pelo player 
  * 						(-1 move-se para a esquerda do eixo x)
  *						(1 move-se para a direita do eixo x)
- * cub3d->ray.step.y = passo a dar pelo player 
+ * cub3d->ray.step.y = passoint				key_press(int keycode, t_cub3d *cub3d);
+int				key_release(int keycode, t_cub3d *cub3d); a dar pelo player 
  * 						(-1 move-se para a esquerda do eixo y)
  *						(1 move-se para a direita do eixo y)
  * ray.side_dist.x = distância lateral x

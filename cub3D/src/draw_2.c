@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:33:22 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/08 15:54:01 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/08 16:45:04 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void draw_wall(t_cub3d *cub3d, int pixel_w, int pixel_h)
 	cub3d->tex.tex_y = (int)(((float)pixel_h - (float)SCREEN_HEIGHT / 2.0 + (float)cub3d->tex.wall_line_h / 2.0) * cub3d->tex.step);
 
 	if (cub3d->ray.wall_side == 0 && cub3d->ray.ray_dir.x > 0)
-		cub3d->tex.color = get_color(&cub3d->east_view, cub3d->tex.tex_x, cub3d->tex.tex_y);
+		cub3d->tex.color = get_pixel_color(&cub3d->east_view, cub3d->tex.tex_x, cub3d->tex.tex_y);
 	else if (cub3d->ray.wall_side == 0 && cub3d->ray.ray_dir.x < 0)
-		cub3d->tex.color = get_color(&cub3d->west_view, cub3d->tex.tex_x, cub3d->tex.tex_y);
+		cub3d->tex.color = get_pixel_color(&cub3d->west_view, cub3d->tex.tex_x, cub3d->tex.tex_y);
 	else if (cub3d->ray.wall_side == 1 && cub3d->ray.ray_dir.y > 0)
-		cub3d->tex.color = get_color(&cub3d->south_view, cub3d->tex.tex_x, cub3d->tex.tex_y);
+		cub3d->tex.color = get_pixel_color(&cub3d->south_view, cub3d->tex.tex_x, cub3d->tex.tex_y);
 	else
-		cub3d->tex.color = get_color(&cub3d->north_view, cub3d->tex.tex_x, cub3d->tex.tex_y);
+		cub3d->tex.color = get_pixel_color(&cub3d->north_view, cub3d->tex.tex_x, cub3d->tex.tex_y);
 
 	my_pixel_put(&cub3d->map_view, pixel_w, pixel_h, cub3d->tex.color);
 }
