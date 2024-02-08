@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:34:06 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/08 12:28:13 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/08 13:46:24 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,44 +75,42 @@ void get_map(t_cub3d *cub3d)
 
 void	draw_bar(t_cub3d *cub3d, int x, int y, float angle)
 {
-    int bar_x2;
-    int bar_y2;
-    int dx;
-    int dy;
-	int sx;
-    int sy;
-    int err;
-	int e2;
+    t_bar draw;
 	
-	bar_x2 = x + BAR_LENGTH * cos(cub3d->player.dirx + angle);
-	bar_y2 = y - BAR_LENGTH * -sin(cub3d->player.dirx + angle);
-	dx = abs(bar_x2 - x);
-	dy = abs(bar_y2 - y);
-    err = abs(bar_x2 - x) - dy;
-	if (x < bar_x2)
-		sx = 1;
+	draw.bar_x2 = x + BAR_LENGTH * cos(cub3d->player.dirx + angle);
+	draw.bar_y2 = y - BAR_LENGTH * -sin(cub3d->player.dirx + angle);
+	draw.dx = abs(draw.bar_x2 - x);
+	draw.dy = abs(draw.bar_y2 - y);
+   	draw.err = draw.dx - draw.dy;
+	if (x < draw.bar_x2)
+		draw.sx = 1;
 	else
-		sx = -1;
-	if (y < bar_y2)
-		sy = 1;
+		draw.sx = -1;
+	if (y < draw.bar_y2)
+		draw.sy = 1;
 	else
-		sy = -1;
-	while (1) 
+		draw.sy = -1;
+	draw_bar_2(cub3d, draw, x, y);
+}
+
+void	draw_bar_2(t_cub3d *cub3d, t_bar draw, int x, int y)
+{
+	while (1)
 	{
 		my_pixel_put(&cub3d->map_view, x, y, get_argb(0,255, 0, 0));
-		if (x == bar_x2 && y == bar_y2)
+		if (x == draw.bar_x2 && y == draw.bar_y2)
 			break;
-		e2 = 2 * err;
-		if (e2 > -dy)
+		draw.e2 = 2 * draw.err;
+		if (draw.e2 > -draw.dy)
 		{
-			err -= dy;
-			x += sx;
+			draw.err -= draw.dy;
+			x += draw.sx;
 		}
-		if (e2 < dx)
+		if (draw.e2 < draw.dx)
 		{
-			err += dx;
-			y += sy;
+			draw.err += draw.dx;
+			y += draw.sy;
 		}
-	}
+	} 
 }
 

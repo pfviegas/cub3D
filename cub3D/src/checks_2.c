@@ -6,16 +6,23 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 10:58:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 11:03:25 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/08 12:42:32 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-// verifica se as imagens existem
+
+/**
+ * Verifica se os arquivos das imagens das texturas especificadas no 
+ * struct `textures` existem. Caso algum arquivo esteja faltando, 
+ * a função exibe uma mensagem de erro correspondente e encerra o programa.
+ *
+ * @param cub3d O ponteiro para a estrutura `t_cub3d`.
+ */
 void	check_textures_images(t_cub3d *cub3d)
 {
-	int fd;
+	int	fd;
 
 	fd = open(cub3d->textures.north_path, O_RDONLY);
 	if (fd == -1)
@@ -35,7 +42,13 @@ void	check_textures_images(t_cub3d *cub3d)
 	close(fd);
 }
 
-// verifica se o mapa tem apenas os caracteres permitidos.
+/**
+ * Verifica se o mapa está fechado por paredes. Caso o mapa não esteja 
+ * fechado corretamente, a função exibe uma mensagem de erro correspondente 
+ * e encerra o programa.
+ *
+ * @param cub3d O ponteiro para a estrutura `t_cub3d`.
+ */
 void	check_map(t_cub3d *cub3d)
 {
 	int	line;
@@ -62,7 +75,15 @@ void	check_map(t_cub3d *cub3d)
 		quit("nError: Just one player per map.", cub3d, 26);
 }
 
-// verifica se o caractere é válido e se for espaco valida os caracteres adjacentes.
+/**
+ * Verifica se o caractere `c` é válido. Caso o caractere não seja válido, 
+ * a função exibe uma mensagem de erro correspondente e encerra o programa.
+ *
+ * @param cub3d O ponteiro para a estrutura `t_cub3d`.
+ * @param c O caractere a ser verificado.
+ * @param line A linha onde o caractere foi encontrado.
+ * @param col A coluna onde o caractere foi encontrado.
+ */
 void	check_char(t_cub3d *cub3d, char c, int line, int col)
 {
 	if(c == 'N' || c == 'S' || c == 'W' || c == 'E')
@@ -88,7 +109,15 @@ void	check_char(t_cub3d *cub3d, char c, int line, int col)
 		quit("nError: Invalid characters.", cub3d, 23);
 }
 
-// verifica se o mapa esta fechado por paredes
+/**
+ * Verifica se o caractere `c` está cercado por paredes. Caso o caractere 
+ * não esteja cercado corretamente, a função exibe uma mensagem de erro 
+ * correspondente e encerra o programa.
+ *
+ * @param cub3d O ponteiro para a estrutura `t_cub3d`.
+ * @param line A linha onde o caractere foi encontrado.
+ * @param col A coluna onde o caractere foi encontrado.
+ */
 void	check_map_surrounded_end(t_cub3d *cub3d)
 {
 	int i;

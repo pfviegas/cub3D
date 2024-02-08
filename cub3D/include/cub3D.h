@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 12:07:34 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/08 13:46:40 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,20 @@
 #define MY_PI 3.14159265358979323846
 #define MY_PI_2 (3.14159265358979323846) / 2
 
+typedef struct s_bar
+{
+	int bar_x2;
+	int bar_y2;
+	int dx;
+	int dy;
+	int sx;
+	int sy;
+	int err;
+	int e2;
+}	t_bar;
 
-typedef struct s_tex {
+typedef struct s_tex
+{
 	float	wall_line_h;
 	float	step;
 	int		tex_x;
@@ -241,6 +253,8 @@ void 			look_right(t_cub3d *cub3d);
 void 			rotate_360();
 void 			draw_circle_with_bar(void *mlx, void *win, int x, int y, double angle);
 void 			draw_bar(t_cub3d *cub3d, int x, int y, float angle);
+
+void			draw_bar_2(t_cub3d *cub3d, t_bar draw, int x, int y);
 
 void			check_map_surrounded_end(t_cub3d *cub3d);
 void			check_map_surrounded_start(t_cub3d *cub3d);
