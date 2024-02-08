@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/07 16:44:55 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/08 10:39:09 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,8 @@
 
 
 // player info
-# define DISTANCE_MOVE 1
-# define ROTATION_MOVE 5
+# define MOVE_SPEED 3
 # define BAR_LENGTH 7
-# define FOV 0.66
 
 #define MY_PI 3.14159265358979323846
 #define MY_PI_2 (3.14159265358979323846) / 2
@@ -134,6 +132,16 @@ typedef struct s_ray {
 	float		perp_wall_dist;
 }	t_ray;
 
+typedef struct s_move
+{
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			left;
+	int			right;
+} 	t_move;
+
 typedef struct s_player_info {
 	t_position	position;
 	t_hitbox	hitbox;
@@ -143,7 +151,9 @@ typedef struct s_player_info {
 	t_position	plane;
 	int			map_x;
 	int			map_y;
+	t_move		move;
 }	t_player_info;
+
 
 typedef struct s_cub3d
 {
@@ -189,8 +199,6 @@ void		check_number_elem(t_cub3d *cub3d);
 void		check_textures_images(t_cub3d *cub3d);
 
 
-void		init_images(t_cub3d *cub3d);
-
 void		get_map(t_cub3d *cub3d);
 void		check_nl_middle_map(t_cub3d *cub3d);
 void		map_validations(t_cub3d *cub3d);
@@ -214,8 +222,9 @@ void			check_map_closed(t_cub3d *cub3d);
 int				exit_cub3d(t_cub3d *cub3d);
 void			free_textures_image(t_cub3d *cub3d);
 void			start_cub3d(t_cub3d *cub3d);
-int				key_handling(int keycode, t_cub3d *cub3d);
-void			init_images(t_cub3d *cub3d);
+void			update_possition_player(t_cub3d *cub3d);
+int			key_press(int keycode, t_cub3d *cub3d);
+int			key_release(int keycode, t_cub3d *cub3d);
 void			render_mini_map(t_cub3d *cub3d);
 void			put_map(int x, int y, char c, t_cub3d *cub3d);
 

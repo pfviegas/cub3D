@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:53:47 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/06 16:15:59 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/08 10:39:25 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
-
-/**
- * Inicializa as imagens utilizadas.
- * 
- * @param cub3d Ponteiro para a estrutura que contém os dados.
- */
-void	init_images(t_cub3d *cub3d)
-{
-	int len;
-
-	len = IMAGE_WIDTH;
-	cub3d->img.wall = mlx_xpm_file_to_image(cub3d->mlx, WALL, &len, &len);
-	cub3d->img.floor = mlx_xpm_file_to_image(cub3d->mlx, FLOOR, &len, &len);
-}
 
 /**
  * Inicializa a estrutura de dados 'ray' com valores padrão.
@@ -77,6 +63,14 @@ void	init_var(t_cub3d *cub3d)
 	cub3d->player_number = 0;
 	cub3d->player_direction = '9';
 	cub3d->mini_map_visible = false;
+
+	cub3d->player.move.w = 0;
+	cub3d->player.move.a = 0;
+	cub3d->player.move.s = 0;
+	cub3d->player.move.d = 0;
+	cub3d->player.move.left = 0;
+	cub3d->player.move.right = 0;
+	
 
 	cub3d->end_cub3d = 0;
 	cub3d->move = 1;

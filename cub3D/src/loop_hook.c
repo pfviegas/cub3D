@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:40:40 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/07 16:53:30 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/08 10:27:40 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	loop_hook(t_cub3d *cub3d)
 			mlx_put_image_to_window(cub3d->mlx, cub3d->win, 
 				cub3d->map_view.img, 0, 0);
 			old_position = cub3d->player.position;
-			
+			update_possition_player(cub3d);
 			//check_colision(cub3d, cub3d->player.hitbox, old_position);
 			if (check_colision(cub3d, cub3d->player.hitbox))
 			{
