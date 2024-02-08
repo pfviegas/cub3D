@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:33:22 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/08 16:45:04 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/08 17:37:23 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,5 @@ void draw_wall(t_cub3d *cub3d, int pixel_w, int pixel_h)
 		cub3d->tex.color = get_pixel_color(&cub3d->south_view, cub3d->tex.tex_x, cub3d->tex.tex_y);
 	else
 		cub3d->tex.color = get_pixel_color(&cub3d->north_view, cub3d->tex.tex_x, cub3d->tex.tex_y);
-
 	my_pixel_put(&cub3d->map_view, pixel_w, pixel_h, cub3d->tex.color);
 }
