@@ -6,13 +6,13 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:34:06 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/08 13:46:24 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/08 14:25:06 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-/*
+/**
  * Função responsável por obter as informações dos elementos do mapa.
  * 
  * @param cub3d O ponteiro para a estrutura t_cub3d.
@@ -72,45 +72,3 @@ void get_map(t_cub3d *cub3d)
 		cub3d->map[i++] = ft_strdup(cub3d->cub[start_line++]);
 	cub3d->map[i] = NULL;
 }
-
-void	draw_bar(t_cub3d *cub3d, int x, int y, float angle)
-{
-    t_bar draw;
-	
-	draw.bar_x2 = x + BAR_LENGTH * cos(cub3d->player.dirx + angle);
-	draw.bar_y2 = y - BAR_LENGTH * -sin(cub3d->player.dirx + angle);
-	draw.dx = abs(draw.bar_x2 - x);
-	draw.dy = abs(draw.bar_y2 - y);
-   	draw.err = draw.dx - draw.dy;
-	if (x < draw.bar_x2)
-		draw.sx = 1;
-	else
-		draw.sx = -1;
-	if (y < draw.bar_y2)
-		draw.sy = 1;
-	else
-		draw.sy = -1;
-	draw_bar_2(cub3d, draw, x, y);
-}
-
-void	draw_bar_2(t_cub3d *cub3d, t_bar draw, int x, int y)
-{
-	while (1)
-	{
-		my_pixel_put(&cub3d->map_view, x, y, get_argb(0,255, 0, 0));
-		if (x == draw.bar_x2 && y == draw.bar_y2)
-			break;
-		draw.e2 = 2 * draw.err;
-		if (draw.e2 > -draw.dy)
-		{
-			draw.err -= draw.dy;
-			x += draw.sx;
-		}
-		if (draw.e2 < draw.dx)
-		{
-			draw.err += draw.dx;
-			y += draw.sy;
-		}
-	} 
-}
-

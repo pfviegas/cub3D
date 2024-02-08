@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:40:40 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 12:34:21 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/08 14:29:22 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	loop_hook(t_cub3d *cub3d)
 	{
 		render_3d_view(cub3d);
 		if (cub3d->mini_map_visible == true)
-			render_mini_map1(cub3d);
+			render_mini_map(cub3d);
 		mlx_put_image_to_window(cub3d->mlx, cub3d->win,
 							   cub3d->map_view.img, 0, 0);
 		old_position = cub3d->player.position;

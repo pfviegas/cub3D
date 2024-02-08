@@ -6,12 +6,11 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 10:58:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 12:42:32 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/08 15:43:44 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
-
 
 /**
  * Verifica se os arquivos das imagens das texturas especificadas no 
@@ -110,9 +109,8 @@ void	check_char(t_cub3d *cub3d, char c, int line, int col)
 }
 
 /**
- * Verifica se o caractere `c` está cercado por paredes. Caso o caractere 
- * não esteja cercado corretamente, a função exibe uma mensagem de erro 
- * correspondente e encerra o programa.
+ * Verifica se o final da linha do mapa está correcto.
+ * Caso contrário, exibe uma mensagem de erro e encerra o programa.
  *
  * @param cub3d O ponteiro para a estrutura `t_cub3d`.
  * @param line A linha onde o caractere foi encontrado.
@@ -146,6 +144,12 @@ void	check_map_surrounded_end(t_cub3d *cub3d)
 	}
 }
 
+/**
+ * Verifica se inicio da linha do mapa está correcto.
+ * Caso contrário, exibe uma mensagem de erro e encerra o programa.
+ *
+ * @param cub3d O ponteiro para a estrutura `t_cub3d`.
+ */
 void	check_map_surrounded_start(t_cub3d *cub3d)
 {
 	int i;
