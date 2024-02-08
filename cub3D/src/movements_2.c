@@ -1,17 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moves.c                                            :+:      :+:    :+:   */
+/*   movements_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:35:46 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/08 10:41:18 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/08 12:07:48 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+/**
+ * Atualiza a direção de visualização do jogador e a direção dos raios.
+ * 
+ * Atualiza as coordenadas x e y da direção de visualização do jogador com base 
+ * no ângulo de direção atual. Além disso, atualiza as coordenadas x e y da 
+ * direção dos raios para que sejam iguais à direção de visualização do jogador.
+ * Também atualiza as coordenadas x e y do plano de projeção perpendicular 
+ * à direção de visualização do jogador.
+ * 
+ * @param cub3d O ponteiro para a estrutura t_cub3d.
+ */
 void	update_look(t_cub3d *cub3d)
 {
 	cub3d->player.view_dir.x = cos(cub3d->player.dirx);
@@ -19,36 +30,16 @@ void	update_look(t_cub3d *cub3d)
 	cub3d->ray.ray_dir.x = cos(cub3d->player.dirx);
 	cub3d->ray.ray_dir.y = sin(cub3d->player.dirx);
 	cub3d->player.plane.x = -sin(cub3d->player.dirx);
-	cub3d->player.plane.y = cos(cub3d->player.dirx);	
-}
-// calcula a proxima coordenada quando a tecla para cima foi pressionada
-void	move_front(t_cub3d *cub3d)
-{
-	cub3d->player.position.x += MOVE_SPEED * 0.01 * cos(cub3d->player.dirx);
-	cub3d->player.position.y += MOVE_SPEED * 0.01 * sin(cub3d->player.dirx);
+	cub3d->player.plane.y = cos(cub3d->player.dirx);
 }
 
-// // calcula a proxima coordenada quando a tecla para baixo foi pressionada
-void	move_back(t_cub3d *cub3d)
-{
-	cub3d->player.position.x -= MOVE_SPEED * 0.01 * cos(cub3d->player.dirx);
-	cub3d->player.position.y -= MOVE_SPEED * 0.01 * sin(cub3d->player.dirx);
-}
-
-// // calcula a proxima coordenada quando a tecla para a direita foi pressionada
-void	move_right(t_cub3d *cub3d)
-{
-	cub3d->player.position.x -= MOVE_SPEED * 0.01 * sin(cub3d->player.dirx);
-	cub3d->player.position.y += MOVE_SPEED * 0.01 * cos(cub3d->player.dirx);
-}
-
-// // calcula a proxima coordenada quando a tecla para a esquerda foi pressionada
-void	move_left(t_cub3d *cub3d)
-{
-	cub3d->player.position.x += MOVE_SPEED * 0.01 * sin(cub3d->player.dirx);
-	cub3d->player.position.y -= MOVE_SPEED * 0.01 * cos(cub3d->player.dirx);
-}
-
+/**
+ * Roda o jogador para a esquerda.
+ * Atualiza a posição do jogador de acordo com a velocidade de movimento 
+ * e a direção atual.
+ *
+ * @param cub3d O ponteiro para a estrutura t_cub3d.
+ */
 void look_left(t_cub3d *cub3d)
 {
 	cub3d->player.dirx -= MOVE_SPEED * 0.01;
@@ -59,6 +50,13 @@ void look_left(t_cub3d *cub3d)
 	update_look(cub3d);
 }
 
+/**
+ * Roda o jogador para a direita.
+ * Atualiza a posição do jogador de acordo com a velocidade de movimento 
+ * e a direção atual.
+ *
+ * @param cub3d O ponteiro para a estrutura t_cub3d.
+ */
 void look_right(t_cub3d *cub3d)
 {
 	cub3d->player.dirx += MOVE_SPEED * 0.01;
@@ -69,24 +67,11 @@ void look_right(t_cub3d *cub3d)
 	update_look(cub3d);
 }
 
-// trata os movimentos do jogador
-void	update_possition_player(t_cub3d *cub3d)
-{
-	if (cub3d->player.move.a == 1)
-		move_left(cub3d);
-	if (cub3d->player.move.w == 1)
-		move_front(cub3d);	
-	if (cub3d->player.move.s == 1)
-		move_back(cub3d);
-	if (cub3d->player.move.d == 1)
-		move_right(cub3d);
-	if (cub3d->player.move.left == 1)
-		look_left(cub3d);
-	if (cub3d->player.move.right == 1)
-		look_right(cub3d);
-	cub3d->player.hitbox = define_hitbox(cub3d->player.position);
-}
-
+/**
+ * Verifica que tecla foi pressionada e muda-lhe o estado.
+  *
+ * @param cub3d O ponteiro para a estrutura t_cub3d.
+ */
 int	key_press(int keycode, t_cub3d *cub3d)
 {
 	if (keycode == A)
@@ -108,6 +93,11 @@ int	key_press(int keycode, t_cub3d *cub3d)
 	return (0);
 }
 
+/**
+ * Verifica que tecla foi solta e muda-lhe o estado.
+ *
+ * @param cub3d O ponteiro para a estrutura t_cub3d.
+ */
 int	key_release(int keycode, t_cub3d *cub3d)
 {
 	if (keycode == A)

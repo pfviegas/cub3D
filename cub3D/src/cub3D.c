@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 10:39:20 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:56:04 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,10 @@ void	start_cub3d(t_cub3d *cub3d)
 	cub3d->map_view.img = mlx_new_image(cub3d->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	cub3d->map_view.addr = mlx_get_data_addr(cub3d->map_view.img, &cub3d->map_view.bits_per_pixel,
 											 &cub3d->map_view.line_length, &cub3d->map_view.endian);
-
 	load_textures(cub3d, &cub3d->north_view, cub3d->textures.north_path);
 	load_textures(cub3d, &cub3d->south_view, cub3d->textures.south_path);
 	load_textures(cub3d, &cub3d->west_view, cub3d->textures.west_path);
 	load_textures(cub3d, &cub3d->east_view, cub3d->textures.east_path);
-
 	mlx_hook(cub3d->win, 02, 1L << 0, key_press, cub3d);
 	mlx_hook(cub3d->win, 03, 1L << 1, key_release, cub3d);
 	mlx_hook(cub3d->win, 17, 1L << 17, exit_cub3d, cub3d);
@@ -74,18 +72,7 @@ int	main(int argc, char **argv)
 	get_map(&cub3d);
 	map_validations(&cub3d);
 	create_player(&cub3d);
-	
-//	ft_print_map(&cub3d);	
-//	ft_print_map_flood(&cub3d);	
-
-	// printf("total lines: %d\n", cub3d.map_total_lines);
-	// printf("cub3d->player : %d\n", cub3d.player);
-	// printf("cub3d->player_y (line): %d\n", cub3d.player_y);
-	// printf("cub3d->player_x (col): %d\n", cub3d.player_x);
-	// printf("cub3d->player_direction : %c\n\n", cub3d.player_direction);
-
 	start_cub3d(&cub3d);
-
-	quit("", &cub3d, 0);
+	exit_cub3d(&cub3d);
 	return (0);
 }

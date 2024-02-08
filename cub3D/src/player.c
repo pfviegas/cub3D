@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:15:56 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/07 16:09:35 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:47:44 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,5 @@ t_player_info create_player(t_cub3d *cub3d)
 	cub3d->player.view_dir.y = sin(cub3d->player.dirx);
 	cub3d->player.plane.x = -sin(cub3d->player.dirx);
 	cub3d->player.plane.y = cos(cub3d->player.dirx);
-
-	return cub3d->player;
+	return (cub3d->player);
 }

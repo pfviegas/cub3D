@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/07 10:02:58 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:19:20 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,17 +106,6 @@ void	ft_print_map(t_cub3d *cub3d)
 	printf("\n\n");
 }
 
-void	ft_print_map_char(char **str)
-{
-	int	i;
-
-	i = 0;
-	printf("-----Mapa------\n\n");
-	while(str[i])
-		printf("%s\n", str[i++]);
-	printf("\n\n");
-}
-
 /**
  * Obtém o número total de linhas no arquivo .cub.
  *
@@ -145,91 +134,4 @@ void	get_cub_lines(t_cub3d *cub3d, char **argv)
 	cub3d->cub_total_lines = lines;
 	free(content_line);
 	close(fd);
-}
-
-/**
- * Copia o conteúdo do arquivo .cub para a estrutura de dados do cub3D.
- * 
- * @param cub3d A estrutura de dados do cub3D.
- * @param argv Os argumentos de linha de comando, 
- * onde argv[1] é o caminho para o arquivo .cub.
- */
-void	copy_cub(t_cub3d *cub3d, char **argv)
-{
-	char	*content_line;
-	int		lines;
-	int		fd;
-
-	get_cub_lines(cub3d, argv);
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		quit("nError: Opening .cub file.", cub3d, 4);
-	cub3d->cub = (char **)malloc(sizeof(char *) * (cub3d->cub_total_lines + 1));
-	if (!cub3d->cub)
-		quit("nError: Malloc error.", cub3d, 5);
-	lines = 0;
-	content_line = ft_get_next_line(fd);
-	while (content_line)
-	{
-		cub3d->cub[lines] = ft_strtrim(content_line, "\n");
-		free(content_line);
-		lines++;
-		content_line = ft_get_next_line(fd);
-	}
-	cub3d->cub[lines] = NULL;
-	free(content_line);
-	ft_get_next_line(fd);
-	close(fd);
-}
-
-// Função para verificar se uma coordenada está rodeada de 1s
-void	is_surrounded_1(t_cub3d *cub3d, int line, int col)
-{
-	int	i;
-	int j;
-	
-	if (line == 0)
-		i = line;
-	else
-		i = line - 1;
-	while (cub3d->map[i] && i <= line + 1)
-	{
-		if (col == 0)
-			j = col;
-		else
-			j = col - 1;
-		while (j <= col + 1)
-		{
-			if (i <= cub3d->map_total_lines \
-				&& j < (int)ft_strlen(cub3d->map[i]))
-				if (cub3d->map[i][j] != '1')
-					if (cub3d->map[i][j] != ' ')
-						quit("nError: Invalid map.", cub3d, 24);
-			j++;
-		}
-		i++;
-	}
-}
-
-// Função para verificar se uma coordenada está rodeada de 1s
-void	is_new_line(t_cub3d *cub3d, int line, int col)
-{
-	int	i;
-	int j;
-	
-	i = line - 1;
-	while (i <= line + 1)
-	{
-		j = col - 1;
-		while (j <= col + 1)
-		{
-			if (i >= 0 && i <= cub3d->map_total_lines \
-				&& j >= 0 && j < (int)ft_strlen(cub3d->map[i]))
-				if (cub3d->map[i][j] != '1')
-					if (cub3d->map[i][j] != ' ')
-						quit("Error: Invalid map.", cub3d, 26);
-			j++;
-		}
-		i++;
-	}
 }

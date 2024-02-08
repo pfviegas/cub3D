@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 10:39:09 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/08 12:07:34 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,8 +181,6 @@ typedef struct s_cub3d
 	int			exit;
 	int			player_number;
 	int			start_map;
-	int			end_cub3d;
-	int			move;
 	bool		mini_map_visible;
 	t_tex		tex;
 }	t_cub3d;
@@ -197,6 +195,9 @@ void		get_elements_info(t_cub3d *cub3d);
 void		check_elements(t_cub3d *cub3d, char *cl, int i);
 void		check_number_elem(t_cub3d *cub3d);
 void		check_textures_images(t_cub3d *cub3d);
+
+void		get_colors(t_cub3d *cub3d, char *cl, int i, int flag);
+void		get_textures_path(t_cub3d *cub3d, char *cl, int i, int flag);
 
 
 void		get_map(t_cub3d *cub3d);
@@ -234,6 +235,8 @@ void			render_mini_map1(t_cub3d *cub3d);
 void 			draw_player(t_cub3d *cub3d, int x, int y);
 //void	draw_player(t_cub3d *cub3d, float x, float y, int color);
 
+void 			look_left(t_cub3d *cub3d);
+void 			look_right(t_cub3d *cub3d);
 
 void 			rotate_360();
 void 			draw_circle_with_bar(void *mlx, void *win, int x, int y, double angle);
@@ -241,7 +244,6 @@ void 			draw_bar(t_cub3d *cub3d, int x, int y, float angle);
 
 void			check_map_surrounded_end(t_cub3d *cub3d);
 void			check_map_surrounded_start(t_cub3d *cub3d);
-void			ft_print_map_char(char **str);
 void			load_textures(t_cub3d *cub3d, t_image_data *wall, char *path);
 void			render_3d_view(t_cub3d *cub3d);
 void			calc_step_and_side(t_cub3d *cub3d);
