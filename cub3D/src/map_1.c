@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:34:06 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/09 11:03:10 by correia          ###   ########.fr       */
+/*   Updated: 2024/02/09 11:23:53 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,17 @@ void	get_map(t_cub3d *cub3d)
 	check_nl_middle_map(cub3d);
 	i = 0;
 	start_line = cub3d->start_map;
-	// Conta o número total de linhas do mapa
 	while (cub3d->cub[start_line] && cub3d->cub[start_line][0] != '\0')
 	{
 		i++;
 		start_line++;
 	}
 	cub3d->map_total_lines = i;
-	// Aloca memória para o mapa
 	cub3d->map = (char **)malloc(sizeof(char *) * (cub3d->map_total_lines + 2));
 	if (!cub3d->map)
 		quit("nError: Malloc error.", cub3d, 22);
 	i = 0;
 	start_line = cub3d->start_map;
-	// Copia as linhas do mapa para a estrutura do jogo
 	while (i < cub3d->map_total_lines)
 		cub3d->map[i++] = ft_strdup(cub3d->cub[start_line++]);
 	cub3d->map[i] = NULL;

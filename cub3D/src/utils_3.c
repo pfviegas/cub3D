@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 11:07:26 by correia          ###   ########.fr       */
+/*   Updated: 2024/02/09 11:25:32 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
  */
 unsigned int	get_pixel_color(t_image_data *img, int x, int y)
 {
-	char *dst;
-	unsigned int color;
+	char			*dst;
+	unsigned int	color;
 
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	color = *(unsigned int *)dst;
-	return color;
+	return (color);
 }
 
 /**
@@ -73,9 +73,11 @@ void	get_tex_data(t_cub3d *cub3d)
 	cub3d->tex.tex_x = 0;
 	cub3d->tex.tex_y = 0;
 	if (cub3d->ray.wall_side == 0)
-		wall_x = cub3d->player.position.y + cub3d->ray.perp_wall_dist * cub3d->ray.ray_dir.y;
+		wall_x = cub3d->player.position.y + cub3d->ray.perp_wall_dist 
+			* cub3d->ray.ray_dir.y;
 	else
-		wall_x = cub3d->player.position.x + cub3d->ray.perp_wall_dist * cub3d->ray.ray_dir.x;
+		wall_x = cub3d->player.position.x + cub3d->ray.perp_wall_dist 
+			* cub3d->ray.ray_dir.x;
 	wall_x -= floor(wall_x);
 	cub3d->tex.tex_x = wall_x * TEXTURE_WIDTH;
 	if (cub3d->ray.wall_side == 0 && cub3d->ray.ray_dir.x < 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 10:58:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 10:58:05 by correia          ###   ########.fr       */
+/*   Updated: 2024/02/09 11:38:50 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	check_map_surrounded_end(t_cub3d *cub3d)
 		while (j_1 > 0 && cub3d->map[i][j_1] == ' ')
 			j_1--;
 		if (j_0 < j_1)
-		{	
+		{
 			while (cub3d->map[i][j_0])
 				if (cub3d->map[i][j_0++] == '0')
 					quit("nError: Invalid Map.", cub3d, 34);
@@ -157,7 +157,7 @@ void	check_map_surrounded_start(t_cub3d *cub3d)
 	int	j_1;
 
 	i = 0;
-	while	(cub3d->map[++i])
+	while (cub3d->map[++i])
 	{
 		j_0 = 0;
 		j_1 = 0;
@@ -165,15 +165,15 @@ void	check_map_surrounded_start(t_cub3d *cub3d)
 			j_0++;
 		while (cub3d->map[i][j_1] == ' ')
 			j_1++;
-		if	(j_0 > j_1)
-		{		
-			while	(j_1 <= j_0)
-				if	(cub3d->map[i][j_1++] == '0')	
+		if (j_0 > j_1)
+		{
+			while (j_1 <= j_0)
+				if (cub3d->map[i][j_1++] == '0')
 					quit("nError: Invalid Map.", cub3d, 36);
 		}
 		else if (j_0 < j_1)
-			while	(j_0 <= j_1)
-				if	(cub3d->map[i - 1][j_0++] == '0')
+			while (j_0 <= j_1)
+				if (cub3d->map[i - 1][j_0++] == '0')
 					quit("nError: Invalid Map.", cub3d, 37);
 	}
 }

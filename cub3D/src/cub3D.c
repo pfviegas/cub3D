@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 10:58:35 by correia          ###   ########.fr       */
+/*   Updated: 2024/02/09 11:31:47 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,13 @@
 void	start_cub3d(t_cub3d *cub3d)
 {
 	cub3d->mlx = mlx_init();
-	cub3d->win = mlx_new_window(cub3d->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_NAME);
-	cub3d->map_view.img = mlx_new_image(cub3d->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	cub3d->map_view.addr = mlx_get_data_addr(cub3d->map_view.img, &cub3d->map_view.bits_per_pixel,
-											 &cub3d->map_view.line_length, &cub3d->map_view.endian);
+	cub3d->win = mlx_new_window(cub3d->mlx, SCREEN_WIDTH, SCREEN_HEIGHT,
+			SCREEN_NAME);
+	cub3d->map_view.img = mlx_new_image(cub3d->mlx, SCREEN_WIDTH,
+			SCREEN_HEIGHT);
+	cub3d->map_view.addr = mlx_get_data_addr(cub3d->map_view.img,
+			&cub3d->map_view.bits_per_pixel,
+			&cub3d->map_view.line_length, &cub3d->map_view.endian);
 	load_textures(cub3d, &cub3d->north_view, cub3d->textures.north_path);
 	load_textures(cub3d, &cub3d->south_view, cub3d->textures.south_path);
 	load_textures(cub3d, &cub3d->west_view, cub3d->textures.west_path);
@@ -57,8 +60,8 @@ void	load_textures(t_cub3d *cub3d, t_image_data *wall, char *path)
 	tex_w = IMAGE_WIDTH;
 	tex_h = IMAGE_WIDTH;
 	wall->img = mlx_xpm_file_to_image(cub3d->mlx, path, &tex_w, &tex_h);
-	wall->addr = mlx_get_data_addr(wall->img, &wall->bits_per_pixel, &wall->line_length,
-								   &wall->endian);
+	wall->addr = mlx_get_data_addr(wall->img, &wall->bits_per_pixel,
+			&wall->line_length, &wall->endian);
 }
 
 int	main(int argc, char **argv)

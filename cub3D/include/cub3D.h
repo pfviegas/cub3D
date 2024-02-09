@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 19:26:27 by correia          ###   ########.fr       */
+/*   Updated: 2024/02/09 11:57:10 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 # define MOVE_SPEED 3
 # define BAR_LENGTH 7
 # define MY_PI 3.14159265358979323846
-# define MY_PI_2 (3.14159265358979323846) / 2
+# define MY_PI_2 1.570796327
 
 typedef struct s_bar
 {
@@ -233,9 +233,8 @@ void				init_var(t_cub3d *cub3d);
 /* loop hook */
 int					loop_hook(t_cub3d *cub3d);
 bool				check_colision(t_cub3d *cub3d, t_hitbox hitbox);
-t_position	find_new_position(t_position wanted_position,
-								t_position old_position,
-								t_cub3d *cub3d);
+t_position			find_new_position(t_position wanted_position,
+						t_position old_position, t_cub3d *cub3d);
 
 /* map 1 */
 void				get_elements_info(t_cub3d *cub3d);
@@ -271,7 +270,7 @@ void				calc_wall_height(t_cub3d *cub3d);
 /* utils 1*/
 int					is_space(int c);
 int					is_start_map(char *line);
-int					ft_atoi_cub3d(t_cub3d *cub3d, char *str);
+int					atoi_cub3d(t_cub3d *cub3d, char *str);
 void				ft_print_map(t_cub3d *cub3d);
 void				get_cub_lines(t_cub3d *cub3d, char **argv);
 

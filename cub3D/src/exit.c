@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:30:09 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 11:01:37 by correia          ###   ########.fr       */
+/*   Updated: 2024/02/09 11:27:23 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	quit(char *s, t_cub3d *cub3d, int exit_code)
 	exit(exit_code);
 }
 
-
 /**
  * Libera a memória alocada para uma matriz de strings.
  * 
@@ -38,7 +37,8 @@ void	quit(char *s, t_cub3d *cub3d, int exit_code)
 void	free_matrix(char **str)
 {
 	int	i;
-	if	(!str)
+
+	if (!str)
 		return ;
 	i = 0;
 	while (str[i])

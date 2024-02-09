@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:33:22 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/09 11:01:01 by correia          ###   ########.fr       */
+/*   Updated: 2024/02/09 11:30:02 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,30 +137,29 @@ void	draw_square(t_cub3d *cub3d, int x, int y, int color)
  * @param cub3d O ponteiro para a estrutura.
  * @param pixel_w A coordenada horizontal do pixel a ser desenhado.
  */
-void draw_scene(t_cub3d *cub3d, int pixel_w)
+void	draw_scene(t_cub3d *cub3d, int pixel_w)
 {
-	int pixel_h;
-	int color;
+	int	pixel_h;
+	int	color;
 
 	pixel_h = -1;
 	get_tex_data(cub3d);
 	while (++pixel_h < SCREEN_HEIGHT)
 	{
-		// desenha o ceu
 		if (pixel_h < cub3d->draw.start)
 		{
 			color = get_argb(0, cub3d->textures.ceiling_color[0],
-								cub3d->textures.ceiling_color[1], cub3d->textures.ceiling_color[2]);
+					cub3d->textures.ceiling_color[1],
+					cub3d->textures.ceiling_color[2]);
 			my_pixel_put(&cub3d->map_view, pixel_w, pixel_h, color);
 		}
-		// desenha o chao
 		else if (pixel_h > cub3d->draw.end)
 		{
 			color = get_argb(0, cub3d->textures.floor_color[0],
-								cub3d->textures.floor_color[1], cub3d->textures.floor_color[2]);
+					cub3d->textures.floor_color[1],
+					cub3d->textures.floor_color[2]);
 			my_pixel_put(&cub3d->map_view, pixel_w, pixel_h, color);
 		}
-		// desenha a parede
 		else
 			draw_wall(cub3d, pixel_w, pixel_h);
 	}

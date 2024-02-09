@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 10:54:32 by correia          ###   ########.fr       */
+/*   Updated: 2024/02/09 11:39:07 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 void	map_validations(t_cub3d *cub3d)
 {
 	check_map(cub3d);
-
 	if (cub3d->map_total_lines <= 2)
 		quit("nError: Invalid number of lines.", cub3d, 27);
 	check_map_closed(cub3d);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 19:27:36 by correia          ###   ########.fr       */
+/*   Updated: 2024/02/09 11:17:04 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,13 +136,13 @@ void	get_colors(t_cub3d *cub3d, char *cl, int i, int flag)
 	temp_array = ft_split(temp, ',');
 	while (temp_array[++j])
 	{
-		if ((flag == 5 || flag == 6) && ft_atoi_cub3d(cub3d, temp_array[j]) < 0)
+		if ((flag == 5 || flag == 6) && atoi_cub3d(cub3d, temp_array[j]) < 0)
 			return (free_matrix(temp_array), free(temp), \
 					quit("nError: Formato de cor inválido.", cub3d, 30));
 		else if (flag == 6)
-			cub3d->textures.ceiling_color[j] = ft_atoi_cub3d(cub3d, temp_array[j]);
+			cub3d->textures.ceiling_color[j] = atoi_cub3d(cub3d, temp_array[j]);
 		else if (flag == 5)
-			cub3d->textures.floor_color[j] = ft_atoi_cub3d(cub3d, temp_array[j]);
+			cub3d->textures.floor_color[j] = atoi_cub3d(cub3d, temp_array[j]);
 	}
 	free_matrix(temp_array);
 	free(temp);

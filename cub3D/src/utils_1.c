@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 11:05:25 by correia          ###   ########.fr       */
+/*   Updated: 2024/02/09 11:19:21 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	is_start_map(char *line)
 		return (0);
 	else
 	{
-		while (line[i] && (line[i] == '1' || line[i] == '0' || line[i] == ' ' || line[i] == '\t'))
+		while (line[i] && (line[i] == '1' || line[i] == '0'
+				|| line[i] == ' ' || line[i] == '\t'))
 			i++;
 		if (line[i] == '\0')
 			return (1);
@@ -63,7 +64,7 @@ int	is_start_map(char *line)
  * @param str A string a ser convertida em um número inteiro.
  * @return O número inteiro convertido.
  */
-int	ft_atoi_cub3d(t_cub3d *cub3d, char *str)
+int	atoi_cub3d(t_cub3d *cub3d, char *str)
 {
 	int	res;
 	int	i;
@@ -122,7 +123,6 @@ void	get_cub_lines(t_cub3d *cub3d, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		quit("nError: Opening .cub file.", cub3d, 3);
-
 	lines = 0;
 	content_line = ft_get_next_line(fd);
 	while (content_line)
