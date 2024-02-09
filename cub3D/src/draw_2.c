@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:33:22 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/09 11:52:51 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:46:38 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	my_pixel_put(t_image_data *img, int x, int y, int color)
 
 void	draw_wall(t_cub3d *cub3d, int pixel_w, int pixel_h)
 {
-	cub3d->tex.tex_y = (int)(((float)pixel_h - (float)SCREEN_HEIGHT / 2.0
-				+ (float)cub3d->tex.wall_line_h / 2.0) * cub3d->tex.step);
+	cub3d->tex.tex_y = abs((int)(((float)pixel_h - (float)SCREEN_HEIGHT / 2.0
+				+ (float)cub3d->tex.wall_line_h / 2.0) * cub3d->tex.step));
 	if (cub3d->ray.wall_side == 0 && cub3d->ray.ray_dir.x > 0)
 		cub3d->tex.color = get_pixel_color(&cub3d->east_view, cub3d->tex.tex_x,
 				cub3d->tex.tex_y);

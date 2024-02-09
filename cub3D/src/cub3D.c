@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 11:31:47 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:06:05 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	load_textures(t_cub3d *cub3d, t_image_data *wall, char *path)
 	int	tex_w;
 	int	tex_h;
 
-	tex_w = IMAGE_WIDTH;
-	tex_h = IMAGE_WIDTH;
+	tex_w = TEXTURE_WIDTH;
+	tex_h = TEXTURE_HEIGHT;
 	wall->img = mlx_xpm_file_to_image(cub3d->mlx, path, &tex_w, &tex_h);
 	wall->addr = mlx_get_data_addr(wall->img, &wall->bits_per_pixel,
 			&wall->line_length, &wall->endian);

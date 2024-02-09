@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 11:57:10 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/09 14:50:27 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,18 @@
 # define M 109
 
 // Window info
-
 # define SCREEN_NAME "cub3D"
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
 # define REFRESH_RATE 120
 
-// images
-
-# define IMAGE_WIDTH 16
+// mini map
+//# define IMAGE_WIDTH 16
 # define MINIMAP_SCALE 8
 
 // textures
-
-# define TEXTURE_WIDTH 64
-# define TEXTURE_HEIGHT 64
+# define TEXTURE_WIDTH 960
+# define TEXTURE_HEIGHT 960
 
 // player info
 
@@ -71,8 +68,8 @@ typedef struct s_tex
 {
 	float			wall_line_h;
 	float			step;
-	int				tex_x;
-	int				tex_y;
+	long long int	tex_x;
+	long long int	tex_y;
 	int				color;
 }					t_tex;
 
@@ -242,6 +239,7 @@ void				get_map(t_cub3d *cub3d);
 
 /* mini map */
 void				render_mini_map(t_cub3d *cub3d);
+void				draw_mini_map(t_cub3d *cub3d, int *i, int *j);
 
 /* movementes  1*/
 void				move_front(t_cub3d *cub3d);
