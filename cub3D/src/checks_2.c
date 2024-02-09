@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 10:58:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 15:43:44 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/09 10:58:05 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,19 +85,19 @@ void	check_map(t_cub3d *cub3d)
  */
 void	check_char(t_cub3d *cub3d, char c, int line, int col)
 {
-	if(c == 'N' || c == 'S' || c == 'W' || c == 'E')
+	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 	{
 		cub3d->player_number++;
 		cub3d->player.position.y = line + 0.5;
 		cub3d->player.position.x = col + 0.5;
 		cub3d->player_direction = c;
-		if(c == 'N')
+		if (c == 'N')
 			cub3d->player.dirx = 3 * MY_PI_2;
-		if(c == 'S')
+		if (c == 'S')
 			cub3d->player.dirx = MY_PI_2;
-		if(c == 'W')
+		if (c == 'W')
 			cub3d->player.dirx = MY_PI;
-		if(c == 'E')
+		if (c == 'E')
 			cub3d->player.dirx = 0;
 	}
 	else if (c == '0' || c == '1')
@@ -118,12 +118,12 @@ void	check_char(t_cub3d *cub3d, char c, int line, int col)
  */
 void	check_map_surrounded_end(t_cub3d *cub3d)
 {
-	int i;
-	int j_0;
-	int j_1;
+	int	i;
+	int	j_0;
+	int	j_1;
 
 	i = 0;
-	while(cub3d->map[++i])
+	while (cub3d->map[++i])
 	{
 		j_0 = (size_t)(ft_strlen(cub3d->map[i - 1]) - 1);
 		j_1 = (size_t)(ft_strlen(cub3d->map[i]) - 1);
@@ -131,15 +131,15 @@ void	check_map_surrounded_end(t_cub3d *cub3d)
 			j_0--;
 		while (j_1 > 0 && cub3d->map[i][j_1] == ' ')
 			j_1--;
-		if(j_0 < j_1)
+		if (j_0 < j_1)
 		{	
-			while(cub3d->map[i][j_0])
-				if(cub3d->map[i][j_0++] == '0')
+			while (cub3d->map[i][j_0])
+				if (cub3d->map[i][j_0++] == '0')
 					quit("nError: Invalid Map.", cub3d, 34);
 		}
 		else if (j_0 > j_1)
-			while(cub3d->map[i - 1][j_1])
-				if(cub3d->map[i - 1][j_1++] == '0')
+			while (cub3d->map[i - 1][j_1])
+				if (cub3d->map[i - 1][j_1++] == '0')
 					quit("nError: Invalid Map.", cub3d, 35);
 	}
 }
@@ -152,12 +152,12 @@ void	check_map_surrounded_end(t_cub3d *cub3d)
  */
 void	check_map_surrounded_start(t_cub3d *cub3d)
 {
-	int i;
-	int j_0;
-	int j_1;
+	int	i;
+	int	j_0;
+	int	j_1;
 
 	i = 0;
-	while(cub3d->map[++i])
+	while	(cub3d->map[++i])
 	{
 		j_0 = 0;
 		j_1 = 0;
@@ -165,15 +165,15 @@ void	check_map_surrounded_start(t_cub3d *cub3d)
 			j_0++;
 		while (cub3d->map[i][j_1] == ' ')
 			j_1++;
-		if(j_0 > j_1)
+		if	(j_0 > j_1)
 		{		
-			while(j_1 <= j_0)
-				if(cub3d->map[i][j_1++] == '0')	
+			while	(j_1 <= j_0)
+				if	(cub3d->map[i][j_1++] == '0')	
 					quit("nError: Invalid Map.", cub3d, 36);
 		}
 		else if (j_0 < j_1)
-			while(j_0 <= j_1)
-				if(cub3d->map[i - 1][j_0++] == '0')
+			while	(j_0 <= j_1)
+				if	(cub3d->map[i - 1][j_0++] == '0')
 					quit("nError: Invalid Map.", cub3d, 37);
 	}
 }

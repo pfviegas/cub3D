@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 11:25:57 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/09 10:54:32 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  *
  * @param cub3d O ponteiro para a estrutura de dados 'cub3d'.
  */
-void map_validations(t_cub3d *cub3d)
+void	map_validations(t_cub3d *cub3d)
 {
 	check_map(cub3d);
 
@@ -71,7 +71,7 @@ void	check_textures(t_cub3d *cub3d)
  * @param str A string contendo a linha do arquivo de configuração.
  * @param i O índice inicial da verificação na string.
  */
-void check_elements(t_cub3d *cub3d, char *str, int i)
+void	check_elements(t_cub3d *cub3d, char *str, int i)
 {
 	if (str[i] == 'N' && str[i + 1] == 'O')
 		get_textures_path(cub3d, str, i + 2, 1);

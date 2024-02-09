@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 11:26:53 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/08 19:27:36 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	copy_cub(t_cub3d *cub3d, char **argv)
 void	is_surrounded_1(t_cub3d *cub3d, int line, int col)
 {
 	int	i;
-	int j;
-	
+	int	j;
+
 	if (line == 0)
 		i = line;
 	else
@@ -125,11 +125,11 @@ void	is_new_line(t_cub3d *cub3d, int line, int col)
  * @param i Índice de início da substring contendo as cores.
  * @param flag Flag indicando se as cores são do chão (5) ou do teto (6).
  */
-void get_colors(t_cub3d *cub3d, char *cl, int i, int flag)
+void	get_colors(t_cub3d *cub3d, char *cl, int i, int flag)
 {
-	char *temp;
-	char **temp_array;
-	int j;
+	char	*temp;
+	char	**temp_array;
+	int		j;
 
 	j = -1;
 	temp = ft_substr(cl, i, ft_strlen(cl) - i);

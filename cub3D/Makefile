@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+         #
+#    By: correia <correia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 12:00:51 by pviegas           #+#    #+#              #
-#    Updated: 2024/02/06 15:49:21 by pviegas          ###   ########.fr        #
+#    Updated: 2024/02/09 10:52:58 by correia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ NAME = cub3D
 
 # Compiler options
 CC 			= cc
-FLAGS		= -Wall -Werror -Wextra -g3 #-fsanitize=address
-MLXFLAGS	= -L ./minilibx -lmlx -Ilmlx -lXext -lX11
+FLAGS		= -Wall -Werror -Wextra -g3  #-fsanitize=address
+MLXFLAGS	= -L ./minilibx -lm -lmlx -Ilmlx -lXext -lX11
 
 # Paths
 SRC_DIR			= ./src/
@@ -59,7 +59,7 @@ ${NAME}: $(OBJS)
 	@echo "\n$(GREEN) [Success] Minilibix compilated.$(RESET)\n\n"
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
 	@echo "\n$(GREEN) [Success] Libft compilated.$(RESET)\n\n"
-	$(CC) $(FLAGS) -lm $(SRCS) $(MLXFLAGS) $(LIBFT) -o $(NAME)
+	$(CC) $(FLAGS) $(SRCS) $(MLXFLAGS) $(LIBFT) -o $(NAME)
 	@echo "\n$(GREEN) [Success] ./cub3D created.$(RESET)\n\n"
 
 # ${NAME_BONUS}: $(OBJS_BONUS)

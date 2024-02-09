@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:15:56 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/08 11:47:44 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/09 11:04:40 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
  * @param player_position A posição atual do jogador.
  * @return A hitbox do jogador.
  */
-t_hitbox define_hitbox(t_position player_position)
+t_hitbox	define_hitbox(t_position player_position)
 {
-	t_hitbox hitbox;
+	t_hitbox	hitbox;
 
 	hitbox.top_left_corner.x = player_position.x - 0.25;
 	hitbox.top_right_corner.x = player_position.x + 0.25;
@@ -39,7 +39,7 @@ t_hitbox define_hitbox(t_position player_position)
  * @param cub3d Ponteiro para a estrutura que contem as informações do jogo.
  * @return O objeto t_player_info criado.
  */
-t_player_info create_player(t_cub3d *cub3d)
+t_player_info	create_player(t_cub3d *cub3d)
 {
 	cub3d->player.hitbox = define_hitbox(cub3d->player.position);
 	cub3d->player.view_dir.x = cos(cub3d->player.dirx);

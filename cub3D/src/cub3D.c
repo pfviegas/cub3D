@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 11:56:04 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/09 10:58:35 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	start_cub3d(t_cub3d *cub3d)
  * @param wall O ponteiro para a estrutura t_image_data que armazenará a textura.
  * @param path O caminho para o arquivo de imagem da textura.
  */
-void load_textures(t_cub3d *cub3d, t_image_data *wall, char *path)
+void	load_textures(t_cub3d *cub3d, t_image_data *wall, char *path)
 {
-	int tex_w;
-	int tex_h;
+	int	tex_w;
+	int	tex_h;
 
 	tex_w = IMAGE_WIDTH;
 	tex_h = IMAGE_WIDTH;
@@ -64,7 +64,7 @@ void load_textures(t_cub3d *cub3d, t_image_data *wall, char *path)
 int	main(int argc, char **argv)
 {
 	t_cub3d	cub3d;
-	
+
 	init_var(&cub3d);
 	check_args(&cub3d, argc, argv);
 	copy_cub(&cub3d, argv);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:37:40 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/08 17:32:55 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/09 11:04:45 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void find_wall(t_cub3d *cub3d)
  * 
  * @param cub3d O ponteiro para a estrutura do jogo cub3D.
  */
-void calc_wall_height(t_cub3d *cub3d)
+void	calc_wall_height(t_cub3d *cub3d)
 {
 	cub3d->tex.wall_line_h = 0;
 	if (cub3d->ray.wall_side == 0)

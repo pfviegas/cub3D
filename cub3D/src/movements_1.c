@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:35:46 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/08 16:39:31 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/09 11:03:39 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  *
  * @param cub3d O ponteiro para a estrutura t_cub3d.
  */
-void move_front(t_cub3d *cub3d)
+void	move_front(t_cub3d *cub3d)
 {
 	cub3d->player.position.x += MOVE_SPEED * 0.01 * cos(cub3d->player.dirx);
 	cub3d->player.position.y += MOVE_SPEED * 0.01 * sin(cub3d->player.dirx);
@@ -75,7 +75,7 @@ void	update_possition_player(t_cub3d *cub3d)
 	if (cub3d->player.move.a == 1)
 		move_left(cub3d);
 	if (cub3d->player.move.w == 1)
-		move_front(cub3d);	
+		move_front(cub3d);
 	if (cub3d->player.move.s == 1)
 		move_back(cub3d);
 	if (cub3d->player.move.d == 1)

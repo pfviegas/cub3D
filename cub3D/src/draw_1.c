@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:33:22 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/08 16:25:28 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/09 11:01:01 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  */
 void	draw_bar(t_cub3d *cub3d, int x, int y, float angle)
 {
-	t_bar draw;
+	t_bar	draw;
 
 	draw.bar_x2 = x + BAR_LENGTH * cos(cub3d->player.dirx + angle);
 	draw.bar_y2 = y - BAR_LENGTH * -sin(cub3d->player.dirx + angle);
@@ -44,17 +44,18 @@ void	draw_bar(t_cub3d *cub3d, int x, int y, float angle)
  * Desenha uma barra na tela usando o algoritmo de Bresenham.
  *
  * @param cub3d O ponteiro para a estrutura do jogo cub3D.
- * @param draw A estrutura que contém as informações necessárias para desenhar a barra.
+ * @param draw A estrutura que contém as informações necessárias
+ *  para desenhar a barra.
  * @param x A coordenada x inicial do ponto de partida da barra.
  * @param y A coordenada y inicial do ponto de partida da barra.
  */
-void draw_bar_2(t_cub3d *cub3d, t_bar draw, int x, int y)
+void	draw_bar_2(t_cub3d *cub3d, t_bar draw, int x, int y)
 {
 	while (1)
 	{
 		my_pixel_put(&cub3d->map_view, x, y, get_argb(0, 255, 0, 0));
 		if (x == draw.bar_x2 && y == draw.bar_y2)
-			break;
+			break ;
 		draw.e2 = 2 * draw.err;
 		if (draw.e2 > -draw.dy)
 		{
@@ -80,19 +81,21 @@ void draw_bar_2(t_cub3d *cub3d, t_bar draw, int x, int y)
  */
 void	draw_player(t_cub3d *cub3d, int x, int y)
 {
-	int yy;
+	int	yy;
+	int	color;
 
 	yy = 1;
 	y -= 3;
+	color = get_argb(0, 255, 0, 0);
 	while (yy <= 5)
 	{
-		my_pixel_put(&cub3d->map_view, x, y + yy, get_argb(0, 255, 0, 0));
-		my_pixel_put(&cub3d->map_view, x - 1, y + yy, get_argb(0, 255, 0, 0));
-		my_pixel_put(&cub3d->map_view, x + 1, y + yy, get_argb(0, 255, 0, 0));
+		my_pixel_put(&cub3d->map_view, x, y + yy, color);
+		my_pixel_put(&cub3d->map_view, x - 1, y + yy, color);
+		my_pixel_put(&cub3d->map_view, x + 1, y + yy, color);
 		if (yy >= 2 && yy <= 4)
 		{
-			my_pixel_put(&cub3d->map_view, x - 2, y + yy, get_argb(0, 255, 0, 0));
-			my_pixel_put(&cub3d->map_view, x + 2, y + yy, get_argb(0, 255, 0, 0));
+			my_pixel_put(&cub3d->map_view, x - 2, y + yy, color);
+			my_pixel_put(&cub3d->map_view, x + 2, y + yy, color);
 		}
 		yy++;
 	}

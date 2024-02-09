@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:34:06 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/08 14:25:06 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/09 11:03:10 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
  * @param cub3d O ponteiro para a estrutura t_cub3d.
  * @param fd O descritor de arquivo do mapa.
  */
-void get_elements_info(t_cub3d *cub3d)
+void	get_elements_info(t_cub3d *cub3d)
 {
-	int line;
-	int col;
+	int	line;
+	int	col;
 
 	line = 0;
 	col = 0;
-	while(cub3d->cub[line] && is_start_map(cub3d->cub[line]) == 0)
+	while (cub3d->cub[line] && is_start_map(cub3d->cub[line]) == 0)
 	{
 		col = 0;
 		while (cub3d->cub[line][col] && is_space(cub3d->cub[line][col]) == 1)
@@ -46,10 +46,10 @@ void get_elements_info(t_cub3d *cub3d)
  * 
  * @param cub3d O ponteiro para a estrutura t_cub3d.
  */
-void get_map(t_cub3d *cub3d)
+void	get_map(t_cub3d *cub3d)
 {
-	int i;
-	int start_line;
+	int	i;
+	int	start_line;
 
 	check_nl_middle_map(cub3d);
 	i = 0;

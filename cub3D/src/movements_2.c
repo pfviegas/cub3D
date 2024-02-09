@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:35:46 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/08 12:07:48 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/09 11:04:19 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	update_look(t_cub3d *cub3d)
  *
  * @param cub3d O ponteiro para a estrutura t_cub3d.
  */
-void look_left(t_cub3d *cub3d)
+void	look_left(t_cub3d *cub3d)
 {
 	cub3d->player.dirx -= MOVE_SPEED * 0.01;
 	if (cub3d->player.dirx >= 2 * MY_PI)
@@ -57,7 +57,7 @@ void look_left(t_cub3d *cub3d)
  *
  * @param cub3d O ponteiro para a estrutura t_cub3d.
  */
-void look_right(t_cub3d *cub3d)
+void	look_right(t_cub3d *cub3d)
 {
 	cub3d->player.dirx += MOVE_SPEED * 0.01;
 	if (cub3d->player.dirx >= 2 * MY_PI)
@@ -77,7 +77,7 @@ int	key_press(int keycode, t_cub3d *cub3d)
 	if (keycode == A)
 		cub3d->player.move.a = 1;
 	if (keycode == W)
-		cub3d->player.move.w = 1;	
+		cub3d->player.move.w = 1;
 	if (keycode == S)
 		cub3d->player.move.s = 1;
 	if (keycode == D)
@@ -112,5 +112,5 @@ int	key_release(int keycode, t_cub3d *cub3d)
 		cub3d->player.move.left = 0;
 	if (keycode == ARROW_RIGHT)
 		cub3d->player.move.right = 0;
-	return (0);	
+	return (0);
 }

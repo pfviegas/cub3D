@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:30:09 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 11:54:02 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/09 11:01:37 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	quit(char *s, t_cub3d *cub3d, int exit_code)
 void	free_matrix(char **str)
 {
 	int	i;
-	if (!str)
+	if	(!str)
 		return ;
 	i = 0;
 	while (str[i])
@@ -54,13 +54,13 @@ void	free_matrix(char **str)
  */
 void	free_textures_image(t_cub3d *cub3d)
 {
-	if(cub3d->textures.north_path != NULL)
+	if (cub3d->textures.north_path != NULL)
 		free(cub3d->textures.north_path);
-	if(cub3d->textures.south_path != NULL)
+	if (cub3d->textures.south_path != NULL)
 		free(cub3d->textures.south_path);
-	if(cub3d->textures.west_path != NULL)
+	if (cub3d->textures.west_path != NULL)
 		free(cub3d->textures.west_path);
-	if(cub3d->textures.east_path != NULL)
+	if (cub3d->textures.east_path != NULL)
 		free(cub3d->textures.east_path);
 }
 
@@ -80,7 +80,7 @@ int	exit_cub3d(t_cub3d *cub3d)
 		mlx_destroy_image(cub3d->mlx, cub3d->west_view.img);
 	if (cub3d->east_view.img)
 		mlx_destroy_image(cub3d->mlx, cub3d->east_view.img);
-	if (cub3d->map_view.img)	
+	if (cub3d->map_view.img)
 		mlx_destroy_image(cub3d->mlx, cub3d->map_view.img);
 	mlx_destroy_window(cub3d->mlx, cub3d->win);
 	mlx_destroy_display(cub3d->mlx);

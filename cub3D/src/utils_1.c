@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 11:19:20 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/09 11:05:25 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  */
 int	is_space(int c)
 {
-	if((c >= '\t' && c <= '\r') || c == ' ')
+	if ((c >= '\t' && c <= '\r') || c == ' ')
 		return (1);
 	return (0);
 }
@@ -34,22 +34,22 @@ int	is_space(int c)
  * @param line A linha a ser verificada.
  * @return 1 se a linha for o início do mapa, 0 caso contrário.
  */
-int is_start_map(char *line)
+int	is_start_map(char *line)
 {
-	int i;
-	
+	int	i;
+
 	if (!line)
 		return (0);
 	i = 0;
-	while(line[i] && is_space(line[i]) == 1)
+	while (line[i] && is_space(line[i]) == 1)
 		i++;
-	if(line[i] != '1')
+	if (line[i] != '1')
 		return (0);
 	else
-	{	
-		while(line[i] && (line[i] == '1' || line[i] == '0' || line[i] == ' ' || line[i] == '\t'))
+	{
+		while (line[i] && (line[i] == '1' || line[i] == '0' || line[i] == ' ' || line[i] == '\t'))
 			i++;
-		if(line[i] == '\0')
+		if (line[i] == '\0')
 			return (1);
 		else
 			return (0);
@@ -77,7 +77,7 @@ int	ft_atoi_cub3d(t_cub3d *cub3d, char *str)
 		return (-1);
 	while (str[i])
 	{
-		if(res == -1)
+		if (res == -1)
 			res = 0;
 		if (ft_isdigit(str[i]))
 			res = res * 10 + (str[i] - '0');
@@ -101,7 +101,7 @@ void	ft_print_map(t_cub3d *cub3d)
 
 	i = 0;
 	printf("-----Mapa------\n\n");
-	while(cub3d->map[i])
+	while (cub3d->map[i])
 		printf("%s\n", cub3d->map[i++]);
 	printf("\n\n");
 }

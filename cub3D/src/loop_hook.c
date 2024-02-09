@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_hook.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:40:40 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 14:29:22 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/09 11:02:18 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	loop_hook(t_cub3d *cub3d)
 		if (cub3d->mini_map_visible == true)
 			render_mini_map(cub3d);
 		mlx_put_image_to_window(cub3d->mlx, cub3d->win,
-							   cub3d->map_view.img, 0, 0);
+								cub3d->map_view.img, 0, 0);
 		old_position = cub3d->player.position;
 		update_possition_player(cub3d);
 		if (check_colision(cub3d, cub3d->player.hitbox))
@@ -41,7 +41,7 @@ int	loop_hook(t_cub3d *cub3d)
 			cub3d->player.hitbox = define_hitbox(cub3d->player.position);
 		}
 	}
-	return 0;
+	return (0);
 }
 
 /**
@@ -54,13 +54,13 @@ int	loop_hook(t_cub3d *cub3d)
 bool	check_colision(t_cub3d *cub3d, t_hitbox hitbox)
  {
 	if (cub3d->map[(int)hitbox.bottom_left_corner.y][(int)hitbox.bottom_left_corner.x] == '1')
-			return (true);
+		return (true);
 	if (cub3d->map[(int)hitbox.bottom_right_corner.y][(int)hitbox.bottom_right_corner.x] == '1')
-			return (true);
+		return (true);
 	if (cub3d->map[(int)hitbox.top_left_corner.y][(int)hitbox.top_left_corner.x] == '1')
-			return (true);
+		return (true);
 	if (cub3d->map[(int)hitbox.top_right_corner.y][(int)hitbox.top_right_corner.x] == '1')
-			return (true);
+		return (true);
 	return (false);
 }
 
