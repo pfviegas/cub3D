@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 15:30:43 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/09 15:42:33 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define M 109
 
 // Window info
-# define SCREEN_NAME "cub3D"
+# define SCREEN_NAME "cub3D_bonus"
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
 # define REFRESH_RATE 120
