@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: correia <correia@student.42.fr>            +#+  +:+       +#+         #
+#    By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 12:00:51 by pviegas           #+#    #+#              #
-#    Updated: 2024/02/09 10:52:58 by correia          ###   ########.fr        #
+#    Updated: 2024/02/09 15:03:40 by pviegas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,6 +91,10 @@ v:
 p:
 	clear && make re && ./cub3D maps/map_01.cub
 
+norm:
+	@clear
+	@norminette $(SRC_DIR) $(LIBFT_DIR) ./include/ | grep -v "OK" || true
+	
 re: fclean all
 
 .PHONY: all clean fclean re bonus # fclean_bonus
