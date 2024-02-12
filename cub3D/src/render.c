@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:37:40 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/09 11:23:06 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/12 12:42:15 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	calc_step_and_side(t_cub3d *cub3d)
 
 /**
  * Função responsável por encontrar a parede em que o raio colide.
- * DDA Algorithm
+ * DDA (Digital Differential Analyzer) Algorithm
  * 
  * @param cub3d O ponteiro para a estrutura do jogo cub3D.
  * wall_side = 0 -> horizontal (x)
@@ -153,7 +153,7 @@ void	calc_wall_height(t_cub3d *cub3d)
 	cub3d->draw.start = -cub3d->tex.wall_line_h / 2 + SCREEN_HEIGHT / 2;
 	if (cub3d->draw.start < 0)
 		cub3d->draw.start = 0;
-	cub3d->draw.end = cub3d->tex.wall_line_h / 2 + SCREEN_HEIGHT / 2;
+	cub3d->draw.end = (cub3d->tex.wall_line_h / 2 + SCREEN_HEIGHT / 2) - 1;
 	if (cub3d->draw.end >= SCREEN_HEIGHT)
 		cub3d->draw.end = SCREEN_HEIGHT - 1;
 }

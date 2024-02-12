@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:37:40 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/09 15:44:24 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/12 12:44:05 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ void	calc_wall_height(t_cub3d *cub3d)
 	cub3d->draw.start = -cub3d->tex.wall_line_h / 2 + SCREEN_HEIGHT / 2;
 	if (cub3d->draw.start < 0)
 		cub3d->draw.start = 0;
-	cub3d->draw.end = cub3d->tex.wall_line_h / 2 + SCREEN_HEIGHT / 2;
+	cub3d->draw.end = (cub3d->tex.wall_line_h / 2 + SCREEN_HEIGHT / 2) - 1;
 	if (cub3d->draw.end >= SCREEN_HEIGHT)
 		cub3d->draw.end = SCREEN_HEIGHT - 1;
 }
