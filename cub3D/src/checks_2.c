@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 10:58:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 11:38:50 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:57:47 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@ void	check_textures_images(t_cub3d *cub3d)
 
 	fd = open(cub3d->textures.north_path, O_RDONLY);
 	if (fd == -1)
-		quit("nError: North image missing.", cub3d, 15);
+		quit("Error:\n North image missing.", cub3d, 15);
 	close(fd);
 	fd = open(cub3d->textures.south_path, O_RDONLY);
 	if (fd == -1)
-		quit("nError: South image missing.", cub3d, 16);
+		quit("Error:\n South image missing.", cub3d, 16);
 	close(fd);
 	fd = open(cub3d->textures.west_path, O_RDONLY);
 	if (fd == -1)
-		quit("nError: West image missing.", cub3d, 17);
+		quit("Error:\n West image missing.", cub3d, 17);
 	close(fd);
 	fd = open(cub3d->textures.east_path, O_RDONLY);
 	if (fd == -1)
-		quit("nError: East image missing.", cub3d, 18);
+		quit("Error:\n East image missing.", cub3d, 18);
 	close(fd);
 }
 
@@ -69,9 +69,9 @@ void	check_map(t_cub3d *cub3d)
 		line++;
 	}
 	if (cub3d->player_number == 0)
-		quit("nError: There's no player.", cub3d, 25);
+		quit("Error:\n There's no player.", cub3d, 25);
 	else if (cub3d->player_number > 1)
-		quit("nError: Just one player per map.", cub3d, 26);
+		quit("Error:\n Just one player per map.", cub3d, 26);
 }
 
 /**
@@ -105,7 +105,7 @@ void	check_char(t_cub3d *cub3d, char c, int line, int col)
 	else if (c == ' ')
 		is_surrounded_1(cub3d, line, col);
 	else
-		quit("nError: Invalid characters.", cub3d, 23);
+		quit("Error:\n Invalid characters.", cub3d, 23);
 }
 
 /**
@@ -135,12 +135,12 @@ void	check_map_surrounded_end(t_cub3d *cub3d)
 		{
 			while (cub3d->map[i][j_0])
 				if (cub3d->map[i][j_0++] == '0')
-					quit("nError: Invalid Map.", cub3d, 34);
+					quit("Error:\n Invalid Map.", cub3d, 34);
 		}
 		else if (j_0 > j_1)
 			while (cub3d->map[i - 1][j_1])
 				if (cub3d->map[i - 1][j_1++] == '0')
-					quit("nError: Invalid Map.", cub3d, 35);
+					quit("Error:\n Invalid Map.", cub3d, 35);
 	}
 }
 
@@ -169,11 +169,11 @@ void	check_map_surrounded_start(t_cub3d *cub3d)
 		{
 			while (j_1 <= j_0)
 				if (cub3d->map[i][j_1++] == '0')
-					quit("nError: Invalid Map.", cub3d, 36);
+					quit("Error:\n Invalid Map.", cub3d, 36);
 		}
 		else if (j_0 < j_1)
 			while (j_0 <= j_1)
 				if (cub3d->map[i - 1][j_0++] == '0')
-					quit("nError: Invalid Map.", cub3d, 37);
+					quit("Error:\n Invalid Map.", cub3d, 37);
 	}
 }

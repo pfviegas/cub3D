@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 11:17:04 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:57:47 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	copy_cub(t_cub3d *cub3d, char **argv)
 	get_cub_lines(cub3d, argv);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-		quit("nError: Opening .cub file.", cub3d, 4);
+		quit("Error:\n Opening .cub file.", cub3d, 4);
 	cub3d->cub = (char **)malloc(sizeof(char *) * (cub3d->cub_total_lines + 1));
 	if (!cub3d->cub)
-		quit("nError: Malloc error.", cub3d, 5);
+		quit("Error:\n Malloc error.", cub3d, 5);
 	lines = 0;
 	content_line = ft_get_next_line(fd);
 	while (content_line)
@@ -75,7 +75,7 @@ void	is_surrounded_1(t_cub3d *cub3d, int line, int col)
 				&& j < (int)ft_strlen(cub3d->map[i]))
 				if (cub3d->map[i][j] != '1')
 					if (cub3d->map[i][j] != ' ')
-						quit("nError: Invalid map.", cub3d, 24);
+						quit("Error:\n Invalid map.", cub3d, 24);
 			j++;
 		}
 		i++;
@@ -107,7 +107,7 @@ void	is_new_line(t_cub3d *cub3d, int line, int col)
 				{
 					if (cub3d->map[i][j] != ' ')
 					{
-						quit("Error: Invalid map.", cub3d, 26);
+						quit("Error:\n Invalid map.", cub3d, 38);
 					}
 				}
 			}
@@ -138,7 +138,7 @@ void	get_colors(t_cub3d *cub3d, char *cl, int i, int flag)
 	{
 		if ((flag == 5 || flag == 6) && atoi_cub3d(cub3d, temp_array[j]) < 0)
 			return (free_matrix(temp_array), free(temp), \
-					quit("nError: Formato de cor inválido.", cub3d, 30));
+					quit("Error:\n Formato de cor inválido.", cub3d, 30));
 		else if (flag == 6)
 			cub3d->textures.ceiling_color[j] = atoi_cub3d(cub3d, temp_array[j]);
 		else if (flag == 5)
@@ -147,7 +147,7 @@ void	get_colors(t_cub3d *cub3d, char *cl, int i, int flag)
 	free_matrix(temp_array);
 	free(temp);
 	if (j != 3)
-		quit("nError: Formato de cor inválido (RGB).", cub3d, 31);
+		quit("Error:\n Formato de cor inválido (RGB).", cub3d, 31);
 	if (flag == 5)
 		cub3d->textures.floor++;
 	if (flag == 6)

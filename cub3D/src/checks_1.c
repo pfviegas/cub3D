@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 11:39:07 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:57:47 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	map_validations(t_cub3d *cub3d)
 {
 	check_map(cub3d);
 	if (cub3d->map_total_lines <= 2)
-		quit("nError: Invalid number of lines.", cub3d, 27);
+		quit("Error:\n Invalid number of lines.", cub3d, 27);
 	check_map_closed(cub3d);
 	check_map_surrounded_start(cub3d);
 	check_map_surrounded_end(cub3d);
@@ -42,9 +42,9 @@ void	map_validations(t_cub3d *cub3d)
 void	check_args(t_cub3d *cub3d, int argc, char **argv)
 {
 	if (argc != 2)
-		quit("nError: Número inválido de argumentos.\n", cub3d, 1);
+		quit("Error:\n Número inválido de argumentos.\n", cub3d, 1);
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4))
-		quit("nError: O arquivo deve ser do tipo .cub\n", cub3d, 2);
+		quit("Error:\n O arquivo deve ser do tipo .cub\n", cub3d, 2);
 }
 
 /**
@@ -85,7 +85,7 @@ void	check_elements(t_cub3d *cub3d, char *str, int i)
 	else if (str[i] == 'C')
 		get_colors(cub3d, str, i + 1, 6);
 	else if (str[i] != '\0')
-		quit("nError: Linha de elemento inválida.", cub3d, 29);
+		quit("Error:\n Linha de elemento inválida.", cub3d, 29);
 }
 
 /**
@@ -96,15 +96,15 @@ void	check_elements(t_cub3d *cub3d, char *str, int i)
 void	check_number_elem(t_cub3d *cub3d)
 {
 	if (cub3d->textures.north != 1)
-		quit("nError: Linha de elemento inválida.", cub3d, 9);
+		quit("Error:\n Linha de elemento inválida.", cub3d, 9);
 	if (cub3d->textures.south != 1)
-		quit("nError: Linha de elemento inválida.", cub3d, 10);
+		quit("Error:\n Linha de elemento inválida.", cub3d, 10);
 	if (cub3d->textures.west != 1)
-		quit("nError: Linha de elemento inválida.", cub3d, 11);
+		quit("Error:\n Linha de elemento inválida.", cub3d, 11);
 	if (cub3d->textures.east != 1)
-		quit("nError: Linha de elemento inválida.", cub3d, 12);
+		quit("Error:\n Linha de elemento inválida.", cub3d, 12);
 	if (cub3d->textures.floor != 1)
-		quit("nError: Linha de elemento inválida.", cub3d, 13);
+		quit("Error:\n Linha de elemento inválida.", cub3d, 13);
 	if (cub3d->textures.ceiling != 1)
-		quit("nError: Linha de elemento inválida.", cub3d, 14);
+		quit("Error:\n Linha de elemento inválida.", cub3d, 14);
 }

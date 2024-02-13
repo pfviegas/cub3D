@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:34:06 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/09 11:23:53 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:57:47 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	get_elements_info(t_cub3d *cub3d)
 	if (is_start_map(cub3d->cub[line]) == 1)
 		cub3d->start_map = line;
 	if (line == 0)
-		quit("nError: file empty.", cub3d, 7);
+		quit("Error:\n file empty.", cub3d, 7);
 	else if (cub3d->start_map == 0)
-		quit("nError: Invalid map start.", cub3d, 8);
+		quit("Error:\n Invalid map start.", cub3d, 8);
 }
 
 /**
@@ -62,7 +62,7 @@ void	get_map(t_cub3d *cub3d)
 	cub3d->map_total_lines = i;
 	cub3d->map = (char **)malloc(sizeof(char *) * (cub3d->map_total_lines + 2));
 	if (!cub3d->map)
-		quit("nError: Malloc error.", cub3d, 22);
+		quit("Error:\n Malloc error.", cub3d, 22);
 	i = 0;
 	start_line = cub3d->start_map;
 	while (i < cub3d->map_total_lines)

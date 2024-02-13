@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks_3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 10:58:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 10:58:14 by correia          ###   ########.fr       */
+/*   Updated: 2024/02/13 17:57:47 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	check_map_closed(t_cub3d *cub3d)
 		while (cub3d->map[i][j] && cub3d->map[i][j] == ' ')
 			j++;
 		if (cub3d->map[i][j] != '1')
-			quit("nError: Invalid map line start.", cub3d, 32);
+			quit("Error:\n Invalid map line start.", cub3d, 32);
 		i++;
 	}
 	i = 0;
@@ -43,7 +43,7 @@ void	check_map_closed(t_cub3d *cub3d)
 		while (j > 0 && cub3d->map[i][j] == ' ')
 			j--;
 		if (cub3d->map[i][j] != '1')
-			quit("nError: Invalid map line end.", cub3d, 33);
+			quit("Error:\n Invalid map line end.", cub3d, 33);
 		i++;
 	}
 }
@@ -70,10 +70,10 @@ void	check_nl_middle_map(t_cub3d *cub3d)
 	}
 	if (flag == 2)
 	{
-		quit("nError: Mapa inválido.", cub3d, 19);
+		quit("Error:\n Mapa inválido.", cub3d, 19);
 	}
 	if (lines == cub3d->start_map)
-		quit("nError: O mapa está vazio.", cub3d, 20);
+		quit("Error:\n O mapa está vazio.", cub3d, 20);
 	else if (lines == cub3d->start_map + 1)
-		quit("nError: Mapa inválido.", cub3d, 21);
+		quit("Error:\n Mapa inválido.", cub3d, 21);
 }

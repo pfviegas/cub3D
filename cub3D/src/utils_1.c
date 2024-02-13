@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 11:19:21 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:57:47 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	get_cub_lines(t_cub3d *cub3d, char **argv)
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-		quit("nError: Opening .cub file.", cub3d, 3);
+		quit("Error:\n Opening .cub file.", cub3d, 3);
 	lines = 0;
 	content_line = ft_get_next_line(fd);
 	while (content_line)
