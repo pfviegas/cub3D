@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+         #
+#    By: paulo <paulo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 12:00:51 by pviegas           #+#    #+#              #
-#    Updated: 2024/02/09 15:43:35 by pviegas          ###   ########.fr        #
+#    Updated: 2024/02/13 17:38:11 by paulo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,17 +56,17 @@ bonus: $(NAME_BONUS)
 
 ${NAME}: $(OBJS)
 	@$(MAKE) --no-print-directory -C $(MINILIBX_PATH)
-	@echo "\n$(GREEN) [Success] Minilibix compilated.$(RESET)\n\n"
+	@echo "\n$(GREEN) [Success] Minilibix compiled.$(RESET)\n\n"
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
-	@echo "\n$(GREEN) [Success] Libft compilated.$(RESET)\n\n"
+	@echo "\n$(GREEN) [Success] Libft compiled.$(RESET)\n\n"
 	$(CC) $(FLAGS) $(SRCS) $(MLXFLAGS) $(LIBFT) -o $(NAME)
 	@echo "\n$(GREEN) [Success] ./cub3D created.$(RESET)\n\n"
 
 ${NAME_BONUS}: $(OBJS_BONUS)
 	@$(MAKE) --no-print-directory -C $(MINILIBX_PATH)
-	@echo "\n$(GREEN) [Success] Minilibix compilated.$(RESET)\n\n"
+	@echo "\n$(GREEN) [Success] Minilibix compiled.$(RESET)\n\n"
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
-	@echo "\n$(GREEN) [Success] Libft compilated.$(RESET)\n\n"
+	@echo "\n$(GREEN) [Success] Libft compiled.$(RESET)\n\n"
 	$(CC) $(FLAGS) -lm $(SRCS_BONUS) $(MLXFLAGS) $(LIBFT) -o $(NAME_BONUS)
 	@echo "\n$(GREEN) [Success] ./cub3D_bonus created.$(RESET)\n\n"
 
@@ -75,12 +75,17 @@ clean:
 	@echo "$(RED) [Deleting] .o files ... (deleted)$(RESET)"
 	@cd $(LIBFT_DIR) && $(MAKE) --no-print-directory clean
 
+clean_bonus:
+	@rm -rf $(OBJS_BONUS)
+	@echo "$(RED) [Deleting] .o files ... (deleted)$(RESET)"
+	@cd $(LIBFT_DIR) && $(MAKE) --no-print-directory clean
+
 fclean: clean
 	@rm -rf $(NAME) $(OBJS)
 	@echo "$(RED) [Deleting] .a files ... (deleted)$(RESET)"
 	@cd $(LIBFT_DIR) && $(MAKE) --no-print-directory fclean
 
-fclean_bonus: clean
+fclean_bonus: clean_bonus
 	@rm -rf $(NAME_BONUS) $(OBJS_BONUS)
 	@echo "$(RED) [Deleting] .a files ... (deleted)$(RESET)"
 	@cd $(LIBFT_DIR) && $(MAKE) --no-print-directory fclean
@@ -103,4 +108,4 @@ norm:
 	
 re: fclean all
 
-.PHONY: all clean fclean re bonus # fclean_bonus
+.PHONY: all clean fclean re bonus fclean_bonus

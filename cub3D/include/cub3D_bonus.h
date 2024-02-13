@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 15:42:33 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/13 17:39:23 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include <math.h>
 # include <stdbool.h>
@@ -32,18 +32,19 @@
 # define M 109
 
 // Window info
-# define SCREEN_NAME "cub3D_bonus"
+# define SCREEN_NAME "cub3D"
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
 # define REFRESH_RATE 120
 
 // mini map
-//# define IMAGE_WIDTH 16
 # define MINIMAP_SCALE 8
+# define MINIMAP_WIDTH 240
+# define MINIMAP_HEIGHT 120
 
 // textures
-# define TEXTURE_WIDTH 960
-# define TEXTURE_HEIGHT 960
+# define TEXTURE_WIDTH 320
+# define TEXTURE_HEIGHT 320
 
 // player info
 
@@ -239,7 +240,8 @@ void				get_map(t_cub3d *cub3d);
 
 /* mini map */
 void				render_mini_map(t_cub3d *cub3d);
-void				draw_mini_map(t_cub3d *cub3d, int *i, int *j);
+void				draw_mini_map(t_cub3d *cub3d, int *line, int *col,
+						int *mini_map_line, int *mini_map_col);
 
 /* movementes  1*/
 void				move_front(t_cub3d *cub3d);

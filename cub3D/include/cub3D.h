@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/12 16:11:53 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/13 13:46:15 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@
 # define REFRESH_RATE 120
 
 // mini map
-//# define IMAGE_WIDTH 16
 # define MINIMAP_SCALE 8
 # define MINIMAP_WIDTH 240
 # define MINIMAP_HEIGHT 120
@@ -241,7 +240,8 @@ void				get_map(t_cub3d *cub3d);
 
 /* mini map */
 void				render_mini_map(t_cub3d *cub3d);
-void 				draw_mini_map(t_cub3d *cub3d, int *line, int *col, int *mini_map_line, int *mini_map_col);
+void				draw_mini_map(t_cub3d *cub3d, int *line, int *col,
+						int *mini_map_line, int *mini_map_col);
 
 /* movementes  1*/
 void				move_front(t_cub3d *cub3d);
