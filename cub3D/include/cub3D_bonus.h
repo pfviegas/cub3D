@@ -6,7 +6,7 @@
 /*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/13 17:39:23 by paulo            ###   ########.fr       */
+/*   Updated: 2024/02/14 13:17:24 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@
 # define BAR_LENGTH 7
 # define MY_PI 3.14159265358979323846
 # define MY_PI_2 1.570796327
+
+typedef struct s_mini_map
+{
+	int				map_line;
+	int				map_col;
+	int				mini_map_line;
+	int				mini_map_col;
+}					t_mini_map;
 
 typedef struct s_bar
 {
@@ -216,6 +224,8 @@ void				draw_scene(t_cub3d *cub3d, int pixel_w);
 /* draw 2*/
 void				my_pixel_put(t_image_data *img, int x, int y, int color);
 void				draw_wall(t_cub3d *cub3d, int pixel_w, int pixel_h);
+void				draw_mini_map(t_cub3d *cub3d, t_mini_map *mini_map);
+void				draw_mini_map_border(t_cub3d *cub3d);
 
 /* exit  */
 void				quit(char *s, t_cub3d *cub3d, int exit_code);
@@ -240,8 +250,6 @@ void				get_map(t_cub3d *cub3d);
 
 /* mini map */
 void				render_mini_map(t_cub3d *cub3d);
-void				draw_mini_map(t_cub3d *cub3d, int *line, int *col,
-						int *mini_map_line, int *mini_map_col);
 
 /* movementes  1*/
 void				move_front(t_cub3d *cub3d);
