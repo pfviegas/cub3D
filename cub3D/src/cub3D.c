@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 12:06:05 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/14 16:07:27 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@
 void	start_cub3d(t_cub3d *cub3d)
 {
 	cub3d->mlx = mlx_init();
+	if (!cub3d->mlx)
+		quit("Error:\n mlx_init error.", cub3d, 38);
 	cub3d->win = mlx_new_window(cub3d->mlx, SCREEN_WIDTH, SCREEN_HEIGHT,
 			SCREEN_NAME);
+	if (!cub3d->win)
+		quit("Error:\n mlx_new_window error.", cub3d, 39);
 	cub3d->map_view.img = mlx_new_image(cub3d->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
 	cub3d->map_view.addr = mlx_get_data_addr(cub3d->map_view.img,

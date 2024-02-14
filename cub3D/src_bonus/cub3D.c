@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 15:44:24 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/14 16:20:52 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@
 void	start_cub3d(t_cub3d *cub3d)
 {
 	cub3d->mlx = mlx_init();
+	if (!cub3d->mlx)
+		quit("Error:\n mlx_init error.", cub3d, 38);
 	cub3d->win = mlx_new_window(cub3d->mlx, SCREEN_WIDTH, SCREEN_HEIGHT,
 			SCREEN_NAME);
+	if (!cub3d->win)
+		quit("Error:\n mlx_new_window error.", cub3d, 39);
 	cub3d->map_view.img = mlx_new_image(cub3d->mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT);
 	cub3d->map_view.addr = mlx_get_data_addr(cub3d->map_view.img,
@@ -35,6 +39,7 @@ void	start_cub3d(t_cub3d *cub3d)
 	load_textures(cub3d, &cub3d->south_view, cub3d->textures.south_path);
 	load_textures(cub3d, &cub3d->west_view, cub3d->textures.west_path);
 	load_textures(cub3d, &cub3d->east_view, cub3d->textures.east_path);
+	mlx_hook(cub3d->win, 06, 1L << 6, move_mouse, cub3d);
 	mlx_hook(cub3d->win, 02, 1L << 0, key_press, cub3d);
 	mlx_hook(cub3d->win, 03, 1L << 1, key_release, cub3d);
 	mlx_hook(cub3d->win, 17, 1L << 17, exit_cub3d, cub3d);

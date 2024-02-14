@@ -6,7 +6,7 @@
 /*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/14 13:17:24 by paulo            ###   ########.fr       */
+/*   Updated: 2024/02/14 16:36:39 by paulo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include "../minilibx/mlx.h"
 
 // keycodes
-
 # define W 119
 # define A 97
 # define S 115
@@ -30,6 +29,8 @@
 # define ARROW_RIGHT 65363
 # define ARROW_DOWN 65364
 # define M 109
+
+# define MOUSE_SENSITIVITY 0.05
 
 // Window info
 # define SCREEN_NAME "cub3D"
@@ -47,7 +48,6 @@
 # define TEXTURE_HEIGHT 320
 
 // player info
-
 # define MOVE_SPEED 3
 # define BAR_LENGTH 7
 # define MY_PI 3.14159265358979323846
@@ -295,4 +295,6 @@ unsigned int		get_pixel_color(t_image_data *img, int x, int y);
 int					get_argb(int t, int r, int g, int b);
 void				get_tex_data(t_cub3d *cub3d);
 
+/* mouse */
+int					move_mouse(int x, int y, t_cub3d *cub3d);
 #endif
