@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/13 17:57:47 by paulo            ###   ########.fr       */
+/*   Updated: 2024/02/15 11:05:34 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	check_textures(t_cub3d *cub3d)
 {
 	get_elements_info(cub3d);
 	check_number_elem(cub3d);
+	check_textures_sprites(cub3d);
 	check_textures_images(cub3d);
 }
 
@@ -108,3 +109,6 @@ void	check_number_elem(t_cub3d *cub3d)
 	if (cub3d->textures.ceiling != 1)
 		quit("Error:\n Linha de elemento inválida.", cub3d, 14);
 }
+
+
+

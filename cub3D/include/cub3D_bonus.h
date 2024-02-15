@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/14 16:36:39 by paulo            ###   ########.fr       */
+/*   Updated: 2024/02/15 11:58:50 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdbool.h>
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
+# include <sys/time.h>
 
 // keycodes
 # define W 119
@@ -46,6 +47,8 @@
 // textures
 # define TEXTURE_WIDTH 320
 # define TEXTURE_HEIGHT 320
+# define TEXTURE_ENEMY_WIDTH 800
+# define TEXTURE_ENEMY_HEIGHT 80
 
 // player info
 # define MOVE_SPEED 3
@@ -96,6 +99,8 @@ typedef struct s_textures
 	int				floor_color[3];
 	int				ceiling;
 	int				ceiling_color[3];
+	int				enemy;
+	char			*enemy_path;
 }					t_textures;
 
 typedef struct s_image_data
@@ -166,6 +171,27 @@ typedef struct s_player_info
 	t_position		position;
 }					t_player_info;
 
+typedef struct s_animation
+{
+	struct timeval		old_time;
+	struct timeval		new_time;
+	struct s_image_data	img;
+	int					frame;
+	int					max;
+	int					size;
+}						t_animation;
+
+typedef struct s_object
+{
+	int					hp;
+	double				x;
+	double				y;
+	double				printx;
+	double				printy;
+	t_ray				ray;
+	struct s_animation	animation;
+}						t_object;
+
 typedef struct s_cub3d
 {
 	void			*mlx;
@@ -178,6 +204,7 @@ typedef struct s_cub3d
 	t_image_data	west_view;
 	t_image_data	east_view;
 	t_image_data	map_view;
+	t_object		enemy;
 	t_draw			draw;
 	t_tex			tex;
 	char			**cub;
@@ -297,4 +324,14 @@ void				get_tex_data(t_cub3d *cub3d);
 
 /* mouse */
 int					move_mouse(int x, int y, t_cub3d *cub3d);
+
+/*animation*/
+
+void	check_textures_sprites(t_cub3d *cub3d);
+void	enemy_validation(t_cub3d *cub3d, int line, int col);
+void	load_sprite(t_cub3d *cub3d, t_object *enemy, char *path);
+int	init_sprite(t_cub3d *cub3d);
+int	update_enemy_animation(t_cub3d *cub3d);
+void	do_enemy_thing(t_cub3d *cub3d, int *i);
+
 #endif

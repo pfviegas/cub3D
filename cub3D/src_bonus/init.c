@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:53:47 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 15:44:24 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/15 10:59:23 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ void	init_textures(t_cub3d *cub3d)
 	cub3d->textures.west = 0;
 	cub3d->textures.floor = 0;
 	cub3d->textures.ceiling = 0;
+	cub3d->textures.enemy = 0;
 	cub3d->textures.north_path = NULL;
 	cub3d->textures.south_path = NULL;
 	cub3d->textures.west_path = NULL;
 	cub3d->textures.east_path = NULL;
+	cub3d->textures.enemy_path = NULL;
 }
 
 /**

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_hook.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:40:40 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 15:44:24 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/15 11:56:23 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	loop_hook(t_cub3d *cub3d)
 	frames++;
 	if (!(frames % (10000 / REFRESH_RATE)))
 	{
+		update_enemy_animation(cub3d);
 		render_3d_view(cub3d);
 		if (cub3d->mini_map_visible == true)
 			render_mini_map(cub3d);

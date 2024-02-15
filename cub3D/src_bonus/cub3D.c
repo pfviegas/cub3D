@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:11:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/14 16:20:52 by paulo            ###   ########.fr       */
+/*   Updated: 2024/02/15 11:38:58 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	start_cub3d(t_cub3d *cub3d)
 	load_textures(cub3d, &cub3d->south_view, cub3d->textures.south_path);
 	load_textures(cub3d, &cub3d->west_view, cub3d->textures.west_path);
 	load_textures(cub3d, &cub3d->east_view, cub3d->textures.east_path);
+	load_sprite(cub3d, &cub3d->enemy, cub3d->textures.enemy_path);
+	init_sprite(cub3d);
 	mlx_hook(cub3d->win, 06, 1L << 6, move_mouse, cub3d);
 	mlx_hook(cub3d->win, 02, 1L << 0, key_press, cub3d);
 	mlx_hook(cub3d->win, 03, 1L << 1, key_release, cub3d);
