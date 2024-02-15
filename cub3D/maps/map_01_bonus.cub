@@ -1,7 +1,7 @@
-NO ./images/wall1_960.xpm
-SO ./images/wall2_960.xpm
-WE ./images/wall3_960.xpm
-EA ./images/wall4_960.xpm
+NO ./images/wall1_320.xpm
+SO ./images/wall2_320.xpm
+WE ./images/wall3_320.xpm
+EA ./images/wall4_320.xpm
 
 
 F 200,200,200
