@@ -6,7 +6,7 @@
 /*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/15 15:06:48 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/15 17:10:05 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@
 // textures
 # define TEXTURE_WIDTH 320
 # define TEXTURE_HEIGHT 320
-# define TEXTURE_ENEMY_WIDTH 356
-# define TEXTURE_ENEMY_HEIGHT 89
+# define ENEMY_WIDTH 800
+# define ENEMY_HEIGHT 80
 
 // player info
 # define MOVE_SPEED 3
@@ -283,7 +283,7 @@ void				move_front(t_cub3d *cub3d);
 void				move_back(t_cub3d *cub3d);
 void				move_right(t_cub3d *cub3d);
 void				move_left(t_cub3d *cub3d);
-void				update_possition_player(t_cub3d *cub3d);
+void				update_position_player(t_cub3d *cub3d);
 
 /* movementes  2*/
 void				update_look(t_cub3d *cub3d);
@@ -329,7 +329,7 @@ int					move_mouse(int x, int y, t_cub3d *cub3d);
 void				check_textures_sprites(t_cub3d *cub3d);
 void				enemy_validation(t_cub3d *cub3d, int line, int col);
 void				load_sprite(t_cub3d *cub3d, t_object *enemy, char *path);
-int					init_sprite(t_cub3d *cub3d);
+void				init_sprite(t_cub3d *cub3d);
 int					update_enemy_animation(t_cub3d *cub3d);
 void				do_enemy_thing(t_cub3d *cub3d, int *i);
 

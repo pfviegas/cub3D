@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/14 12:45:24 by paulo            ###   ########.fr       */
+/*   Updated: 2024/02/15 17:10:05 by pviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,7 +256,7 @@ void				move_front(t_cub3d *cub3d);
 void				move_back(t_cub3d *cub3d);
 void				move_right(t_cub3d *cub3d);
 void				move_left(t_cub3d *cub3d);
-void				update_possition_player(t_cub3d *cub3d);
+void				update_position_player(t_cub3d *cub3d);
 
 /* movementes  2*/
 void				update_look(t_cub3d *cub3d);
