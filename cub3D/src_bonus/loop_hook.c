@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_hook.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:40:40 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/15 17:10:07 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/16 11:02:55 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	loop_hook(t_cub3d *cub3d)
 {
 	t_position	old_position;
 
-	update_enemy_animation(cub3d);
+	//update_enemy_animation(cub3d);
+	printf("enemy path: %s\n", cub3d->textures.enemy_path);
 	render_3d_view(cub3d);
 	if (cub3d->mini_map_visible == true)
 		render_mini_map(cub3d);
@@ -32,6 +33,7 @@ int	loop_hook(t_cub3d *cub3d)
 		cub3d->map_view.img, 0, 0);
 	old_position = cub3d->player.position;
 	update_position_player(cub3d);
+	read_frame(cub3d);
 	if (check_colision(cub3d, cub3d->player.hitbox))
 	{
 		cub3d->player.position = find_new_position(cub3d->player.position,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/15 17:10:05 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/16 10:43:34 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_image_data
 	int				endian;
 	int				bits_per_pixel;
 	int				line_length;
+	int 			frame;
 }					t_image_data;
 
 typedef struct s_position
@@ -186,9 +187,6 @@ typedef struct s_object
 	int					hp;
 	double				x;
 	double				y;
-	double				printx;
-	double				printy;
-	t_ray				ray;
 	struct s_animation	animation;
 }						t_object;
 
@@ -204,7 +202,8 @@ typedef struct s_cub3d
 	t_image_data	west_view;
 	t_image_data	east_view;
 	t_image_data	map_view;
-	t_object		enemy;
+	//t_object		enemy;
+	t_image_data		enemy;
 	t_draw			draw;
 	t_tex			tex;
 	char			**cub;
@@ -328,9 +327,10 @@ int					move_mouse(int x, int y, t_cub3d *cub3d);
 /*animation*/
 void				check_textures_sprites(t_cub3d *cub3d);
 void				enemy_validation(t_cub3d *cub3d, int line, int col);
-void				load_sprite(t_cub3d *cub3d, t_object *enemy, char *path);
+void				load_sprite(t_cub3d *cub3d, t_image_data *enemy, char *path);
 void				init_sprite(t_cub3d *cub3d);
 int					update_enemy_animation(t_cub3d *cub3d);
 void				do_enemy_thing(t_cub3d *cub3d, int *i);
+void	read_frame(t_cub3d *cub3d);
 
 #endif

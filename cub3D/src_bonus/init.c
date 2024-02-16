@@ -6,7 +6,7 @@
 /*   By: correia <correia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:53:47 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/15 10:59:23 by correia          ###   ########.fr       */
+/*   Updated: 2024/02/16 10:47:02 by correia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	init_var(t_cub3d *cub3d)
 	cub3d->player.move.d = 0;
 	cub3d->player.move.left = 0;
 	cub3d->player.move.right = 0;
+	cub3d->enemy.frame = 1;
 	init_textures(cub3d);
 	init_ray(cub3d);
 }
