@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 10:58:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/15 15:13:00 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/19 17:32:43 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,18 @@ void	check_textures_images(t_cub3d *cub3d)
 }
 
 /**
- * Verifica se o mapa está fechado por paredes. Caso o mapa não esteja 
- * fechado corretamente, a função exibe uma mensagem de erro correspondente 
- * e encerra o programa.
- *
- * @param cub3d O ponteiro para a estrutura `t_cub3d`.
+ * Verifica o mapa do jogo.
+ * 
+ * Esta função percorre o mapa linha por linha e verifica se os caracteres são válidos.
+ * Também verifica se há apenas um jogador no mapa.
+ * 
+ * @param cub3d O ponteiro para a estrutura do jogo.
  */
-void	check_map(t_cub3d *cub3d)
+
+void check_map(t_cub3d *cub3d)
 {
-	int	line;
-	int	col;
+	int line;
+	int col;
 
 	line = 0;
 	while (cub3d->map[line] != NULL)
@@ -69,9 +71,9 @@ void	check_map(t_cub3d *cub3d)
 		line++;
 	}
 	if (cub3d->player_number == 0)
-		quit("Error:\n There's no player.", cub3d, 25);
+		quit("Error:\n There is no player.", cub3d, 25);
 	else if (cub3d->player_number > 1)
-		quit("Error:\n Just one player per map.", cub3d, 26);
+		quit("Error:\n Only one player per map.", cub3d, 26);
 }
 
 /**

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks_3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 10:58:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/13 17:57:47 by paulo            ###   ########.fr       */
+/*   Updated: 2024/02/19 17:33:22 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ void	check_nl_middle_map(t_cub3d *cub3d)
 	}
 	if (flag == 2)
 	{
-		quit("Error:\n Mapa inválido.", cub3d, 19);
+		quit("Error:\n Invalid map.", cub3d, 19);
 	}
 	if (lines == cub3d->start_map)
-		quit("Error:\n O mapa está vazio.", cub3d, 20);
+		quit("Error:\n The map is empty.", cub3d, 20);
 	else if (lines == cub3d->start_map + 1)
-		quit("Error:\n Mapa inválido.", cub3d, 21);
+		quit("Error:\n Invalid map.", cub3d, 21);
 }

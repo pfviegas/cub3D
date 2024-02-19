@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/13 17:57:47 by paulo            ###   ########.fr       */
+/*   Updated: 2024/02/19 17:32:12 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	map_validations(t_cub3d *cub3d)
 void	check_args(t_cub3d *cub3d, int argc, char **argv)
 {
 	if (argc != 2)
-		quit("Error:\n Número inválido de argumentos.\n", cub3d, 1);
+		quit("Error:\n Invalid number of arguments.\n", cub3d, 1);
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4))
-		quit("Error:\n O arquivo deve ser do tipo .cub\n", cub3d, 2);
+		quit("Error:\n The file must be of type .cub\n", cub3d, 2);
 }
 
 /**
@@ -59,8 +59,11 @@ void	check_args(t_cub3d *cub3d, int argc, char **argv)
 void	check_textures(t_cub3d *cub3d)
 {
 	get_elements_info(cub3d);
-	check_number_elem(cub3d);
 	check_textures_images(cub3d);
+	if (cub3d->textures.floor != 1)
+		quit("Error:\n Floor color invalid.", cub3d, 13);
+	if (cub3d->textures.ceiling != 1)
+		quit("Error:\n Ceiling color invalid.", cub3d, 14);
 }
 
 /**
@@ -81,11 +84,17 @@ void	check_elements(t_cub3d *cub3d, char *str, int i)
 	else if (str[i] == 'E' && str[i + 1] == 'A')
 		get_textures_path(cub3d, str, i + 2, 4);
 	else if (str[i] == 'F')
+	{
+		check_number_elem(cub3d, 5);
 		get_colors(cub3d, str, i + 1, 5);
+	}
 	else if (str[i] == 'C')
+	{
+		check_number_elem(cub3d, 6);
 		get_colors(cub3d, str, i + 1, 6);
+	}
 	else if (str[i] != '\0')
-		quit("Error:\n Linha de elemento inválida.", cub3d, 29);
+		quit("Error:\n Invalid element.", cub3d, 29);
 }
 
 /**
@@ -93,18 +102,15 @@ void	check_elements(t_cub3d *cub3d, char *str, int i)
  * 
  * @param cub3d O ponteiro para a estrutura de dados 'cub3d'.
  */
-void	check_number_elem(t_cub3d *cub3d)
+void	check_number_elem(t_cub3d *cub3d, int flag)
 {
-	if (cub3d->textures.north != 1)
-		quit("Error:\n Linha de elemento inválida.", cub3d, 9);
-	if (cub3d->textures.south != 1)
-		quit("Error:\n Linha de elemento inválida.", cub3d, 10);
-	if (cub3d->textures.west != 1)
-		quit("Error:\n Linha de elemento inválida.", cub3d, 11);
-	if (cub3d->textures.east != 1)
-		quit("Error:\n Linha de elemento inválida.", cub3d, 12);
-	if (cub3d->textures.floor != 1)
-		quit("Error:\n Linha de elemento inválida.", cub3d, 13);
-	if (cub3d->textures.ceiling != 1)
-		quit("Error:\n Linha de elemento inválida.", cub3d, 14);
+	if (cub3d->textures.north > 0 && flag == 1)
+		quit("Error:\n Invalid north texture.", cub3d, 9);
+	if (cub3d->textures.south  > 0 && flag == 2)
+		quit("Error:\n Invalid south texture.", cub3d, 10);
+	if (cub3d->textures.west  > 0 && flag == 3)
+		quit("Error:\n Invalid west texture.", cub3d, 11);
+	if (cub3d->textures.east  > 0 && flag == 4)
+		quit("Error:\n Invalid east texture.", cub3d, 12);
 }
+

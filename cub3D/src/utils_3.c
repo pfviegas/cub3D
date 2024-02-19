@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/09 12:46:43 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/19 15:10:55 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	get_argb(int t, int r, int g, int b)
  * A variável `cub3d->tex.step` é definida como a altura da textura 
  * (`TEXTURE_HEIGHT`) dividida pela altura da linha da parede 
  * (`cub3d->tex.wall_line_h`).
- * A expressão `(float)TEXTURE_HEIGHT / cub3d->tex.wall_line_h` calcula 
+ * A expressão `(double)TEXTURE_HEIGHT / cub3d->tex.wall_line_h` calcula 
  * o passo da textura. Isso é feito para determinar quantos pixels da 
  * textura devem ser desenhados para cada pixel da linha da parede.
  * Se a altura da textura for maior que a altura da linha da parede, 
@@ -68,7 +68,7 @@ int	get_argb(int t, int r, int g, int b)
 
 void	get_tex_data(t_cub3d *cub3d)
 {
-	float	wall_x;
+	double	wall_x;
 
 	cub3d->tex.tex_x = 0;
 	cub3d->tex.tex_y = 0;
@@ -84,5 +84,5 @@ void	get_tex_data(t_cub3d *cub3d)
 		cub3d->tex.tex_x = TEXTURE_WIDTH - cub3d->tex.tex_x - 1;
 	if (cub3d->ray.wall_side == 1 && cub3d->ray.ray_dir.y > 0)
 		cub3d->tex.tex_x = TEXTURE_WIDTH - cub3d->tex.tex_x - 1;
-	cub3d->tex.step = (float)TEXTURE_HEIGHT / cub3d->tex.wall_line_h;
+	cub3d->tex.step = (double)TEXTURE_HEIGHT / cub3d->tex.wall_line_h;
 }

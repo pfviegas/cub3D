@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:34:06 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/13 17:57:47 by paulo            ###   ########.fr       */
+/*   Updated: 2024/02/19 17:35:20 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	get_elements_info(t_cub3d *cub3d)
 	if (is_start_map(cub3d->cub[line]) == 1)
 		cub3d->start_map = line;
 	if (line == 0)
-		quit("Error:\n file empty.", cub3d, 7);
+		quit("Error:\n File empty.", cub3d, 7);
 	else if (cub3d->start_map == 0)
 		quit("Error:\n Invalid map start.", cub3d, 8);
 }

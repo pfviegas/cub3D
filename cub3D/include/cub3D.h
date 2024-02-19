@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/19 14:42:22 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:03:25 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 
 // Window info
 # define SCREEN_NAME "cub3D"
-# define SCREEN_WIDTH 1280
-# define SCREEN_HEIGHT 720
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 
 // mini map
 # define MINIMAP_SCALE 8
@@ -42,8 +42,8 @@
 # define MINIMAP_HEIGHT 120
 
 // textures
-# define TEXTURE_WIDTH 320
-# define TEXTURE_HEIGHT 320
+# define TEXTURE_WIDTH 64
+# define TEXTURE_HEIGHT 64
 
 // player info
 
@@ -74,8 +74,8 @@ typedef struct s_bar
 
 typedef struct s_tex
 {
-	float			wall_line_h;
-	float			step;
+	double			wall_line_h;
+	double			step;
 	long long int	tex_x;
 	long long int	tex_y;
 	int				color;
@@ -108,8 +108,8 @@ typedef struct s_image_data
 
 typedef struct s_position
 {
-	float			x;
-	float			y;
+	double			x;
+	double			y;
 }					t_position;
 
 typedef struct s_step
@@ -139,7 +139,7 @@ typedef struct s_ray
 	t_position		delta;
 	t_position		side_dist;
 	int				wall_side;
-	float			perp_wall_dist;
+	double			perp_wall_dist;
 }					t_ray;
 
 typedef struct s_move
@@ -157,7 +157,7 @@ typedef struct s_player_info
 	void			*img;
 	int				map_y;
 	int				map_x;
-	float			dirx;
+	double			dirx;
 	t_move			move;
 	t_hitbox		hitbox;
 	t_position		plane;
@@ -195,7 +195,7 @@ void				map_validations(t_cub3d *cub3d);
 void				check_args(t_cub3d *cub3d, int argc, char **argv);
 void				check_textures(t_cub3d *cub3d);
 void				check_elements(t_cub3d *cub3d, char *cl, int i);
-void				check_number_elem(t_cub3d *cub3d);
+void				check_number_elem(t_cub3d *cub3d, int flag);
 
 /* checks 2  */
 void				check_textures_images(t_cub3d *cub3d);
@@ -214,7 +214,7 @@ void				load_textures(t_cub3d *cub3d, t_image_data *wall,
 						char *path);
 
 /* draw 1*/
-void				draw_bar(t_cub3d *cub3d, int x, int y, float angle);
+void				draw_bar(t_cub3d *cub3d, int x, int y, double angle);
 void				draw_bar_2(t_cub3d *cub3d, t_bar draw, int x, int y);
 void				draw_player(t_cub3d *cub3d, int x, int y);
 void				draw_square(t_cub3d *cub3d, int x, int y, int color);
@@ -284,7 +284,6 @@ void				get_cub_lines(t_cub3d *cub3d, char **argv);
 /* utils 2*/
 void				copy_cub(t_cub3d *cub3d, char **argv);
 void				is_surrounded_1(t_cub3d *cub3d, int line, int col);
-void				is_new_line(t_cub3d *cub3d, int line, int col);
 void				get_colors(t_cub3d *cub3d, char *cl, int i, int flag);
 void				get_textures_path(t_cub3d *cub3d, char *cl, int i,
 						int flag);
@@ -296,5 +295,7 @@ void				get_tex_data(t_cub3d *cub3d);
 
 /* mouse */
 int					move_mouse(int x, int y, t_cub3d *cub3d);
+void				look_left_mouse(t_cub3d *cub3d);
+void				look_right_mouse(t_cub3d *cub3d);
 
 #endif

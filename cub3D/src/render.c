@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:37:40 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/12 12:42:15 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/19 15:10:55 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@
  */
 void	render_3d_view(t_cub3d *cub3d)
 {
-	float	camera_x;
+	double	camera_x;
 	int		pixel_w;
 
 	pixel_w = -1;
 	while (++pixel_w < SCREEN_WIDTH)
 	{
-		camera_x = 2 * pixel_w / (float)(SCREEN_WIDTH) - 1;
+		camera_x = 2 * pixel_w / (double)(SCREEN_WIDTH) - 1;
 		cub3d->ray.ray_dir.x = cub3d->player.view_dir.x
 			+ cub3d->player.plane.x * camera_x;
 		cub3d->ray.ray_dir.y = cub3d->player.view_dir.y

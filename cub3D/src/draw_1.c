@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:33:22 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/09 11:30:02 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:10:55 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @param y A coordenada y do ponto de origem da barra.
  * @param angle O ângulo em radianos para a direção da barra.
  */
-void	draw_bar(t_cub3d *cub3d, int x, int y, float angle)
+void	draw_bar(t_cub3d *cub3d, int x, int y, double angle)
 {
 	t_bar	draw;
 

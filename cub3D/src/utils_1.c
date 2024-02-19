@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paulo <paulo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/13 17:57:47 by paulo            ###   ########.fr       */
+/*   Updated: 2024/02/19 17:01:10 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ int	is_start_map(char *line)
 		return (0);
 	else
 	{
-		while (line[i] && (line[i] == '1' || line[i] == '0'
-				|| line[i] == ' ' || line[i] == '\t'))
+		while (line[i] && (line[i] == '1'|| line[i] == ' '))
 			i++;
 		if (line[i] == '\0')
 			return (1);
