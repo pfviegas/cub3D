@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/15 17:10:05 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/19 14:42:22 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@
 # define SCREEN_NAME "cub3D"
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
-# define REFRESH_RATE 120
 
 // mini map
 # define MINIMAP_SCALE 8
@@ -294,5 +293,8 @@ void				get_textures_path(t_cub3d *cub3d, char *cl, int i,
 unsigned int		get_pixel_color(t_image_data *img, int x, int y);
 int					get_argb(int t, int r, int g, int b);
 void				get_tex_data(t_cub3d *cub3d);
+
+/* mouse */
+int					move_mouse(int x, int y, t_cub3d *cub3d);
 
 #endif
