@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/20 11:37:07 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:28:37 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 void	map_validations(t_cub3d *cub3d)
 {
 	check_map_char(cub3d);
-	check_last_line_map(cub3d);
-	check_map_closed(cub3d);
+	check_first_last_char(cub3d);
 	check_map_surrounded_start(cub3d);
 	check_map_surrounded_end(cub3d);
+	check_last_line_map(cub3d);
 }
 
 /**

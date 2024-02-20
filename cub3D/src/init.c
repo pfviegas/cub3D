@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:53:47 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/08 11:06:41 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/20 12:24:04 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	init_var(t_cub3d *cub3d)
 	cub3d->map = NULL;
 	cub3d->map_total_lines = 0;
 	cub3d->start_map = 0;
-	cub3d->map_max_column = 0;
 	cub3d->mini_map_visible = false;
 	cub3d->player.position.x = 0;
 	cub3d->player.position.y = 0;

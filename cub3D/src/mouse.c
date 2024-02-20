@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:10:51 by paulo             #+#    #+#             */
-/*   Updated: 2024/02/19 14:50:37 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:52:40 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	move_mouse(int x, int y, t_cub3d *cub3d)
 
 void	look_left_mouse(t_cub3d *cub3d)
 {
-	cub3d->player.dirx -= MOVE_SPEED * 0.006;
+	cub3d->player.dirx -= MOVE_DISTANCE * 0.006;
 	if (cub3d->player.dirx >= 2 * MY_PI)
 		cub3d->player.dirx -= 2 * MY_PI;
 	else if (cub3d->player.dirx <= 0)
@@ -53,7 +53,7 @@ void	look_left_mouse(t_cub3d *cub3d)
  */
 void	look_right_mouse(t_cub3d *cub3d)
 {
-	cub3d->player.dirx += MOVE_SPEED * 0.006;
+	cub3d->player.dirx += MOVE_DISTANCE * 0.006;
 	if (cub3d->player.dirx >= 2 * MY_PI)
 		cub3d->player.dirx -= 2 * MY_PI;
 	else if (cub3d->player.dirx <= 0)

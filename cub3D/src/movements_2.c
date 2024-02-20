@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:35:46 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/19 14:41:28 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:52:40 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	update_look(t_cub3d *cub3d)
  */
 void	look_left(t_cub3d *cub3d)
 {
-	cub3d->player.dirx -= MOVE_SPEED * 0.01;
+	cub3d->player.dirx -= MOVE_DISTANCE * 0.01;
 	if (cub3d->player.dirx >= 2 * MY_PI)
 		cub3d->player.dirx -= 2 * MY_PI;
 	else if (cub3d->player.dirx <= 0)
@@ -59,7 +59,7 @@ void	look_left(t_cub3d *cub3d)
  */
 void	look_right(t_cub3d *cub3d)
 {
-	cub3d->player.dirx += MOVE_SPEED * 0.01;
+	cub3d->player.dirx += MOVE_DISTANCE * 0.01;
 	if (cub3d->player.dirx >= 2 * MY_PI)
 		cub3d->player.dirx -= 2 * MY_PI;
 	else if (cub3d->player.dirx <= 0)

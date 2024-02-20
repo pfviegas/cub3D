@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:40:40 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/19 14:42:39 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:53:49 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	loop_hook(t_cub3d *cub3d)
 	update_position_player(cub3d);
 	if (check_colision(cub3d, cub3d->player.hitbox))
 	{
-		cub3d->player.position = find_new_position(cub3d->player.position,
-				old_position, cub3d);
+		cub3d->player.position = find_colision(cub3d, cub3d->player.position,
+				old_position);
 		cub3d->player.hitbox = define_hitbox(cub3d->player.position);
 	}
 	return (0);
@@ -65,24 +65,24 @@ bool	check_colision(t_cub3d *cub3d, t_hitbox hitbox)
 }
 
 /**
- * Encontra uma nova posição para o jogador.
+ * Encontra a colisao e define uma nova posição para o jogador.
  *
- * @param wanted_position A posição desejada.
- * @param old_position A posição atual.
  * @param cub3d O ponteiro para a estrutura t_cub3d.
+ * @param actual_position A posição desejada.
+ * @param old_position A posição atual.
  * @return A nova posição do jogador.
  */
-t_position	find_new_position(t_position wanted_position,
-	t_position old_position, t_cub3d *cub3d)
+t_position	find_colision(t_cub3d *cub3d, t_position actual_position,
+	t_position old_position)
 {
 	t_position	new_position;
 
-	new_position.x = wanted_position.x;
+	new_position.x = actual_position.x;
 	new_position.y = old_position.y;
 	if (!check_colision(cub3d, define_hitbox(new_position)))
 		return (new_position);
 	new_position.x = old_position.x;
-	new_position.y = wanted_position.y;
+	new_position.y = actual_position.y;
 	if (!check_colision(cub3d, define_hitbox(new_position)))
 		return (new_position);
 	new_position.x = old_position.x;

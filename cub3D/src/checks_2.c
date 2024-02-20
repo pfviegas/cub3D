@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 10:58:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/20 11:37:33 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:47:48 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void	check_map_char(t_cub3d *cub3d)
 			check_char(cub3d, cub3d->map[line][col], line, col);
 			col++;
 		}
-		if (cub3d->map_max_column < col)
-			cub3d->map_max_column = col;
 		line++;
 	}
 	if (cub3d->player_number == 0)

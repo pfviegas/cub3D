@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:35:46 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/15 17:10:05 by pviegas          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:52:40 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
  */
 void	move_front(t_cub3d *cub3d)
 {
-	cub3d->player.position.x += MOVE_SPEED * 0.01 * cos(cub3d->player.dirx);
-	cub3d->player.position.y += MOVE_SPEED * 0.01 * sin(cub3d->player.dirx);
+	cub3d->player.position.x += MOVE_DISTANCE * 0.01 * cos(cub3d->player.dirx);
+	cub3d->player.position.y += MOVE_DISTANCE * 0.01 * sin(cub3d->player.dirx);
 }
 
 /**
@@ -34,8 +34,8 @@ void	move_front(t_cub3d *cub3d)
  */
 void	move_back(t_cub3d *cub3d)
 {
-	cub3d->player.position.x -= MOVE_SPEED * 0.01 * cos(cub3d->player.dirx);
-	cub3d->player.position.y -= MOVE_SPEED * 0.01 * sin(cub3d->player.dirx);
+	cub3d->player.position.x -= MOVE_DISTANCE * 0.01 * cos(cub3d->player.dirx);
+	cub3d->player.position.y -= MOVE_DISTANCE * 0.01 * sin(cub3d->player.dirx);
 }
 
 /**
@@ -47,8 +47,8 @@ void	move_back(t_cub3d *cub3d)
  */
 void	move_right(t_cub3d *cub3d)
 {
-	cub3d->player.position.x -= MOVE_SPEED * 0.01 * sin(cub3d->player.dirx);
-	cub3d->player.position.y += MOVE_SPEED * 0.01 * cos(cub3d->player.dirx);
+	cub3d->player.position.x -= MOVE_DISTANCE * 0.01 * sin(cub3d->player.dirx);
+	cub3d->player.position.y += MOVE_DISTANCE * 0.01 * cos(cub3d->player.dirx);
 }
 
 /**
@@ -60,8 +60,8 @@ void	move_right(t_cub3d *cub3d)
  */
 void	move_left(t_cub3d *cub3d)
 {
-	cub3d->player.position.x += MOVE_SPEED * 0.01 * sin(cub3d->player.dirx);
-	cub3d->player.position.y -= MOVE_SPEED * 0.01 * cos(cub3d->player.dirx);
+	cub3d->player.position.x += MOVE_DISTANCE * 0.01 * sin(cub3d->player.dirx);
+	cub3d->player.position.y -= MOVE_DISTANCE * 0.01 * cos(cub3d->player.dirx);
 }
 
 /**

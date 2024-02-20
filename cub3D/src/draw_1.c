@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 09:33:22 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/19 15:10:55 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:52:53 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ void	draw_scene(t_cub3d *cub3d, int pixel_w)
 	int	color;
 
 	pixel_h = -1;
-	get_tex_data(cub3d);
 	while (++pixel_h < SCREEN_HEIGHT)
 	{
 		if (pixel_h < cub3d->draw.start)

@@ -6,22 +6,22 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 10:58:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/20 11:37:55 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:28:37 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
 /**
- * Verifica se o mapa está fechado.
+ * Verifica o primeiro e o ultimo caracter de cada linha 
+ * e '1' ignorando os espacos.
  * 
- * Verifica se o mapa fornecido está fechado, ou seja, se todas as bordas
- * do mapa são compostas por caracteres '1'. Caso contrário, a função 
+ * Caso contrário, a função 
  * encerra o programa exibindo uma mensagem de erro.
  * 
  * @param cub3d - A estrutura principal do jogo cub3D.
  */
-void	check_map_closed(t_cub3d *cub3d)
+void	check_first_last_char(t_cub3d *cub3d)
 {
 	int	i;
 	int	j;
@@ -69,9 +69,7 @@ void	check_nl_middle_map(t_cub3d *cub3d)
 		lines++;
 	}
 	if (flag == 2)
-	{
 		quit("Error:\n Invalid map.", cub3d, 19);
-	}
 	if (lines == cub3d->start_map)
 		quit("Error:\n The map is empty.", cub3d, 20);
 	else if (lines == cub3d->start_map + 1)

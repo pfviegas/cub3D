@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/20 11:39:21 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:56:54 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@
 # define MINIMAP_HEIGHT 120
 
 // textures
-# define TEXTURE_WIDTH 64
-# define TEXTURE_HEIGHT 64
+# define TEXTURE_WIDTH 320
+# define TEXTURE_HEIGHT 320
 
 // player info
 
-# define MOVE_SPEED 3
+# define MOVE_DISTANCE 6
 # define BAR_LENGTH 7
 # define MY_PI 3.14159265358979323846
 # define MY_PI_2 1.570796327
@@ -185,7 +185,6 @@ typedef struct s_cub3d
 	int				start_map;
 	int				cub_total_lines;
 	int				map_total_lines;
-	int				map_max_column;
 	int				player_number;
 	bool			mini_map_visible;
 }					t_cub3d;
@@ -205,7 +204,7 @@ void				check_map_surrounded_end(t_cub3d *cub3d);
 void				check_map_surrounded_start(t_cub3d *cub3d);
 
 /* checks 3  */
-void				check_map_closed(t_cub3d *cub3d);
+void				check_first_last_char(t_cub3d *cub3d);
 void				check_nl_middle_map(t_cub3d *cub3d);
 
 /* cub3d  */
@@ -241,8 +240,8 @@ void				init_var(t_cub3d *cub3d);
 /* loop hook */
 int					loop_hook(t_cub3d *cub3d);
 bool				check_colision(t_cub3d *cub3d, t_hitbox hitbox);
-t_position			find_new_position(t_position wanted_position,
-						t_position old_position, t_cub3d *cub3d);
+t_position			find_colision(t_cub3d *cub3d, 
+						t_position actual_position, t_position old_position);
 
 /* map 1 */
 void				get_elements_info(t_cub3d *cub3d);

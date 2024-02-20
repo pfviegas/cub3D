@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:37:40 by pveiga-c          #+#    #+#             */
-/*   Updated: 2024/02/19 15:10:55 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:52:58 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,16 @@ void	render_3d_view(t_cub3d *cub3d)
 		calc_step_and_side(cub3d);
 		find_wall(cub3d);
 		calc_wall_height(cub3d);
+		get_tex_data(cub3d);
 		draw_scene(cub3d, pixel_w);
 	}
 }
 
 /**
  * Função responsável por calcular os passos e as distâncias laterais do raio.
- *
- * @param cub3d O ponteiro para a estrutura do jogo cub3D.
  * 
- * cub3d->ray.step.x = passo a dar pelo player 
- * 						(-1 move-se para a esquerda do eixo x)
- *						(1 move-se para a direita do eixo x)
- * cub3d->ray.step.y = passoint				key_press(int keycode, t_cub3d *cub3d);
-int				key_release(int keycode, t_cub3d *cub3d); a dar pelo player 
- * 						(-1 move-se para a esquerda do eixo y)
- *						(1 move-se para a direita do eixo y)
- * ray.side_dist.x = distância lateral x
- * ray.side_dist.y = distância lateral y
+ * @param cub3d O ponteiro para a estrutura do jogo cub3D.
  */
-
 void	calc_step_and_side(t_cub3d *cub3d)
 {
 	if (cub3d->ray.ray_dir.x < 0)
