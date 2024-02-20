@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/20 10:55:18 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:38:35 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ void	get_colors(t_cub3d *cub3d, char *cl, int i, int flag)
 		cub3d->textures.ceiling++;
 }
 
-
 /**
  * Função responsável por obter o caminho das texturas do jogo.
  * 
@@ -157,7 +156,8 @@ void	get_textures_path(t_cub3d *cub3d, char *cl, int i, int flag)
 }
 
 /**
- * Verifica se há espaços em branco em uma string a partir de uma posição específica.
+ * Verifica se há espaços em branco em uma string a partir 
+ * de uma posição específica.
  * 
  * @param cub3d O ponteiro para a estrutura do jogo cub3D.
  * @param cl A string a ser verificada.
@@ -165,11 +165,11 @@ void	get_textures_path(t_cub3d *cub3d, char *cl, int i, int flag)
  */
 void	check_white_space(t_cub3d *cub3d, char *cl, int i)
 {
-	int j;
-	
+	int	j;
+
 	j = i;
-	while(cl[j] && is_space(cl[j]) == 1)
+	while (cl[j] && is_space(cl[j]) == 1)
 		j++;
-	if(j == i)
+	if (j == i)
 		quit("Error:\n Invalid texture path.", cub3d, 40);
 }

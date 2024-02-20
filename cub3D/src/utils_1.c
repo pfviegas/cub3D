@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:45:49 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/19 17:01:10 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:38:58 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	is_start_map(char *line)
 		return (0);
 	else
 	{
-		while (line[i] && (line[i] == '1'|| line[i] == ' '))
+		while (line[i] && (line[i] == '1' || line[i] == ' '))
 			i++;
 		if (line[i] == '\0')
 			return (1);

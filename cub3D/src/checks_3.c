@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 10:58:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/20 11:30:40 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:37:55 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ void	check_nl_middle_map(t_cub3d *cub3d)
 void	check_last_line_map(t_cub3d *cub3d)
 {
 	int	i;
-	int line;
+	int	line;
 
 	i = 0;
 	line = cub3d->map_total_lines - 1;
 	while (cub3d->map[line][i] == '\0')
 		line--;
-	while(i < (int)ft_strlen(cub3d->map[line]))
+	while (i < (int)ft_strlen(cub3d->map[line]))
 	{
 		if (cub3d->map[line][i] != '1')
 		{

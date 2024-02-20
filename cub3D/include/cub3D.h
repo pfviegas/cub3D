@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/20 11:22:25 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:39:21 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,7 +274,7 @@ void				render_3d_view(t_cub3d *cub3d);
 void				calc_step_and_side(t_cub3d *cub3d);
 void				find_wall(t_cub3d *cub3d);
 void				calc_wall_height(t_cub3d *cub3d);
-void	check_white_space(t_cub3d *cub3d, char *cl, int i);
+void				check_white_space(t_cub3d *cub3d, char *cl, int i);
 
 /* utils 1*/
 int					is_space(int c);
@@ -299,7 +299,5 @@ void				get_tex_data(t_cub3d *cub3d);
 int					move_mouse(int x, int y, t_cub3d *cub3d);
 void				look_left_mouse(t_cub3d *cub3d);
 void				look_right_mouse(t_cub3d *cub3d);
-
-
 
 #endif

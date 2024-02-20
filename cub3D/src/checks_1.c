@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/20 11:06:08 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:37:07 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,10 @@ void	check_number_elem(t_cub3d *cub3d, int flag)
 {
 	if (cub3d->textures.north > 0 && flag == 1)
 		quit("Error:\n Invalid north texture.", cub3d, 9);
-	if (cub3d->textures.south  > 0 && flag == 2)
+	if (cub3d->textures.south > 0 && flag == 2)
 		quit("Error:\n Invalid south texture.", cub3d, 10);
-	if (cub3d->textures.west  > 0 && flag == 3)
+	if (cub3d->textures.west > 0 && flag == 3)
 		quit("Error:\n Invalid west texture.", cub3d, 11);
-	if (cub3d->textures.east  > 0 && flag == 4)
+	if (cub3d->textures.east > 0 && flag == 4)
 		quit("Error:\n Invalid east texture.", cub3d, 12);
 }
-

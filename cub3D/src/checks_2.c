@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 10:58:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/20 10:59:05 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:37:33 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,17 @@ void	check_textures_images(t_cub3d *cub3d)
 /**
  * Verifica o mapa do jogo.
  * 
- * Esta função percorre o mapa linha por linha e verifica se os caracteres são válidos.
+ * Esta função percorre o mapa linha por linha e verifica 
+ * se os caracteres são válidos.
  * Também verifica se há apenas um jogador no mapa.
  * 
  * @param cub3d O ponteiro para a estrutura do jogo.
  */
 
-void check_map_char(t_cub3d *cub3d)
+void	check_map_char(t_cub3d *cub3d)
 {
-	int line;
-	int col;
+	int	line;
+	int	col;
 
 	line = 0;
 	while (cub3d->map[line] != NULL)
