@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 10:58:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/19 17:33:22 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:30:40 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,26 @@ void	check_nl_middle_map(t_cub3d *cub3d)
 		quit("Error:\n The map is empty.", cub3d, 20);
 	else if (lines == cub3d->start_map + 1)
 		quit("Error:\n Invalid map.", cub3d, 21);
+}
+
+void	check_last_line_map(t_cub3d *cub3d)
+{
+	int	i;
+	int line;
+
+	i = 0;
+	line = cub3d->map_total_lines - 1;
+	while (cub3d->map[line][i] == '\0')
+		line--;
+	while(i < (int)ft_strlen(cub3d->map[line]))
+	{
+		if (cub3d->map[line][i] != '1')
+		{
+			if (cub3d->map[line][i] == ' ')
+				is_surrounded_1(cub3d, line, i);
+			else
+				quit("Error:\n Invalid map.", cub3d, 41);
+		}
+		i++;
+	}
 }

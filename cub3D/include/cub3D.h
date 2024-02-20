@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:42 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/19 17:03:25 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:22:25 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ void				check_number_elem(t_cub3d *cub3d, int flag);
 
 /* checks 2  */
 void				check_textures_images(t_cub3d *cub3d);
-void				check_map(t_cub3d *cub3d);
+void				check_map_char(t_cub3d *cub3d);
 void				check_char(t_cub3d *cub3d, char c, int line, int col);
 void				check_map_surrounded_end(t_cub3d *cub3d);
 void				check_map_surrounded_start(t_cub3d *cub3d);
@@ -212,6 +212,7 @@ void				check_nl_middle_map(t_cub3d *cub3d);
 void				start_cub3d(t_cub3d *cub3d);
 void				load_textures(t_cub3d *cub3d, t_image_data *wall,
 						char *path);
+void				check_last_line_map(t_cub3d *cub3d);
 
 /* draw 1*/
 void				draw_bar(t_cub3d *cub3d, int x, int y, double angle);
@@ -273,6 +274,7 @@ void				render_3d_view(t_cub3d *cub3d);
 void				calc_step_and_side(t_cub3d *cub3d);
 void				find_wall(t_cub3d *cub3d);
 void				calc_wall_height(t_cub3d *cub3d);
+void	check_white_space(t_cub3d *cub3d, char *cl, int i);
 
 /* utils 1*/
 int					is_space(int c);
@@ -297,5 +299,7 @@ void				get_tex_data(t_cub3d *cub3d);
 int					move_mouse(int x, int y, t_cub3d *cub3d);
 void				look_left_mouse(t_cub3d *cub3d);
 void				look_right_mouse(t_cub3d *cub3d);
+
+
 
 #endif

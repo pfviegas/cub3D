@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:19:02 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/19 17:32:12 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:06:08 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@
  */
 void	map_validations(t_cub3d *cub3d)
 {
-	check_map(cub3d);
-	if (cub3d->map_total_lines <= 2)
-		quit("Error:\n Invalid number of lines.", cub3d, 27);
+	check_map_char(cub3d);
+	check_last_line_map(cub3d);
 	check_map_closed(cub3d);
 	check_map_surrounded_start(cub3d);
 	check_map_surrounded_end(cub3d);

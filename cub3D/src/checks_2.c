@@ -6,7 +6,7 @@
 /*   By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 10:58:04 by pviegas           #+#    #+#             */
-/*   Updated: 2024/02/19 17:32:43 by pveiga-c         ###   ########.fr       */
+/*   Updated: 2024/02/20 10:59:05 by pveiga-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	check_textures_images(t_cub3d *cub3d)
  * @param cub3d O ponteiro para a estrutura do jogo.
  */
 
-void check_map(t_cub3d *cub3d)
+void check_map_char(t_cub3d *cub3d)
 {
 	int line;
 	int col;
@@ -74,6 +74,8 @@ void check_map(t_cub3d *cub3d)
 		quit("Error:\n There is no player.", cub3d, 25);
 	else if (cub3d->player_number > 1)
 		quit("Error:\n Only one player per map.", cub3d, 26);
+	if (cub3d->map_total_lines <= 2)
+		quit("Error:\n Invalid number of lines.", cub3d, 27);
 }
 
 /**
