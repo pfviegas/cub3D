@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pveiga-c <pveiga-c@student.42.fr>          +#+  +:+       +#+         #
+#    By: pviegas <pviegas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 12:00:51 by pviegas           #+#    #+#              #
-#    Updated: 2024/02/19 15:04:01 by pveiga-c         ###   ########.fr        #
+#    Updated: 2024/02/21 10:23:02 by pviegas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ RESET 	= \033[0m
 
 # Executable name
 NAME 			= cub3D
+NAME_BONUS		= cub3D_bonus
 
 # Compiler options
 CC 				= cc
@@ -50,7 +51,17 @@ ${NAME}: $(OBJS)
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
 	@echo "\n$(GREEN) [Success] Libft compiled.$(RESET)\n\n"
 	$(CC) $(FLAGS) $(SRCS) $(MLXFLAGS) $(LIBFT) -o $(NAME)
-	@echo "\n$(GREEN) [Success] ./cub3D created.$(RESET)\n\n"
+	@echo "\n$(GREEN) [Success] ./$(NAME) created.$(RESET)\n\n"
+
+bonus: $(NAME_BONUS)
+
+${NAME_BONUS}: $(OBJS)
+	@$(MAKE) --no-print-directory -C $(MINILIBX_PATH)
+	@echo "\n$(GREEN) [Success] Minilibix compiled.$(RESET)\n\n"
+	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
+	@echo "\n$(GREEN) [Success] Libft compiled.$(RESET)\n\n"
+	$(CC) $(FLAGS) $(SRCS) $(MLXFLAGS) $(LIBFT) -o $(NAME_BONUS)
+	@echo "\n$(GREEN) [Success] ./$(NAME_BONUS) created.$(RESET)\n\n"
 
 clean:
 	@rm -rf $(OBJS)
@@ -58,6 +69,7 @@ clean:
 	@cd $(LIBFT_DIR) && $(MAKE) --no-print-directory clean
 
 fclean: clean
+	@rm -rf $(NAME_BONUS)
 	@rm -rf $(NAME) $(OBJS)
 	@echo "$(RED) [Deleting] .a files ... (deleted)$(RESET)"
 	@cd $(LIBFT_DIR) && $(MAKE) --no-print-directory fclean
@@ -65,8 +77,11 @@ fclean: clean
 v:
 	clear && make re && valgrind --track-fds=yes --show-reachable=yes --leak-check=full --show-leak-kinds=all --track-origins=yes ./cub3D maps/map_01.cub
 
-p:
+p1:
 	clear && make re && ./cub3D maps/map_01.cub
+
+p2:
+	clear && make re && ./cub3D maps/map_02.cub
 
 norm:
 	@clear
